@@ -1,0 +1,41 @@
+﻿@page
+@model MileAway.Pages.Shared.profileModel
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "_Layout";
+}
+<link rel="stylesheet" href="~/css/profile.css">
+<div class="text-center">
+    <h1>Registreren</h1>
+</div>
+
+<form>
+    <div class="form-group">
+        <label for="inputSirName">Voornaam*</label>
+        <input type="text" class="form-control" id="inputSirName" placeholder="Voornaam">
+    </div>
+    <div class="form-group">
+        <label for="inputLastName">Achternaam</label>
+        <input type="text" class="form-control" id="inputLastName" placeholder="Achternaam">
+    </div>
+    <div class="form-group">
+        <label for="inputEmail">Email address*</label>
+        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="E-mail">
+    </div>
+    <div class="form-group">
+        <label for="inputPassword">Wachtwoord*</label>
+        <input type="password" class="form-control" id="inputPassword" placeholder="Wachtwoord">
+    </div>
+    <div class="form-group">
+        <label for="inputRepeatPassword">Wachtwoord herhalen*</label>
+        <input type="password" class="form-control" id="inputRepeatPassword" placeholder="Wachtwoord">
+    </div>
+    <div>
+        <label class="form-label" for="profilePicture">Profielfoto</label>
+        <input type="file" class="form-control" id="profilePicture" />
+    </div>
+    <br />
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Volgende</button>
+    </div>
+</form>
