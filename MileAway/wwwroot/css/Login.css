@@ -1,8 +1,6 @@
 ﻿/* BASIC */
 
-html {
-    background-color: #56baed;
-}
+
 
 body {
     font-family: "Poppins", sans-serif;
@@ -40,6 +38,10 @@ h2 {
     padding: 20px;
 }
 
+form{
+    padding: 20px;
+}
+
 #formContent {
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
@@ -48,7 +50,7 @@ h2 {
     width: 90%;
     max-width: 450px;
     position: relative;
-    padding: 0px;
+    padding: 20px !important;
     -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     text-align: center;
