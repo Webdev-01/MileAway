@@ -1,5 +1,6 @@
 # MileAway
-![afbeelding](https://user-images.githubusercontent.com/32060618/109632570-74f46400-7b47-11eb-83a6-e14f37043f73.png)
+![logo_white](https://user-images.githubusercontent.com/12415855/109633035-f51ac980-7b47-11eb-90dd-7cc7699406c6.png)
+
 
 Mile Away, Mile Awaay
 
