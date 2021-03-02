@@ -1,6 +1,4 @@
-﻿/* BASIC */
-
-body {
+﻿body {
     font-family: "Poppins", sans-serif;
     height: 90%;
 }
@@ -9,21 +7,13 @@ body {
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
     background: #fff;
-    width: 90%;
     position: relative;
     padding: 20px !important;
     margin-bottom: 20px;
     -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     text-align: center;
-}
-
-.btn{
-    margin: 10px;
-}
-
-.Wrapper_login {
-    margin-top: 50px;
+    height: 100%;
 }
 
 #formFooter {
@@ -32,10 +22,6 @@ body {
     -webkit-border-radius: 0 0 10px 10px;
     border-radius: 0 0 10px 10px;
     padding-top: 10px;
-}
-
-.Icon_user{
-    padding: 10px;
 }
 
 .underlineHover {
@@ -60,4 +46,8 @@ body {
 
 .underlineHover:hover:after {
     width: 100%;
+}
+
+img.navbar-icon {
+    width: 200px;
 }

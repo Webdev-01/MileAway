@@ -14,15 +14,23 @@
 </head>
 <body>
     <div class="container">
+        <!-- Logo -->
         <div class="row">
-            <div class="col-12 Wrapper_login">
+            <div class="col text-center mt-3">
+                <img class="navbar-icon" alt="MileAway logo" src="~/assets/logo.png" />
+            </div>
+        </div>
+        <!-- Wrapper login -->
+        <div class="row">
+            <div class="col-12 Wrapper_login mt-4">
                 <div id="formContent">
                     <!-- Tabs Titles -->
-                    <div class="Icon_user">
-                        <i class="far fa-user fa-2x"></i>
+                    <div class="Text p-2">
+                       <h3>Welkom!</h3>
+                        <p>De inzage in uw uitgaven begint hier</p>
                     </div>
                     <!-- Login Form -->
-                    <form>
+                    <form method="post">
                         <!-- Username -->
                         <div class="form-group row">
                             <div class="col-6 offset-3">
@@ -36,32 +44,38 @@
                             </div>
                         </div>
                         <!-- Submit btn-->
-                        <button type="submit" class="btn btn-primary">Log in</button>
+                        <button type="submit" class="btn btn-primary mb-2">Log in</button>
                     </form>
                     <!-- Register -->
                     <div id="formFooter">
-                        <a class="underlineHover" href="#">Registreren?</a>
+                        <a class="underlineHover" href="#">Registreer hier</a>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Wrapper RDW1 -->
         <div class="row">
-            <div class="col-5 Wrapper_RDW1 float-left red">
-                <h4>Waar zitten de uitgaven van m'n voertuig?</h4>
-                <p>- TestInfo</p>
-                <p>- TestInfo</p>
-                <p>- TestInfo</p>
+            <div class="col-6 pl-0 red">
+                <div class="Wrapper_RDW1">
+                    <h4>Waar zitten de uitgaven van m'n voertuig?</h4>
+                    <p>- TestInfo</p>
+                    <p>- TestInfo</p>
+                    <p>- TestInfo</p>
+                </div>
             </div>
-            <div class="col-5 offset-2 Wrapper_RDW2 float-right blue">
-                <h4>Connectie met RDW API</h4>
-                <p>- TestInfo</p>
-                <p>- TestInfo</p>
-                <p>- TestInfo</p>
+            <!-- Wrapper RDW2 -->
+            <div class="col-6 pr-0 blue">
+                <div class="Wrapper_RDW2">
+                    <h4>Connectie met RDW API</h4>
+                    <p>- TestInfo</p>
+                    <p>- TestInfo</p>
+                    <p>- TestInfo</p>
+                </div>
             </div>
         </div>
     </div>
-
+    <!-- Script fontawesome -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    </body>
+</body>
 </html>
 
