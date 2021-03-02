@@ -2,5 +2,38 @@
 @model MileAway.Pages.Shared.profileModel
 @{
     ViewData["Title"] = "Profile";
+    Layout = "_Layout";
 }
 <link rel="stylesheet" href="~/css/profile.css">
+<div class="text-center">
+    <h1>Gebruikersgegevens</h1>
+</div>
+
+<br />
+
+<div class="row">
+    <div class="col-12 text-center">
+        <img src="http://fpoimg.com/200x200" class="img-thumbnail" alt="Profile picture" />
+    </div>
+</div>
+
+<br />
+
+<ul class="list-group">
+    <li class="list-group-item">Voornaam: </li>
+    <li class="list-group-item">Achternaam: </li>
+    <li class="list-group-item">E-mailadres: </li>
+    <li class="list-group-item">Wachtwoord: </li>
+</ul>
+
+<br />
+<br />
+
+<div class="row">
+    <div class="col-6 text-center">
+        <button id="btn-anpassen" type="button" class="btn btn-primary btn-lg">Aanpassen</button>
+    </div>
+    <div class="col-6  text-center">
+        <button id="btn-changepass" type="button" class="btn btn-primary btn-lg">Wachtwoord veranderen</button>
+    </div>
+</div>
