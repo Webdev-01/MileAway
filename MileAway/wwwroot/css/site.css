@@ -6,6 +6,12 @@ a.navbar-brand {
   text-align: center;
   word-break: break-all;
 }
+img.navbar-icon {
+    width: 200px;
+}
+.navbar {
+    border-bottom: 3px solid #00A3FF;
+}
 
 /* Provide sufficient contrast against white background */
 a {
