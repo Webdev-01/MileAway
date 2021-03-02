@@ -1,0 +1,27 @@
+﻿@page
+@model MileAway.Pages.LoginModel
+@{
+}
+<link rel="stylesheet" href="~/css/Login.css">
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <div class="fadeIn first">
+            <i class="far fa-user fa-2x"></i>
+        </div>
+
+        <!-- Login Form -->
+        <form>
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Username">
+            <input type="text" id="password" class="fadeIn third" name="login" placeholder="Password">
+            <input type="submit" class="fadeIn fourth" value="Log In">
+        </form>
+
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+            <a class="underlineHover" href="#">Registreren?</a>
+        </div>
+
+    </div>
+</div>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
