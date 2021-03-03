@@ -11,17 +11,47 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow mb-3">
             <div class="container">
+                <div class="navbar-collapse collapse flex-sm-row-reverse d-sm-none">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Profile">
+                                <img width="40" src="~/assets/icons/profile.png"/>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse d-md-none">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Profile">
+                                Profiel
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 <a class="navbar-brand" asp-area="" asp-page="/Index">
-                    <img class="navbar-icon" alt="MileAway logo" src="assets/logo.png" />
+                    <img class="navbar-icon" alt="MileAway logo" src="assets/logo.png"/>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+                <div class="navbar-collapse collapse flex-sm-row-reverse d-sm-none">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">
+                                <img width="40" src="~/assets/icons/logout.png"/>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse d-md-none">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">
+                                Logout
+                            </a>
                         </li>
                     </ul>
                 </div>
