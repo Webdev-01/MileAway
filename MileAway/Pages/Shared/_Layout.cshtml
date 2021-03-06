@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    bool noNav = ViewData["No Nav"] != null;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,11 +11,14 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 <body>
+@if (!noNav)
+{
+
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">
-                    <img class="navbar-icon" alt="MileAway logo" src="~/assets/logo.png" />
+                    <img class="navbar-icon" alt="MileAway logo" src="~/assets/logo.png"/>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -43,22 +49,23 @@
             </div>
         </nav>
     </header>
+}
+<div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+<footer class="border-top footer text-muted">
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        &copy; 2021 - MileAway - <a asp-area="" asp-page="/Privacy">Privacy</a>
     </div>
+</footer>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - MileAway - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @RenderSection("Scripts", required: false)
+@RenderSection("Scripts", required: false)
 </body>
 </html>
