@@ -10,6 +10,7 @@ namespace MileAway.Pages
 {
     public class IndexModel : PageModel
     {
+        private bool isLoggedIn { get; set; } = true;
         private readonly ILogger<IndexModel> _logger;
 
         public IndexModel(ILogger<IndexModel> logger)
@@ -17,9 +18,11 @@ namespace MileAway.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            if (isLoggedIn)
+                return RedirectToPage("Overview");
+            return RedirectToPage("Login");
         }
     }
 }
