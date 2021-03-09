@@ -1,0 +1,8 @@
+﻿table tbody tr td:first-child {
+    font-weight: bold;
+    padding-left: 85px;
+}
+table {
+    text-align: left;
+    padding: 20px;
+}

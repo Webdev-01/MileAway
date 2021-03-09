@@ -1,0 +1,68 @@
+﻿@page
+@model MileAway.Pages.ViewVehicleModel
+@{
+    ViewData["Title"] = "Bekijk voertuig";
+    Layout = "_Layout";
+}
+<link rel="stylesheet" href="~/css/ViewVehicle.css">
+
+<div class="row">
+    <div class="card col-xs-12 col-md-6 mx-auto text-center">
+        <div class="card-body ">
+            <h5 class="card-title">Alfa Romeo 147</h5>
+            <div>03-LL-GN</div>
+            <img class="mx-auto d-block" width="200" src="https://parkers-images.bauersecure.com/gallery-image/pagefiles/204617/static-exterior/1752x1168/ar_896.jpg" alt="Car picture">
+
+            <table class="table table-sm">
+                <tbody>
+                    <tr>
+                        <td>Kenteken: </td>
+                        <td>03-LL-GN </td>
+                    </tr>
+                    <tr>
+                        <td>Merk: </td>
+                        <td>Alfa Romeo </td>
+                    </tr>
+                    <tr>
+                        <td>Model: </td>
+                        <td>147 </td>
+                    </tr>
+                    <tr>
+                        <td>Kleur: </td>
+                        <td>Grijs </td>
+                    </tr>
+                    <tr>
+                        <td>Kilometerstand: </td>
+                        <td>227.500 </td>
+                    </tr>
+                    <tr>
+                        <td>Wegenbelasting: </td>
+                        <td>€110,- </td>
+                    </tr>
+                    <tr>
+                        <td>Verzekering: </td>
+                        <td>€70,- </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Kostengeschiedenis</h2>
+            <table class="table table-sm">
+                <tbody>
+                    <tr>
+                        <td>Tanken: </td>
+                        <td>€76,35 </td>
+                    </tr>
+                    <tr>
+                        <td>Reparatie: <i class="fa fa-download" aria-hidden="true"></i></td>
+                        <td>€643,50 </td>
+                    </tr>
+                    <tr>
+                        <td>Tanken: </td>
+                        <td>€40,34 </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
