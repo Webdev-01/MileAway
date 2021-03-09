@@ -38,6 +38,7 @@ namespace MileAway
             {
                 app.UseDeveloperExceptionPage();
                 app.UseLiveReload();
+                app.UseBrowserLink();
             }
             else
             {
