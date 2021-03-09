@@ -5,12 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace MileAway.Pages
 {
     public class IndexModel : PageModel
     {
-        private bool isLoggedIn { get; set; } = true;
         private readonly ILogger<IndexModel> _logger;
 
         public IndexModel(ILogger<IndexModel> logger)
@@ -20,9 +20,10 @@ namespace MileAway.Pages
 
         public IActionResult OnGet()
         {
-            if (isLoggedIn)
-                return RedirectToPage("Overview");
-            return RedirectToPage("Login");
+            if (HttpContext.Session.GetString("user_id") == null){
+                return RedirectToPage("Login");
+            }
+            return Page();
         }
     }
 }

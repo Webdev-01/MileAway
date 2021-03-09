@@ -4,13 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Http;
 
 namespace MileAway.Pages
 {
-    public class OverviewModel : PageModel
+    public class LogoutModel : PageModel
     {
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            HttpContext.Session.Remove("user_id");
+            return RedirectToPage("Index");
         }
     }
 }

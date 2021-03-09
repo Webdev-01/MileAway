@@ -28,5 +28,15 @@ namespace MileAway.Repositories
             var users = connect.Query<Users>("SELECT * FROM users").ToList();
             return users;
         }
+
+        public static Users GetUserByLogin(Users user)
+        {
+            using var connect = Connect();
+            var userVars = connect.QuerySingleOrDefault<Users>("SELECT * FROM users WHERE EMAIL=@Email AND PASSWORD=@Password",
+                new { Email = user.EMAIL,
+                Password = user.PASSWORD });
+
+            return userVars;
+        }
     }
 }

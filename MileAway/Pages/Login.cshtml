@@ -1,14 +1,12 @@
 ﻿@page
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.Extensions.Hosting
 @model MileAway.Pages.LoginModel
 @{
     ViewData["No Nav"] = true;
     Layout = "_Layout";
 }
 
-@foreach (var user in Model.users)
-{
-    <p>@user.EMAIL</p>
-}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,21 +30,23 @@
                 <div id="formContent">
                     <!-- Tabs Titles -->
                     <div class="Text p-2">
-                       <h3>Welkom!</h3>
+                        <h3>Welkom!</h3>
                         <p>De inzage in uw uitgaven begint hier</p>
                     </div>
                     <!-- Login Form -->
-                    <form method="post">
+                    <form method="post" asp-page-handler="Login">
                         <!-- Username -->
                         <div class="form-group row">
                             <div class="col-6 offset-3">
-                                <input type="text" class="form-control" id="Username" aria-describedby="Username" placeholder="Username">
+                                <input asp-for="User.EMAIL" type="text" class="form-control" id="Username" placeholder="Username">
+                                <span class="invalid-feedback" asp-validation-for="User.EMAIL"></span>
                             </div>
                         </div>
                         <!-- Password -->
                         <div class="form-group row">
                             <div class="col-6 offset-3">
-                                <input type="password" class="form-control" id="Password" aria-describedby="Password" placeholder="Password">
+                                <input asp-for="User.PASSWORD" type="password" class="form-control" id="Password" placeholder="Password">
+                                <span class="invalid-feedback" asp-validation-for="User.PASSWORD"></span>
                             </div>
                         </div>
                         <!-- Submit btn-->
