@@ -31,7 +31,6 @@ namespace MileAway.Pages
                 } else
                 {
                     Error = "This emailadress is already in use";
-                    return Page();
                 }
             }
             return Page();
