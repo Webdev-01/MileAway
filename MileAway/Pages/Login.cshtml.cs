@@ -19,7 +19,6 @@ namespace MileAway.Pages
 
         public void OnGet()
         {
-            users = UsersRepository.GetUsers();
         }
 
         public IActionResult OnPostLogin()

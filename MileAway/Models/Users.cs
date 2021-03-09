@@ -8,9 +8,10 @@ namespace MileAway.Models
 
         public string EMAIL { get; set; }
 
-        public string USERNAME { get; set; }
-
         public string PASSWORD { get; set; }
+
+        //[Compare("PASSWORD")]
+        public string CONFIRMPASSWORD { get; set; }
 
         public string FIRSTNAME { get; set; }
 

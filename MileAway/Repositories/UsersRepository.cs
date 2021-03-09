@@ -38,5 +38,27 @@ namespace MileAway.Repositories
 
             return userVars;
         }
+
+        public static bool RegisterUser(Users user)
+        {
+            using var connect = Connect();
+            try
+            {
+                var registerUser = connect.Execute("INSERT INTO users (EMAIL, PASSWORD, FIRSTNAME, LASTNAME, USER_IMAGE) VALUES (@Email, @Password, @Firstname, @Lastname, @User_image)", new
+                {
+                    Email = user.EMAIL,
+                    Password = user.PASSWORD,
+                    Firstname = user.FIRSTNAME,
+                    Lastname = user.LASTNAME,
+                    User_image = user.USER_IMAGE
+                });
+
+                return registerUser == 1;
+            } catch (MySqlException e)
+            {
+                return false;
+            }
+            return false;
+        }
     }
 }

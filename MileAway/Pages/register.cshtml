@@ -1,7 +1,9 @@
 ﻿@page
-@model MileAway.Pages.Shared.profileModel
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.Extensions.Hosting
+@model MileAway.Pages.registerModel
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "Register";
     Layout = "_Layout";
 }
 <link rel="stylesheet" href="~/css/profile.css">
@@ -9,30 +11,42 @@
     <h1>Registreren</h1>
 </div>
 
-<form>
+<form method="post" asp-page-handler="Register">
+    @if (Model.Error != null)
+    {
+    <div class="alert alert-danger" role="alert">
+        @Model.Error
+    </div>
+    }
     <div class="form-group">
         <label for="inputSirName">Voornaam*</label>
-        <input type="text" class="form-control" id="inputSirName" placeholder="Voornaam">
+        <input asp-for="User.FIRSTNAME" type="text" class="form-control" id="inputSirName" placeholder="Voornaam">
+        <span class="invalid-feedback" asp-validation-for="User.FIRSTNAME"></span>
     </div>
     <div class="form-group">
         <label for="inputLastName">Achternaam</label>
-        <input type="text" class="form-control" id="inputLastName" placeholder="Achternaam">
+        <input asp-for="User.LASTNAME" type="text" class="form-control" id="inputLastName" placeholder="Achternaam">
+        <span class="invalid-feedback" asp-validation-for="User.LASTNAME"></span>
     </div>
     <div class="form-group">
         <label for="inputEmail">Email address*</label>
-        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="E-mail">
+        <input asp-for="User.EMAIL" type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="E-mail">
+        <span class="invalid-feedback" asp-validation-for="User.EMAIL"></span>
     </div>
     <div class="form-group">
         <label for="inputPassword">Wachtwoord*</label>
-        <input type="password" class="form-control" id="inputPassword" placeholder="Wachtwoord">
+        <input asp-for="User.PASSWORD" type="password" class="form-control" id="inputPassword" placeholder="Wachtwoord">
+        <span class="invalid-feedback" asp-validation-for="User.PASSWORD"></span>
     </div>
     <div class="form-group">
         <label for="inputRepeatPassword">Wachtwoord herhalen*</label>
-        <input type="password" class="form-control" id="inputRepeatPassword" placeholder="Wachtwoord">
+        <input asp-for="User.CONFIRMPASSWORD" type="password" class="form-control" id="inputRepeatPassword" placeholder="Wachtwoord">
+        <span class="invalid-feedback" asp-validation-for="User.CONFIRMPASSWORD"></span>
     </div>
     <div>
         <label class="form-label" for="profilePicture">Profielfoto</label>
-        <input type="file" class="form-control" id="profilePicture" />
+        <input asp-for="User.USER_IMAGE" type="file" class="form-control" id="profilePicture" />
+        <span class="invalid-feedback" asp-validation-for="User.USER_IMAGE"></span>
     </div>
     <br />
     <div class="text-center">
