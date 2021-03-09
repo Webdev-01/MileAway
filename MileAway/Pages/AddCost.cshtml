@@ -1,4 +1,55 @@
 ﻿@page
 @model MileAway.Pages.AddCostModel
 @{
+    ViewData["Title"] = "Kosten toevoegen page";
+    Layout = "_Layout";
+    var test = Model.costType == "brandstof" ? "selected" : "";
 }
+
+
+
+<form method="post" asp-page-handler="AddCost">
+    <div class="form-group">
+        <label for="type">Soort kosten</label>
+        <selectl class="form-control" id="type" onchange='window.location.href = "/AddCost?type=" + $("#type").val();'>
+            <option value="---">---</option>
+            <option selected=@Model.costTypeString value="brandstof">Brandstof</option>
+            <option value="reperatie">Reperatie</option>
+        </selectl>
+    </div>
+    @if (Model.costType == "brandstof")
+    {
+
+        <div class="form-group">
+            <label for="inputPrice">Bedrag*</label>
+            <input type="text" class="form-control" id="inputPrice" placeholder="€50">
+        </div>
+        <div class="form-group">
+            <label for="inputMileage">Kilometerstand</label>
+            <input type="email" class="form-control" id="inputKM" aria-describedby="emailHelp" placeholder="122000km">
+        </div>
+        <div class="form-group">
+            <label for="inputLiters">Liters*</label>
+            <input type="password" class="form-control" id="inputLitersPassword" placeholder="30L">
+        </div>
+        <div class="form-group">
+            <label for="inputDate">Datum</label>
+            <input type="date" class="form-control" id="inputDate" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="inputTime">Time</label>
+            <input type="time" class="form-control" id="inputTime" placeholder="">
+        </div>
+        <br />
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Volgende</button>
+        </div>
+    }
+    <div id=""></div>
+</form>
+
+<script>
+    function type() {
+        ;
+    }
+</script>
