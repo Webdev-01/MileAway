@@ -5,6 +5,10 @@
     Layout = "_Layout";
 }
 
+@foreach (var user in Model.users)
+{
+    <p>@user.EMAIL</p>
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
