@@ -11,14 +11,20 @@ namespace MileAway.Pages
     public class AddVehicleModel : PageModel
     {
         [BindProperty]
-        public Vehicles vehicle { get; set; }
+        public Vehicles Vehicle { get; set; }
+
+        [BindProperty]
+        public double Road_Tax { get; set; }
+        [BindProperty]
+        public double Insurance { get; set; }
+
         public void OnGet()
         {
         }
 
         public void OnPostConfirm()
         {
-            var test = vehicle;
+            var test = Vehicle;
         }
     }
 }

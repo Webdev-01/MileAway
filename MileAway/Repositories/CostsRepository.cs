@@ -11,19 +11,10 @@ namespace MileAway.Repositories
 {
     public class CostsRepository
     {
-        private static IDbConnection Connect()
-        {
-            return new MySqlConnection(
-                "Server = localhost;" +
-                "Port = 3306;" +
-                "Database = mileaway;" +
-                "Uid = root;" +
-                "Pwd =;");
-        }
 
         public static bool AddCost(Costs costs)
         {
-            using var connect = Connect();
+            using var connect = DbUtils.GetDbConnection();
             try
             {
                 var Addcost = connect.Execute("INSERT INTO costs (Cost_ID, Typecost_Id, Vehicle_Id, Cost, Date_Of_Cost, Invoice_Doc) VALUES (@CostId, @TypecostId, @VehicleId, @Cost, @DateOfCost, InvoiceDoc)", new

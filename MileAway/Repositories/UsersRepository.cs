@@ -11,19 +11,9 @@ namespace MileAway.Repositories
 {
     public class UsersRepository
     {
-        private static IDbConnection Connect()
-        {
-            return new MySqlConnection(
-                "Server = localhost;" +
-                "Port = 3306;" +
-                "Database = mileaway;" +
-                "Uid = root;" +
-                "Pwd =;");
-        }
-
         public static List<Users> GetUsers()
         {
-            using var connect = Connect();
+            using var connect = DbUtils.GetDbConnection();
 
             var users = connect.Query<Users>("SELECT * FROM users").ToList();
             return users;
@@ -31,7 +21,7 @@ namespace MileAway.Repositories
 
         public static Users GetUserByLogin(Users user)
         {
-            using var connect = Connect();
+            using var connect = DbUtils.GetDbConnection();
             var userVars = connect.QuerySingleOrDefault<Users>("SELECT * FROM users WHERE Email=@Email",
             new
             {
@@ -42,7 +32,7 @@ namespace MileAway.Repositories
 
         public static Users GetUserByID(int userid)
         {
-            using var connect = Connect();
+            using var connect = DbUtils.GetDbConnection();
 
             var users = connect.QuerySingleOrDefault<Users>("SELECT * FROM users WHERE User_ID = @user_id", 
                 new { 
@@ -55,7 +45,7 @@ namespace MileAway.Repositories
 
         public static bool RegisterUser(Users user)
         {
-            using var connect = Connect();
+            using var connect = DbUtils.GetDbConnection();
             try
             {
                 var registerUser = connect.Execute("INSERT INTO users (Email, Password, First_Name, Last_Name, User_Image) VALUES (@Email, @Password, @Firstname, @Lastname, @User_image)", new
