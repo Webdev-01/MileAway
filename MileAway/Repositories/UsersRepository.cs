@@ -33,7 +33,8 @@ namespace MileAway.Repositories
         {
             using var connect = Connect();
             var userVars = connect.QuerySingleOrDefault<Users>("SELECT * FROM users WHERE EMAIL=@Email",
-            new { 
+            new
+            {
                 Email = user.Email
             });
             return userVars;
@@ -66,8 +67,9 @@ namespace MileAway.Repositories
                     User_image = user.User_Image
                 });
 
-            return true;
-            } catch (MySqlException e)
+                return true;
+            }
+            catch (MySqlException e)
             {
                 return false;
             }

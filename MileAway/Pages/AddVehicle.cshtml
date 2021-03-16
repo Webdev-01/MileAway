@@ -4,41 +4,40 @@
     ViewData["Title"] = "Kosten toevoegen page";
     Layout = "_Layout";
 }
+
+<h1>Voeg voertuig toe</h1>
 <div class="bs-stepper">
     <div class="bs-stepper-header" role="tablist">
         <!-- your steps here -->
         <div class="step" data-target="#information-part">
             <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-                <span class="bs-stepper-circle">1</span>
-                <span class="bs-stepper-label">Basisinformatie</span>
+                <span class="bs-stepper-circle"></span>
             </button>
         </div>
         <div class="line"></div>
         <div class="step" data-target="#photo-part">
             <button type="button" class="step-trigger" role="tab" aria-controls="photo-part" id="photo-part-trigger">
-                <span class="bs-stepper-circle">2</span>
-                <span class="bs-stepper-label">Foto</span>
+                <span class="bs-stepper-circle"></span>
             </button>
         </div>
         <div class="line"></div>
         <div class="step" data-target="#costs-part">
             <button type="button" class="step-trigger" role="tab" aria-controls="costs-part" id="costs-part-trigger">
-                <span class="bs-stepper-circle">3</span>
-                <span class="bs-stepper-label">Kosten</span>
+                <span class="bs-stepper-circle"></span>
             </button>
         </div>
         <div class="line"></div>
         <div class="step" data-target="#confirm-part">
             <button type="button" class="step-trigger" role="tab" aria-controls="confirm-part" id="confirm-part-trigger">
-                <span class="bs-stepper-circle">4</span>
-                <span class="bs-stepper-label">Bevestigen</span>
+                <span class="bs-stepper-circle"></span>
             </button>
         </div>
     </div>
     <div class="bs-stepper-content">
         <!-- your steps content here -->
         <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
-            <form>
+            <h2 class="text-center">Basisinformatie</h2>
+            <form method="post">
                 <div class="form-group">
                     <label for="licensePlate">Kenteken</label>
                     <input type="text" class="form-control" id="licensePlate" placeholder="TIK HIER">
@@ -65,34 +64,40 @@
                 </div>
                 <div class="form-group">
                     <label for="color">Kleur</label>
-                    <input type="password" class="form-control" id="color">
+                    <input type="text" class="form-control" id="color">
                 </div>
                 <div class="form-group">
                     <label for="inputMileage">Kilometerstand</label>
-                    <input type="date" class="form-control" id="inputMileage">
+                    <input type="text" class="form-control" id="inputMileage">
                 </div>
                 <br />
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Volgende</button>
+                    <button type="button" class="btn btn-warning" href="/">Annuleren</button>
+                    <button type="submit" class="btn btn-light border-dark" onclick="nextStepper();return false;">Volgende</button>
                 </div>
             </form>
         </div>
-        <div id="photo-part" class="content" role="tabpanel" aria-labelledby="photo-part-trigger">
-            <form>
+        <div id="photo-part" class="content text-center mx-auto" role="tabpanel" aria-labelledby="photo-part-trigger">
+            <h2>Foto</h2>
+            <form class="mx-auto" method="post">
                 <p>Deze foto hebben we gevonden bij het kenteken.</p>
-                <p>Wilt u deze gebruiken?</p>
 
-                <img src="https://lh3.googleusercontent.com/proxy/oBFixbbSrMB5_nTjKzwt_UKQCM88vr4NgyMcwJ-IaGV-WU1_-bBVPI-uULqyQBiK6vbyW_sOYBMslV3CfzdPfM4rRKfI6NauX_kcTurLMZUra6c7or6IaSyedY7k7gs7jH_xyQEtl_RG-bPbudyTQeLeT2ZdJvCeG2Se9jF7nw" />
-                <button>Ja</button>
-                <button>Uploaden...</button>
+                <img width="400px" src="https://lh3.googleusercontent.com/proxy/oBFixbbSrMB5_nTjKzwt_UKQCM88vr4NgyMcwJ-IaGV-WU1_-bBVPI-uULqyQBiK6vbyW_sOYBMslV3CfzdPfM4rRKfI6NauX_kcTurLMZUra6c7or6IaSyedY7k7gs7jH_xyQEtl_RG-bPbudyTQeLeT2ZdJvCeG2Se9jF7nw" />
+                <div class="mt-3">
+                    <p>Wilt u deze gebruiken?</p>
+                    <button type="button" class="btn btn-light border-dark">Ja</button>
+                    <button type="button" class="btn btn-light border-dark">Uploaden...</button>
+                </div>
                 <br />
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Volgende</button>
+                    <button type="button" class="btn btn-light border-dark" onclick="toStepper(1);return false;">Vorige</button>
+                    <button type="submit" class="btn btn-light border-dark" onclick="nextStepper();return false;">Volgende</button>
                 </div>
             </form>
         </div>
         <div id="costs-part" class="content" role="tabpanel" aria-labelledby="costs-part-trigger">
-            <form>
+            <h2 class="text-center">Kosten</h2>
+            <form method="post">
                 <div class="form-group">
                     <label for="roadTax">Wegenbelasting bedrag</label>
                     <input type="text" class="form-control" id="roadTax">
@@ -103,11 +108,13 @@
                 </div>
                 <br />
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Volgende</button>
+                    <button type="button" class="btn btn-light border-dark" onclick="toStepper(2); return false;">Vorige</button>
+                    <button type="submit" class="btn btn-light border-dark" onclick="nextStepper();return false;">Volgende</button>
                 </div>
             </form>
         </div>
         <div id="confirm-part" class="content" role="tabpanel" aria-labelledby="confirm-part-trigger">
+            <h2 class="text-center">Bevestigen</h2>
             <table class="table table-sm">
                 <tbody>
                     <tr>
@@ -142,8 +149,31 @@
             </table>
             <img src="https://lh3.googleusercontent.com/proxy/oBFixbbSrMB5_nTjKzwt_UKQCM88vr4NgyMcwJ-IaGV-WU1_-bBVPI-uULqyQBiK6vbyW_sOYBMslV3CfzdPfM4rRKfI6NauX_kcTurLMZUra6c7or6IaSyedY7k7gs7jH_xyQEtl_RG-bPbudyTQeLeT2ZdJvCeG2Se9jF7nw" />
             <div class="text-center">
-                <button type="submit" class="btn btn-primary">Volgende</button>
+                <button type="button" class="btn btn-light border-dark" onclick="toStepper(3); return false;">Vorige</button>
+                <button type="submit" class="btn btn-light border-dark">Volgende</button>
             </div>
         </div>
     </div>
 </div>
+<script>
+    var stepper;
+    document.addEventListener('DOMContentLoaded',
+        function () {
+            stepper = new Stepper(document.querySelector('.bs-stepper'));
+            stepper.options = {
+                linear: false,
+                animation: true,
+                selectors: {
+                    steps: '.step',
+                    trigger: '.step-trigger',
+                    stepper: '.bs-stepper'
+                }
+            }
+        });
+    function nextStepper() {
+        stepper.next();
+    }
+    function toStepper(step) {
+        stepper.to(step);
+    }
+</script>
