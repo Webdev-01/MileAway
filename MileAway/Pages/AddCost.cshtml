@@ -45,24 +45,74 @@
     {
         //Brandstof form
         <div class="form-group">
-            <label for="inputPrice">Bedrag*</label>
-            <input type="text" class="form-control" id="inputPrice" placeholder="€50">
+            <label for="inputCost">Bedrag*</label>
+            <input asp-for="Costs.Cost" type="text" class="form-control" id="inputCost" placeholder="€50">
+            <span class="invalid-feedback" asp-validation-for="Costs.Cost"></span>
         </div>
         <div class="form-group">
-            <label for="inputMileage">Kilometerstand</label>
-            <input type="email" class="form-control" id="inputKM" aria-describedby="emailHelp" placeholder="122000km">
+            <label for="inputMileage_Km">Kilometerstand</label>
+            <input asp-for="Vehicles.Mileage_Km" type="text" class="form-control" id="inputMileage_Km" placeholder="122000km">
+            <span class="invalid-feedback" asp-validation-for="Vehicles.Mileage_Km"></span>
         </div>
         <div class="form-group">
-            <label for="inputLiters">Liters*</label>
-            <input type="password" class="form-control" id="inputLitersPassword" placeholder="30L">
+            <label for="inputFuel_Quantity">Liters*</label>
+            <input asp-for="Costs.Fuel_Quantity" type="password" class="form-control" id="inputFuel_Quantity" placeholder="30L">
+            <span class="invalid-feedback" asp-validation-for="Costs.Fuel_Quantity"></span>
         </div>
         <div class="form-group">
-            <label for="inputDate">Datum</label>
-            <input type="date" class="form-control" id="inputDate" placeholder="">
+            <label for="inputDate_Of_Cost">Datum</label>
+            <input asp-for="Costs.Date_Of_Cost" type="date" class="form-control" id="inputDate_Of_Cost" placeholder="">
+            <span class="invalid-feedback" asp-validation-for="Costs.Date_Of_Cost"></span>
+        </div>
+        @*<div class="form-group">
+                <label for="inputTime">Time</label>
+                <input asp-for="User.FirstName" type="time" class="form-control" id="inputTime" placeholder="">
+                <span class="invalid-feedback" asp-validation-for="User.FirstName"></span>
+            </div>*@
+        <br />
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Volgende</button>
+        </div>
+    }
+
+
+    @if (Model.costType == "Reparatie")
+    {
+        //Reparatie forum
+        <div class="form-group">
+            <label for="inputCost">Bedrag*</label>
+            <input asp-for="Costs.Cost" type="text" class="form-control" id="inputCost" placeholder="€50">
+            <span class="invalid-feedback" asp-validation-for="Costs.Cost"></span>
         </div>
         <div class="form-group">
-            <label for="inputTime">Time</label>
-            <input type="time" class="form-control" id="inputTime" placeholder="">
+            <label for="inputRepair_Information">Onderdelen vervangen</label>
+            <input asp-for="Costs.Repair_Information" type="text" class="form-control" id="inputRepair_Information" placeholder="Koppeling, Versnellingspook">
+            <span class="invalid-feedback" asp-validation-for="Costs.Repair_Information"></span>
+        </div>
+        @*<div class="form-group">
+                <label for="inputLiters">Man-uren</label>
+                <input asp-for="User.FirstName" type="text" class="form-control" id="inputManHours" placeholder="28">
+                <span class="invalid-feedback" asp-validation-for="User.FirstName"></span>
+            </div>*@
+        <div class="form-group">
+            <label for="inputInvoice_Doc">Factuurnummer</label>
+            <input asp-for="Costs.Invoice_Doc" type="text" class="form-control" id="inputInvoice_Doc" placeholder="2008176">
+            <span class="invalid-feedback" asp-validation-for="Costs.Invoice_Doc"></span>
+        </div>
+        @*<div class="form-group">
+                <label for="inputDate">Garage</label>
+                <input asp-for="User.FirstName" type="text" class="form-control" id="inputGarage" placeholder="">
+                <span class="invalid-feedback" asp-validation-for="User.FirstName"></span>
+            </div>*@
+        <div class="form-group">
+            <label for="inputMileage_Km">Kilometerstand</label>
+            <input asp-for="Vehicles.Mileage_Km" type="text" class="form-control" id="inputMileage_Km" placeholder="122000km">
+            <span class="invalid-feedback" asp-validation-for="Vehicles.Mileage_Km"></span>
+        </div>
+        <div class="form-group">
+            <label for="inputDate_Of_Cost">Datum</label>
+            <input asp-for="Costs.Date_Of_Cost" type="date" class="form-control" id="inputDate_Of_Cost" placeholder="">
+            <span class="invalid-feedback" asp-validation-for="Costs.Date_Of_Cost"></span>
         </div>
         <br />
         <div class="text-center">
@@ -70,13 +120,6 @@
         </div>
     }
 </form>
-
-@if (Model.costType == "Reparatie")
-{
-    //Reparatie form
-    <p>REPARATIE!</p>
-}
-
 
 
 
