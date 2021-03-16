@@ -39,6 +39,19 @@ namespace MileAway.Repositories
             return userVars;
         }
 
+        public static Users GetUserByID(int userid)
+        {
+            using var connect = Connect();
+
+            var users = connect.QuerySingleOrDefault<Users>("SELECT * FROM users WHERE USER_ID = @user_id", 
+                new { 
+                    user_id = userid
+                }
+
+                );
+            return users;
+        }
+
         public static bool RegisterUser(Users user)
         {
             using var connect = Connect();
