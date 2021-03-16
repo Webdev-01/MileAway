@@ -4,7 +4,7 @@ namespace MileAway.Models
 {
     public class Users
     {
-        public int User_Id { get; set; }
+        public int User_ID { get; set; }
 
         [Required]
         public string Email { get; set; }
@@ -18,10 +18,10 @@ namespace MileAway.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
-        public string FirstName { get; set; }
+        public string First_Name { get; set; }
 
         [Required]
-        public string LastName { get; set; }
+        public string Last_Name { get; set; }
 
         public string User_Image { get; set; }
     }

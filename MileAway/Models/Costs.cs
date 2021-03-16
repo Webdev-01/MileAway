@@ -12,10 +12,7 @@ namespace MileAway.Models
         public int Typecost_Id { get; set; }
         public int Vehicle_Id { get; set; }
         [Required]
-        public int Cost { get; set; }
-        public string Fuel_Type { get; set; }
-        public int Fuel_Quantity { get; set; }
-        public string Repair_Information { get; set; }
+        public double Cost { get; set; }
         [Required]
         public DateTime Date_Of_Cost { get; set; }
         public string Invoice_Doc { get; set; }
