@@ -4,25 +4,25 @@ namespace MileAway.Models
 {
     public class Users
     {
-        public int USER_ID { get; set; }
+        public int User_Id { get; set; }
 
         [Required]
-        public string EMAIL { get; set; }
+        public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "{0} length must be at least {2} characters long.", MinimumLength = 6)]
-        public string PASSWORD { get; set; }
+        public string Password { get; set; }
 
         [Required]
         [Compare("PASSWORD", ErrorMessage = "The passwords do not match with eachother.")]
         public string CONFIRMPASSWORD { get; set; }
 
         [Required]
-        public string FIRSTNAME { get; set; }
+        public string FirstName { get; set; }
 
         [Required]
-        public string LASTNAME { get; set; }
+        public string LastName { get; set; }
 
-        public string USER_IMAGE { get; set; }
+        public string User_Image { get; set; }
     }
 }

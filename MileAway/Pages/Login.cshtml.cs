@@ -29,11 +29,11 @@ namespace MileAway.Pages
             if (user != null)
             {
                 //verify ( input , password DB)
-                var result = SecurePasswordHasher.Verify(User.PASSWORD, user.PASSWORD);
+                var result = SecurePasswordHasher.Verify(User.Password, user.Password);
                 if(result == true)
                 {
                     //Maak session aan en redirect naar homepage
-                    HttpContext.Session.SetString("user_id", user.USER_ID.ToString());
+                    HttpContext.Session.SetString("user_id", user.User_Id.ToString());
                     TempData["SuccesMessage"] = "U bent succesvol ingelogd.";
                     return RedirectToPage("Index");
                 }

@@ -1,4 +1,149 @@
 ﻿@page
 @model MileAway.Pages.AddVehicleModel
 @{
+    ViewData["Title"] = "Kosten toevoegen page";
+    Layout = "_Layout";
 }
+<div class="bs-stepper">
+    <div class="bs-stepper-header" role="tablist">
+        <!-- your steps here -->
+        <div class="step" data-target="#information-part">
+            <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+                <span class="bs-stepper-circle">1</span>
+                <span class="bs-stepper-label">Basisinformatie</span>
+            </button>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-target="#photo-part">
+            <button type="button" class="step-trigger" role="tab" aria-controls="photo-part" id="photo-part-trigger">
+                <span class="bs-stepper-circle">2</span>
+                <span class="bs-stepper-label">Foto</span>
+            </button>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-target="#costs-part">
+            <button type="button" class="step-trigger" role="tab" aria-controls="costs-part" id="costs-part-trigger">
+                <span class="bs-stepper-circle">3</span>
+                <span class="bs-stepper-label">Kosten</span>
+            </button>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-target="#confirm-part">
+            <button type="button" class="step-trigger" role="tab" aria-controls="confirm-part" id="confirm-part-trigger">
+                <span class="bs-stepper-circle">4</span>
+                <span class="bs-stepper-label">Bevestigen</span>
+            </button>
+        </div>
+    </div>
+    <div class="bs-stepper-content">
+        <!-- your steps content here -->
+        <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
+            <form>
+                <div class="form-group">
+                    <label for="licensePlate">Kenteken</label>
+                    <input type="text" class="form-control" id="licensePlate" placeholder="TIK HIER">
+                </div>
+                <div class="form-group">
+                    <label for="type">Soort voertuig</label>
+                    <select class="form-control" id="type">
+                        <option value="---">---</option>
+                        <option value="car">Auto</option>
+                        <option value="van">Busje</option>
+                        <option value="camper">Camper</option>
+                        <option value="truck">Vrachtwagen</option>
+                        <option value="motor">Motor</option>
+                        <option value="scooter">Scooter</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="brand">Merk*</label>
+                    <input type="text" class="form-control" id="brand">
+                </div>
+                <div class="form-group">
+                    <label for="model">Model*</label>
+                    <input type="text" class="form-control" id="model">
+                </div>
+                <div class="form-group">
+                    <label for="color">Kleur</label>
+                    <input type="password" class="form-control" id="color">
+                </div>
+                <div class="form-group">
+                    <label for="inputMileage">Kilometerstand</label>
+                    <input type="date" class="form-control" id="inputMileage">
+                </div>
+                <br />
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Volgende</button>
+                </div>
+            </form>
+        </div>
+        <div id="photo-part" class="content" role="tabpanel" aria-labelledby="photo-part-trigger">
+            <form>
+                <p>Deze foto hebben we gevonden bij het kenteken.</p>
+                <p>Wilt u deze gebruiken?</p>
+
+                <img src="https://lh3.googleusercontent.com/proxy/oBFixbbSrMB5_nTjKzwt_UKQCM88vr4NgyMcwJ-IaGV-WU1_-bBVPI-uULqyQBiK6vbyW_sOYBMslV3CfzdPfM4rRKfI6NauX_kcTurLMZUra6c7or6IaSyedY7k7gs7jH_xyQEtl_RG-bPbudyTQeLeT2ZdJvCeG2Se9jF7nw" />
+                <button>Ja</button>
+                <button>Uploaden...</button>
+                <br />
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Volgende</button>
+                </div>
+            </form>
+        </div>
+        <div id="costs-part" class="content" role="tabpanel" aria-labelledby="costs-part-trigger">
+            <form>
+                <div class="form-group">
+                    <label for="roadTax">Wegenbelasting bedrag</label>
+                    <input type="text" class="form-control" id="roadTax">
+                </div>
+                <div class="form-group">
+                    <label for="insurance">Verzekering bedrag</label>
+                    <input type="text" class="form-control" id="insurance">
+                </div>
+                <br />
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Volgende</button>
+                </div>
+            </form>
+        </div>
+        <div id="confirm-part" class="content" role="tabpanel" aria-labelledby="confirm-part-trigger">
+            <table class="table table-sm">
+                <tbody>
+                    <tr>
+                        <td>Kenteken: </td>
+                        <td>09-PO-ML </td>
+                    </tr>
+                    <tr>
+                        <td>Merk:</td>
+                        <td>Ford </td>
+                    </tr>
+                    <tr>
+                        <td>Model: </td>
+                        <td>Mustang </td>
+                    </tr>
+                    <tr>
+                        <td>Kleur: </td>
+                        <td>Geel </td>
+                    </tr>
+                    <tr>
+                        <td>Kilometerstand: </td>
+                        <td>110.000 </td>
+                    </tr>
+                    <tr>
+                        <td>Wegenbelasting: </td>
+                        <td>€110,- </td>
+                    </tr>
+                    <tr>
+                        <td>Verzekering: </td>
+                        <td>€70,- </td>
+                    </tr>
+                </tbody>
+            </table>
+            <img src="https://lh3.googleusercontent.com/proxy/oBFixbbSrMB5_nTjKzwt_UKQCM88vr4NgyMcwJ-IaGV-WU1_-bBVPI-uULqyQBiK6vbyW_sOYBMslV3CfzdPfM4rRKfI6NauX_kcTurLMZUra6c7or6IaSyedY7k7gs7jH_xyQEtl_RG-bPbudyTQeLeT2ZdJvCeG2Se9jF7nw" />
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Volgende</button>
+            </div>
+        </div>
+    </div>
+</div>

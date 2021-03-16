@@ -9,7 +9,7 @@ using MileAway.Repositories;
 
 namespace MileAway.Pages
 {
-    public class registerModel : PageModel
+    public class RegisterModel : PageModel
     {
         [BindProperty]
         public Users User { get; set; }
@@ -24,7 +24,7 @@ namespace MileAway.Pages
         {
             if (ModelState.IsValid)
             {
-                User.PASSWORD = SecurePasswordHasher.Hash(User.PASSWORD);
+                User.Password = SecurePasswordHasher.Hash(User.Password);
                 var registerUser = UsersRepository.RegisterUser(User);
                 if (registerUser)
                 {
