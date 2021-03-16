@@ -7,7 +7,7 @@ namespace MileAway.Models
 {
     public class Typecosts
     {
-        public int Typecost_Id { get; set; }
-        public string TypecostName { get; set; }
+        public int tYpECoSt_iD { get; set; }
+        public string TypeCost_Name { get; set; }
     }
 }

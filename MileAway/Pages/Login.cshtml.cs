@@ -33,7 +33,8 @@ namespace MileAway.Pages
                 if (result == true)
                 {
                     //Maak session aan en redirect naar homepage
-                    HttpContext.Session.SetString("user_id", user.User_Id.ToString());
+                    HttpContext.Session.SetInt32("user_id", user.User_Id);
+                    var test = HttpContext.Session.GetInt32("user_id");
                     TempData["SuccesMessage"] = "U bent succesvol ingelogd.";
                     return RedirectToPage("Index");
                 }
