@@ -27,7 +27,7 @@ namespace MileAway.Pages
             if (user != null)
             {
                 //Maak session aan en redirect naar homepage
-                HttpContext.Session.SetString("user_id", user.USER_ID.ToString());
+                HttpContext.Session.SetString("user_id", user.User_Id.ToString());
                 return RedirectToPage("Index");
             }
             return Page();

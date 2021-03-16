@@ -11,11 +11,11 @@
 <form method="post" asp-page-handler="AddCost">
     <div class="form-group">
         <label for="type">Soort kosten</label>
-        <selectl class="form-control" id="type" onchange='window.location.href = "/AddCost?type=" + $("#type").val();'>
+        <select class="form-control" id="type" onchange='window.location.href = "/AddCost?type=" + $("#type").val();'>
             <option value="---">---</option>
             <option selected=@Model.costTypeString value="brandstof">Brandstof</option>
             <option value="reperatie">Reperatie</option>
-        </selectl>
+        </select>
     </div>
     @if (Model.costType == "brandstof")
     {

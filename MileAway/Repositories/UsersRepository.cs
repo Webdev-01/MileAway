@@ -32,9 +32,9 @@ namespace MileAway.Repositories
         public static Users GetUserByLogin(Users user)
         {
             using var connect = Connect();
-            var userVars = connect.QuerySingleOrDefault<Users>("SELECT * FROM users WHERE EMAIL=@Email AND PASSWORD=@Password",
-                new { Email = user.EMAIL,
-                Password = user.PASSWORD });
+            var userVars = connect.QuerySingleOrDefault<Users>("SELECT * FROM users WHERE Email=@Email AND Password=@Password",
+                new { Email = user.Email,
+                Password = user.Password });
 
             return userVars;
         }
@@ -44,13 +44,13 @@ namespace MileAway.Repositories
             using var connect = Connect();
             try
             {
-                var registerUser = connect.Execute("INSERT INTO users (EMAIL, PASSWORD, FIRSTNAME, LASTNAME, USER_IMAGE) VALUES (@Email, @Password, @Firstname, @Lastname, @User_image)", new
+                var registerUser = connect.Execute("INSERT INTO users (Email, Password, FirstName, LastName, User_Image) VALUES (@Email, @Password, @Firstname, @Lastname, @User_image)", new
                 {
-                    Email = user.EMAIL,
-                    Password = user.PASSWORD,
-                    Firstname = user.FIRSTNAME,
-                    Lastname = user.LASTNAME,
-                    User_image = user.USER_IMAGE
+                    Email = user.Email,
+                    Password = user.Password,
+                    Firstname = user.FirstName,
+                    Lastname = user.LastName,
+                    User_image = user.User_Image
                 });
 
                 return registerUser == 1;

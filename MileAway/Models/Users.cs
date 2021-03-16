@@ -4,23 +4,23 @@ namespace MileAway.Models
 {
     public class Users
     {
-        public int USER_ID { get; set; }
+        public int User_Id { get; set; }
 
         [Required]
-        public string EMAIL { get; set; }
+        public string Email { get; set; }
 
         [Required]
-        public string PASSWORD { get; set; }
+        public string Password { get; set; }
 
-        [Compare("PASSWORD")]
-        public string CONFIRMPASSWORD { get; set; }
-
-        [Required]
-        public string FIRSTNAME { get; set; }
+        [Compare("Password")]
+        public string ConfirmPassword { get; set; }
 
         [Required]
-        public string LASTNAME { get; set; }
+        public string FirstName { get; set; }
 
-        public string USER_IMAGE { get; set; }
+        [Required]
+        public string LastName { get; set; }
+
+        public string User_Image { get; set; }
     }
 }

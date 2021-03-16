@@ -33,33 +33,33 @@ $.validator.unobtrusive.options = settings;</script>
     }
     <div class="form-group">
         <label for="inputSirName">Voornaam*</label>
-        <input asp-for="User.FIRSTNAME" type="text" class="form-control" id="inputSirName" placeholder="Voornaam">
-        <span class="invalid-feedback" asp-validation-for="User.FIRSTNAME"></span>
+        <input asp-for="User.FirstName" type="text" class="form-control" id="inputSirName" placeholder="Voornaam">
+        <span class="invalid-feedback" asp-validation-for="User.FirstName"></span>
     </div>
     <div class="form-group">
         <label for="inputLastName">Achternaam</label>
-        <input asp-for="User.LASTNAME" type="text" class="form-control" id="inputLastName" placeholder="Achternaam">
-        <span class="invalid-feedback" asp-validation-for="User.LASTNAME"></span>
+        <input asp-for="User.LastName" type="text" class="form-control" id="inputLastName" placeholder="Achternaam">
+        <span class="invalid-feedback" asp-validation-for="User.LastName"></span>
     </div>
     <div class="form-group">
         <label for="inputEmail">Email address*</label>
-        <input asp-for="User.EMAIL" type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="E-mail">
-        <span class="invalid-feedback" asp-validation-for="User.EMAIL"></span>
+        <input asp-for="User.Email" type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="E-mail">
+        <span class="invalid-feedback" asp-validation-for="User.Email"></span>
     </div>
     <div class="form-group">
         <label for="inputPassword">Wachtwoord*</label>
-        <input asp-for="User.PASSWORD" type="password" class="form-control" id="inputPassword" placeholder="Wachtwoord">
-        <span class="invalid-feedback" asp-validation-for="User.PASSWORD"></span>
+        <input asp-for="User.Password" type="password" class="form-control" id="inputPassword" placeholder="Wachtwoord">
+        <span class="invalid-feedback" asp-validation-for="User.Password"></span>
     </div>
     <div class="form-group">
         <label for="inputRepeatPassword">Wachtwoord herhalen*</label>
-        <input asp-for="User.CONFIRMPASSWORD" type="password" class="form-control" id="inputRepeatPassword" placeholder="Wachtwoord">
-        <span class="invalid-feedback" asp-validation-for="User.CONFIRMPASSWORD"></span>
+        <input asp-for="User.ConfirmPassword" type="password" class="form-control" id="inputRepeatPassword" placeholder="Wachtwoord">
+        <span class="invalid-feedback" asp-validation-for="User.ConfirmPassword"></span>
     </div>
     <div>
         <label class="form-label" for="profilePicture">Profielfoto</label>
-        <input asp-for="User.USER_IMAGE" type="file" class="form-control" id="profilePicture" />
-        <span class="invalid-feedback" asp-validation-for="User.USER_IMAGE"></span>
+        <input asp-for="User.User_Image" type="file" class="form-control" id="profilePicture" />
+        <span class="invalid-feedback" asp-validation-for="User.User_Image"></span>
     </div>
     <br />
     <div class="text-center">

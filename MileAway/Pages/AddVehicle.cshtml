@@ -1,4 +1,138 @@
 ﻿@page
 @model MileAway.Pages.AddVehicleModel
 @{
+    ViewData["Title"] = "Kosten toevoegen page";
+    Layout = "_Layout";
 }
+<div class="bs-stepper">
+    <div class="bs-stepper-header" role="tablist">
+        <!-- your steps here -->
+        <div class="step" data-target="#information-part">
+            <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+                <span class="bs-stepper-circle">1</span>
+                <span class="bs-stepper-label">Basisinformatie</span>
+            </button>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-target="#photo-part">
+            <button type="button" class="step-trigger" role="tab" aria-controls="photo-part" id="photo-part-trigger">
+                <span class="bs-stepper-circle">2</span>
+                <span class="bs-stepper-label">Foto</span>
+            </button>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-target="#costs-part">
+            <button type="button" class="step-trigger" role="tab" aria-controls="costs-part" id="costs-part-trigger">
+                <span class="bs-stepper-circle">3</span>
+                <span class="bs-stepper-label">Kosten</span>
+            </button>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-target="#confirm-part">
+            <button type="button" class="step-trigger" role="tab" aria-controls="confirm-part" id="confirm-part-trigger">
+                <span class="bs-stepper-circle">4</span>
+                <span class="bs-stepper-label">Bevestigen</span>
+            </button>
+        </div>
+    </div>
+    <div class="bs-stepper-content">
+        <!-- your steps content here -->
+        <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
+            <form>
+                <div class="form-group">
+                    <label for="licensePlate">Kenteken</label>
+                    <input type="text" class="form-control" id="licensePlate" placeholder="TIK HIER">
+                </div>
+                <div class="form-group">
+                    <label for="type">Soort voertuig</label>
+                    <select class="form-control" id="type">
+                        <option value="---">---</option>
+                        <option value="car">Auto</option>
+                        <option value="van">Busje</option>
+                        <option value="camper">Camper</option>
+                        <option value="truck">Vrachtwagen</option>
+                        <option value="motor">Motor</option>
+                        <option value="scooter">Scooter</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="brand">Merk*</label>
+                    <input type="text" class="form-control" id="brand">
+                </div>
+                <div class="form-group">
+                    <label for="model">Model*</label>
+                    <input type="text" class="form-control" id="model">
+                </div>
+                <div class="form-group">
+                    <label for="color">Kleur</label>
+                    <input type="password" class="form-control" id="color">
+                </div>
+                <div class="form-group">
+                    <label for="inputMileage">Kilometerstand</label>
+                    <input type="date" class="form-control" id="inputMileage">
+                </div>
+                <br/>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Volgende</button>
+                </div>
+            </form>
+        </div>
+        <div id="photo-part" class="content" role="tabpanel" aria-labelledby="photo-part-trigger">
+            <form>
+                <div class="form-group">
+                    <label for="inputPrice">Bedrag*</label>
+                    <input type="text" class="form-control" id="inputPrice" placeholder="€50">
+                </div>
+                <div class="form-group">
+                    <label for="inputMileage">Kilometerstand</label>
+                    <input type="email" class="form-control" id="inputKM" aria-describedby="emailHelp" placeholder="122000km">
+                </div>
+                <div class="form-group">
+                    <label for="inputLiters">Liters*</label>
+                    <input type="password" class="form-control" id="inputLitersPassword" placeholder="30L">
+                </div>
+                <div class="form-group">
+                    <label for="inputDate">Datum</label>
+                    <input type="date" class="form-control" id="inputDate" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="inputTime">Time</label>
+                    <input type="time" class="form-control" id="inputTime" placeholder="">
+                </div>
+                <br />
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Volgende</button>
+                </div>
+            </form>
+        </div>
+        <div id="costs-part" class="content" role="tabpanel" aria-labelledby="costs-part-trigger">
+            <form>
+                <div class="form-group">
+                    <label for="inputPrice">Bedrag*</label>
+                    <input type="text" class="form-control" id="inputPrice" placeholder="€50">
+                </div>
+                <div class="form-group">
+                    <label for="inputMileage">Kilometerstand</label>
+                    <input type="email" class="form-control" id="inputKM" aria-describedby="emailHelp" placeholder="122000km">
+                </div>
+                <div class="form-group">
+                    <label for="inputLiters">Liters*</label>
+                    <input type="password" class="form-control" id="inputLitersPassword" placeholder="30L">
+                </div>
+                <div class="form-group">
+                    <label for="inputDate">Datum</label>
+                    <input type="date" class="form-control" id="inputDate" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="inputTime">Time</label>
+                    <input type="time" class="form-control" id="inputTime" placeholder="">
+                </div>
+                <br />
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Volgende</button>
+                </div>
+            </form>
+        </div>
+        <div id="confirm-part" class="content" role="tabpanel" aria-labelledby="confirm-part-trigger"></div>
+    </div>
+</div>
