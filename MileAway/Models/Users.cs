@@ -10,10 +10,12 @@ namespace MileAway.Models
         public string Email { get; set; }
 
         [Required]
-        public string Password { get; set; }
+        [StringLength(100, ErrorMessage = "{0} length must be at least {2} characters long.", MinimumLength = 6)]
+        public string PASSWORD { get; set; }
 
-        [Compare("Password")]
-        public string ConfirmPassword { get; set; }
+        [Required]
+        [Compare("password", ErrorMessage = "The passwords do not match with eachother.")]
+        public string CONFIRMPASSWORD { get; set; }
 
         [Required]
         public string FirstName { get; set; }
