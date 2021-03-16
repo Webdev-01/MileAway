@@ -29,7 +29,8 @@ namespace MileAway.Pages
                 if (registerUser)
                 {
                     return RedirectToPage("Login");
-                } else
+                }
+                else
                 {
                     Error = "This emailadress is already in use";
                 }

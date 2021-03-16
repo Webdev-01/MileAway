@@ -20,7 +20,8 @@ namespace MileAway.Pages
 
         public IActionResult OnGet()
         {
-            if (HttpContext.Session.GetString("user_id") == null){
+            if (HttpContext.Session.GetString("user_id") == null)
+            {
                 return RedirectToPage("Login");
             }
             return Page();
