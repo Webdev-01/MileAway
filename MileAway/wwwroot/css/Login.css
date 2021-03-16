@@ -25,7 +25,8 @@
 }
 
 .underlineHover {
-    text-decoration: none;
+    text-decoration: none !important;
+    cursor: pointer;
 }
 
 /* Simple CSS3 Fade-in Animation */

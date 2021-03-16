@@ -33,6 +33,12 @@
                         <h3>Welkom!</h3>
                         <p>De inzage in uw uitgaven begint hier</p>
                     </div>
+                    @if (TempData.ContainsKey("ErrorMessage"))
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @TempData["ErrorMessage"]
+                        </div>
+                    }
                     <!-- Login Form -->
                     <form method="post" asp-page-handler="Login">
                         <!-- Username -->

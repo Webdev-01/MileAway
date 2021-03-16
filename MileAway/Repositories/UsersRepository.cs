@@ -32,10 +32,10 @@ namespace MileAway.Repositories
         public static Users GetUserByLogin(Users user)
         {
             using var connect = Connect();
-            var userVars = connect.QuerySingleOrDefault<Users>("SELECT * FROM users WHERE EMAIL=@Email AND PASSWORD=@Password",
-                new { Email = user.EMAIL,
-                Password = user.PASSWORD });
-
+            var userVars = connect.QuerySingleOrDefault<Users>("SELECT * FROM users WHERE EMAIL=@Email",
+            new { 
+                Email = user.EMAIL
+            });
             return userVars;
         }
 
@@ -53,12 +53,11 @@ namespace MileAway.Repositories
                     User_image = user.USER_IMAGE
                 });
 
-                return registerUser == 1;
+            return true;
             } catch (MySqlException e)
             {
                 return false;
             }
-            return false;
         }
     }
 }

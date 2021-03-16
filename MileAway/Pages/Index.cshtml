@@ -5,7 +5,12 @@
     Layout = "_Layout";
 }
 <link rel="stylesheet" href="~/css/Overview.css">
-
+@if (TempData.ContainsKey("SuccesMessage"))
+{
+<div class="alert alert-success" role="alert">
+    @TempData["SuccesMessage"]
+</div>
+}
 <div class="accordion mt-0" id="accordionExample">
     <div class="card">
         <button class="btn btn-link w-100 collapsed mx-auto d-block" type="button" data-toggle="collapse" data-target="#collapseGraphs" aria-expanded="false" aria-controls="collapseGraphs" onclick="switchCaret()">
