@@ -20,5 +20,27 @@ namespace MileAway.Repositories
                 "Uid = root;" +
                 "Pwd =;");
         }
+
+        //public static bool AddCost(Costs costs)
+        //{
+        //    using var connect = Connect();
+        //    try
+        //    {
+        //        var Addcost = connect.Execute("INSERT INTO users (Email, Password, FirstName, LastName, User_Image) VALUES (@Email, @Password, @Firstname, @Lastname, @User_image)", new
+        //        {
+        //            Email = user.Email,
+        //            Password = user.Password,
+        //            Firstname = user.FirstName,
+        //            Lastname = user.LastName,
+        //            User_image = user.User_Image
+        //        });
+
+        //        return true;
+        //    }
+        //    catch (MySqlException e)
+        //    {
+        //        return false;
+        //    }
+        //}
     }
 }
