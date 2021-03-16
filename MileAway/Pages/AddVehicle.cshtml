@@ -71,7 +71,7 @@
                     <label for="inputMileage">Kilometerstand</label>
                     <input type="date" class="form-control" id="inputMileage">
                 </div>
-                <br/>
+                <br />
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Volgende</button>
                 </div>
@@ -79,26 +79,12 @@
         </div>
         <div id="photo-part" class="content" role="tabpanel" aria-labelledby="photo-part-trigger">
             <form>
-                <div class="form-group">
-                    <label for="inputPrice">Bedrag*</label>
-                    <input type="text" class="form-control" id="inputPrice" placeholder="€50">
-                </div>
-                <div class="form-group">
-                    <label for="inputMileage">Kilometerstand</label>
-                    <input type="email" class="form-control" id="inputKM" aria-describedby="emailHelp" placeholder="122000km">
-                </div>
-                <div class="form-group">
-                    <label for="inputLiters">Liters*</label>
-                    <input type="password" class="form-control" id="inputLitersPassword" placeholder="30L">
-                </div>
-                <div class="form-group">
-                    <label for="inputDate">Datum</label>
-                    <input type="date" class="form-control" id="inputDate" placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="inputTime">Time</label>
-                    <input type="time" class="form-control" id="inputTime" placeholder="">
-                </div>
+                <p>Deze foto hebben we gevonden bij het kenteken.</p>
+                <p>Wilt u deze gebruiken?</p>
+
+                <img src="https://lh3.googleusercontent.com/proxy/oBFixbbSrMB5_nTjKzwt_UKQCM88vr4NgyMcwJ-IaGV-WU1_-bBVPI-uULqyQBiK6vbyW_sOYBMslV3CfzdPfM4rRKfI6NauX_kcTurLMZUra6c7or6IaSyedY7k7gs7jH_xyQEtl_RG-bPbudyTQeLeT2ZdJvCeG2Se9jF7nw" />
+                <button>Ja</button>
+                <button>Uploaden...</button>
                 <br />
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Volgende</button>
@@ -108,24 +94,12 @@
         <div id="costs-part" class="content" role="tabpanel" aria-labelledby="costs-part-trigger">
             <form>
                 <div class="form-group">
-                    <label for="inputPrice">Bedrag*</label>
-                    <input type="text" class="form-control" id="inputPrice" placeholder="€50">
+                    <label for="roadTax">Wegenbelasting bedrag</label>
+                    <input type="text" class="form-control" id="roadTax">
                 </div>
                 <div class="form-group">
-                    <label for="inputMileage">Kilometerstand</label>
-                    <input type="email" class="form-control" id="inputKM" aria-describedby="emailHelp" placeholder="122000km">
-                </div>
-                <div class="form-group">
-                    <label for="inputLiters">Liters*</label>
-                    <input type="password" class="form-control" id="inputLitersPassword" placeholder="30L">
-                </div>
-                <div class="form-group">
-                    <label for="inputDate">Datum</label>
-                    <input type="date" class="form-control" id="inputDate" placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="inputTime">Time</label>
-                    <input type="time" class="form-control" id="inputTime" placeholder="">
+                    <label for="insurance">Verzekering bedrag</label>
+                    <input type="text" class="form-control" id="insurance">
                 </div>
                 <br />
                 <div class="text-center">
@@ -133,6 +107,43 @@
                 </div>
             </form>
         </div>
-        <div id="confirm-part" class="content" role="tabpanel" aria-labelledby="confirm-part-trigger"></div>
+        <div id="confirm-part" class="content" role="tabpanel" aria-labelledby="confirm-part-trigger">
+            <table class="table table-sm">
+                <tbody>
+                    <tr>
+                        <td>Kenteken: </td>
+                        <td>09-PO-ML </td>
+                    </tr>
+                    <tr>
+                        <td>Merk:</td>
+                        <td>Ford </td>
+                    </tr>
+                    <tr>
+                        <td>Model: </td>
+                        <td>Mustang </td>
+                    </tr>
+                    <tr>
+                        <td>Kleur: </td>
+                        <td>Geel </td>
+                    </tr>
+                    <tr>
+                        <td>Kilometerstand: </td>
+                        <td>110.000 </td>
+                    </tr>
+                    <tr>
+                        <td>Wegenbelasting: </td>
+                        <td>€110,- </td>
+                    </tr>
+                    <tr>
+                        <td>Verzekering: </td>
+                        <td>€70,- </td>
+                    </tr>
+                </tbody>
+            </table>
+            <img src="https://lh3.googleusercontent.com/proxy/oBFixbbSrMB5_nTjKzwt_UKQCM88vr4NgyMcwJ-IaGV-WU1_-bBVPI-uULqyQBiK6vbyW_sOYBMslV3CfzdPfM4rRKfI6NauX_kcTurLMZUra6c7or6IaSyedY7k7gs7jH_xyQEtl_RG-bPbudyTQeLeT2ZdJvCeG2Se9jF7nw" />
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Volgende</button>
+            </div>
+        </div>
     </div>
 </div>

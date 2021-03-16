@@ -1,7 +1,7 @@
 ﻿@page
 @using Microsoft.AspNetCore.Hosting
 @using Microsoft.Extensions.Hosting
-@model MileAway.Pages.registerModel
+@model MileAway.Pages.RegisterModel
 @{
     ViewData["Title"] = "Register";
     Layout = "_Layout";
@@ -11,12 +11,13 @@
 {
     <partial name="_ValidationScriptsPartial" />
 
-    <script>var settings = {
-validClass: "is-valid",
-errorClass: "is-invalid"
-};
-$.validator.setDefaults(settings);
-$.validator.unobtrusive.options = settings;</script>
+    <script>
+    var settings = {
+            validClass: "is-valid",
+            errorClass: "is-invalid"
+        };
+        $.validator.setDefaults(settings);
+        $.validator.unobtrusive.options = settings;</script>
 }
 
 <link rel="stylesheet" href="~/css/profile.css">

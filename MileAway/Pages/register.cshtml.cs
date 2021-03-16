@@ -9,7 +9,7 @@ using MileAway.Repositories;
 
 namespace MileAway.Pages
 {
-    public class registerModel : PageModel
+    public class RegisterModel : PageModel
     {
         [BindProperty]
         public Users User { get; set; }

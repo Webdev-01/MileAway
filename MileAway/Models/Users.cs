@@ -14,7 +14,7 @@ namespace MileAway.Models
         public string Password { get; set; }
 
         [Required]
-        [Compare("password", ErrorMessage = "The passwords do not match with eachother.")]
+        [Compare("Password", ErrorMessage = "The passwords do not match with eachother.")]
         public string ConfirmPassword { get; set; }
 
         [Required]
