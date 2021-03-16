@@ -24,7 +24,7 @@ namespace MileAway.Pages
         {
             if (ModelState.IsValid)
             {
-                User.PASSWORD = SecurePasswordHasher.Hash(User.PASSWORD);
+                User.Password = SecurePasswordHasher.Hash(User.Password);
                 var registerUser = UsersRepository.RegisterUser(User);
                 if (registerUser)
                 {

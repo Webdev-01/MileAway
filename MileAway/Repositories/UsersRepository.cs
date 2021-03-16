@@ -34,7 +34,7 @@ namespace MileAway.Repositories
             using var connect = Connect();
             var userVars = connect.QuerySingleOrDefault<Users>("SELECT * FROM users WHERE EMAIL=@Email",
             new { 
-                Email = user.EMAIL
+                Email = user.Email
             });
             return userVars;
         }
