@@ -11,12 +11,10 @@ namespace MileAway.Pages
     public class AddCostModel : PageModel
     {
         public string costType { get; set; }
-        public string costTypeString { get; set; }
 
         public ActionResult OnGet()
         {
             costType = HttpContext.Request.Query["type"];
-            costTypeString = costType == "brandstof" ? "selected" : "";
             return Page();
         }
     }

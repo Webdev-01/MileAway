@@ -3,23 +3,47 @@
 @{
     ViewData["Title"] = "Kosten toevoegen page";
     Layout = "_Layout";
-    var test = Model.costType == "brandstof" ? "selected" : "";
+    //var test = Model.costType == "brandstof" ? "selected" : "";
 }
 
+<script>
+    window.addEventListener("load", function () {
+        @if (Model.costType == "Brandstof")
+        {
+            <text>$("#type option[value='Brandstof']").attr("selected", "selected");</text>
+        }
+        @if (Model.costType == "Reparatie")
+        {
+            <text>$("#type option[value='Reparatie']").attr("selected", "selected");</text>
+        }
+    });
+    var CheckType = "Brandstof";
 
+    function test() {
+        var e = document.getElementById("type");
+        console.log(e.value);
+        CheckType = e.value;
+        if (CheckType == "Brandstof") {
+            window.location.href = "/AddCost?type=Brandstof";
+        }
+        if (CheckType == "Reparatie") {
+            window.location.href = "/AddCost?type=Reparatie";
+        }
+    }
+</script>
 
 <form method="post" asp-page-handler="AddCost">
     <div class="form-group">
-        <label for="type">Soort kosten</label>
-        <selectl class="form-control" id="type" onchange='window.location.href = "/AddCost?type=" + $("#type").val();'>
-            <option value="---">---</option>
-            <option selected=@Model.costTypeString value="brandstof">Brandstof</option>
-            <option value="reperatie">Reperatie</option>
-        </selectl>
+        <select class="form-control" id="type" onchange="test()">
+            <option selected>Open this select menu</option>
+            <option value="Brandstof">Brandstof</option>
+            <option value="Reparatie">Reparatie</option>
+        </select>
     </div>
-    @if (Model.costType == "brandstof")
-    {
 
+    @if (Model.costType == "Brandstof")
+    {
+        //Brandstof form
         <div class="form-group">
             <label for="inputPrice">Bedrag*</label>
             <input type="text" class="form-control" id="inputPrice" placeholder="€50">
@@ -45,11 +69,14 @@
             <button type="submit" class="btn btn-primary">Volgende</button>
         </div>
     }
-    <div id=""></div>
 </form>
 
-<script>
-    function type() {
-        ;
-    }
-</script>
+@if (Model.costType == "Reparatie")
+{
+    //Reparatie form
+    <p>REPARATIE!</p>
+}
+
+
+
+
