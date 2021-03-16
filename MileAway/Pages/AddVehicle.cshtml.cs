@@ -11,9 +11,14 @@ namespace MileAway.Pages
     public class AddVehicleModel : PageModel
     {
         [BindProperty]
-        public Vehicles vehicles { get; set; }
+        public Vehicles vehicle { get; set; }
         public void OnGet()
         {
+        }
+
+        public void OnPostConfirm()
+        {
+            var test = vehicle;
         }
     }
 }
