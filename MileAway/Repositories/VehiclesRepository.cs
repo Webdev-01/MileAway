@@ -11,7 +11,7 @@ namespace MileAway.Repositories
 {
     public class VehiclesRepository
     {
-        public bool AddVehicle(Vehicles vehicles)
+        public static bool AddVehicle(Vehicles vehicles)
         {
             using var connect = DbUtils.GetDbConnection();
             try
@@ -35,6 +35,33 @@ namespace MileAway.Repositories
             {
                 return false;
             }
+        }
+        public static List<Vehicles> GetVehiclesByEmail(string email)
+        {
+            using var connect = DbUtils.GetDbConnection();
+
+            var vehicles = connect.Query<Vehicles>("SELECT * FROM vehicles WHERE Email = @Email",
+                new
+                {
+                    Email = email
+                }
+
+            ).ToList();
+            return vehicles;
+        }
+
+        public static Vehicles GetVehicleByLicense(string license)
+        {
+            using var connect = DbUtils.GetDbConnection();
+
+            var vehicle = connect.QueryFirstOrDefault<Vehicles>("SELECT * FROM vehicles WHERE License = @License",
+                new
+                {
+                    License = license
+                }
+
+            );
+            return vehicle;
         }
     }
 }

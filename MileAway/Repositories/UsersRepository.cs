@@ -34,7 +34,7 @@ namespace MileAway.Repositories
         {
             using var connect = DbUtils.GetDbConnection();
 
-            var users = connect.QuerySingleOrDefault<Users>("SELECT * FROM users WHERE User_ID = @Email", 
+            var users = connect.QuerySingleOrDefault<Users>("SELECT * FROM users WHERE Email = @Email", 
                 new { 
                     Email = email
                 }

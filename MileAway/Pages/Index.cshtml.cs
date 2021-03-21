@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using MileAway.Models;
+using MileAway.Repositories;
 
 namespace MileAway.Pages
 {
@@ -17,13 +19,19 @@ namespace MileAway.Pages
         {
             _logger = logger;
         }
+        [BindProperty]
+        public List<Vehicles> Vehicles { get; set; }
+
 
         public IActionResult OnGet()
         {
-            if (HttpContext.Session.GetString("user_id") == null)
+            if (HttpContext.Session.GetString("email") == null)
             {
                 return RedirectToPage("Login");
             }
+
+            Vehicles = VehiclesRepository.GetVehiclesByEmail(HttpContext.Session.GetString("email"));
+            //TODO: get fixed costs and get average costs
             return Page();
         }
     }

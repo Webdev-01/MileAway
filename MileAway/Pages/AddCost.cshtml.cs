@@ -18,7 +18,7 @@ namespace MileAway.Pages
         [BindProperty]
         public Vehicles Vehicles { get; set; }
 
-        public ActionResult OnGet()
+        public ActionResult OnGet(string license)
         {
             costType = HttpContext.Request.Query["type"];
             return Page();

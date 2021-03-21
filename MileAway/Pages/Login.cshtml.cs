@@ -30,7 +30,7 @@ namespace MileAway.Pages
             {
                 //verify ( input , password DB)
                 var result = SecurePasswordHasher.Verify(User.Password, user.Password);
-                if (result == true)
+                if (result)
                 {
                     //Maak session aan en redirect naar homepage
                     HttpContext.Session.SetString("email", user.Email);

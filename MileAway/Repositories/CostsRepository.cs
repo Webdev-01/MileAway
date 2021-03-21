@@ -35,5 +35,49 @@ namespace MileAway.Repositories
                 return false;
             }
         }
+
+        public static List<Costs> GetCostsByLicense(string license)
+        {
+            using var connect = DbUtils.GetDbConnection();
+
+            var costs = connect.Query<Costs>("SELECT * FROM costs WHERE License = @License",
+                new
+                {
+                    License = license
+                }
+
+            ).ToList();
+            return costs;
+        }
+
+        public static bool AddFixedCosts(double insurance, double roadTax, string vehicleLicense)
+        {
+            {
+                using var connect = DbUtils.GetDbConnection();
+                try
+                {
+                    var insuranceResult = connect.Execute("INSERT INTO costs (TypeCost_ID, License, Cost, Date_Of_Cost) VALUES (@TypeCost_ID, @License, @Cost, @Date_Of_Cost)", new
+                    {
+                        TypeCost_ID = 4,
+                        License = vehicleLicense,
+                        Cost = insurance,
+                        Date_Of_Cost = DateTime.Now
+                    });
+                    var roadTaxResult = connect.Execute("INSERT INTO costs (TypeCost_ID, License, Cost, Date_Of_Cost) VALUES (@TypeCost_ID, @License, @Cost, @Date_Of_Cost)", new
+                    {
+                        TypeCost_ID = 3,
+                        License = vehicleLicense,
+                        Cost = roadTax,
+                        Date_Of_Cost = DateTime.Now
+                    });
+                    //TODO: add date of cost
+                    return insuranceResult == 1 && roadTaxResult == 1;
+                }
+                catch (MySqlException e)
+                {
+                    return false;
+                }
+            }
+        }
     }
 }
