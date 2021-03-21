@@ -37,7 +37,7 @@
     {
         <div class="card col-xs-12 col-md-6 text-center">
             <div class="card-body ">
-                <a asp-page="/ViewVehicle/@vehicle.License">
+                <a href="/ViewVehicle/@vehicle.License">
                     <h3 class="card-title mb-0">@vehicle.Brand_Name @vehicle.Model_Name</h3>
                     <div class="card-text">
                         <h4>@vehicle.License</h4>
@@ -48,7 +48,7 @@
                     </div>
                     <img class="mx-auto d-block" width="200" src="https://parkers-images.bauersecure.com/gallery-image/pagefiles/204617/static-exterior/1752x1168/ar_896.jpg" alt="Car picture">
                 </a>
-                <a asp-page="/AddCost/@vehicle.License" class="mt-2 btn btn-light border-dark">Kosten toevoegen</a>
+                <a href="/AddCost/@vehicle.License" class="mt-2 btn btn-light border-dark">Kosten toevoegen</a>
             </div>
         </div>
     }

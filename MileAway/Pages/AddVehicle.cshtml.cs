@@ -24,12 +24,13 @@ namespace MileAway.Pages
         {
         }
 
+        //TODO: look into validation, if everything is correct
         public IActionResult OnPostConfirm()
         {
             Vehicle.Email = HttpContext.Session.GetString("email");
             if (VehiclesRepository.AddVehicle(Vehicle))
-                if(CostsRepository.AddFixedCosts(Insurance, Road_Tax, Vehicle.License))
-                return RedirectToPage("Index");
+                if (CostsRepository.AddFixedCosts(Insurance, Road_Tax, Vehicle.License))
+                    return RedirectToPage("Index");
             return Page();
         }
     }

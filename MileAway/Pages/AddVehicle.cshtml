@@ -50,24 +50,24 @@
             <!-- your steps content here -->
             <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
                 <h2 class="text-center">Basisinformatie</h2>
-                <div class="form-group">
-                    <label for="licensePlate">Kenteken</label>
-                    <input type="text" asp-for="Vehicle.License" class="form-control" id="licensePlate" placeholder="TIK HIER">
+                <div class="form-group mx-auto">
+                    <label for="licensePlate">Kenteken*</label>
+                    <input type="text" asp-for="Vehicle.License" class="kentekenplaat d-block mx-auto" style="font-size: 3em" id="licensePlate" placeholder="TIK HIER">
                     <span class="invalid-feedback" asp-validation-for="Vehicle.License"></span>
                 </div>
                 @*<div class="form-group">
-                    <label for="type">Soort voertuig</label>
-                    <select class="form-control" asp-for="vehicle.Vehicle_Type" id="type">
-                        <option value="---">---</option>
-                        <option value="car">Auto</option>
-                        <option value="van">Busje</option>
-                        <option value="camper">Camper</option>
-                        <option value="truck">Vrachtwagen</option>
-                        <option value="motor">Motor</option>
-                        <option value="scooter">Scooter</option>
-                    </select>
-                    <span class="invalid-feedback" asp-validation-for="vehicle.Vehicle_Type"></span>
-                </div>*@
+                        <label for="type">Soort voertuig</label>
+                        <select class="form-control" asp-for="vehicle.Vehicle_Type" id="type">
+                            <option value="---">---</option>
+                            <option value="car">Auto</option>
+                            <option value="van">Busje</option>
+                            <option value="camper">Camper</option>
+                            <option value="truck">Vrachtwagen</option>
+                            <option value="motor">Motor</option>
+                            <option value="scooter">Scooter</option>
+                        </select>
+                        <span class="invalid-feedback" asp-validation-for="vehicle.Vehicle_Type"></span>
+                    </div>*@
                 <div class="form-group">
                     <label for="brand">Merk*</label>
                     <input type="text" class="form-control" asp-for="Vehicle.Brand_Name" id="brand">
@@ -87,6 +87,11 @@
                     <label for="color">Kleur</label>
                     <input type="text" class="form-control" asp-for="Vehicle.Color" id="color">
                     <span class="invalid-feedback" asp-validation-for="Vehicle.Color"></span>
+                </div>
+                <div class="form-group">
+                    <label for="fuelType">Brandstoftype</label>
+                    <input type="text" class="form-control" asp-for="Vehicle.FuelType" id="fuelType">
+                    <span class="invalid-feedback" asp-validation-for="Vehicle.FuelType"></span>
                 </div>
                 <div class="form-group">
                     <label for="inputMileage">Kilometerstand</label>
@@ -179,6 +184,11 @@
 </div>
 <script>
     var stepper;
+    var kentekenplaat;
+    document.addEventListener('DOMContentLoaded',
+        function () {
+            kentekenplaat = new Kentekenplaat(document.querySelector('.kentekenplaat'));
+        });
     document.addEventListener('DOMContentLoaded',
         function () {
             stepper = new Stepper(document.querySelector('.bs-stepper'));
