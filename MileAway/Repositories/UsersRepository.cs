@@ -30,13 +30,13 @@ namespace MileAway.Repositories
             return userVars;
         }
 
-        public static Users GetUserByID(int userid)
+        public static Users GetUserByEmail(string email)
         {
             using var connect = DbUtils.GetDbConnection();
 
-            var users = connect.QuerySingleOrDefault<Users>("SELECT * FROM users WHERE User_ID = @user_id", 
+            var users = connect.QuerySingleOrDefault<Users>("SELECT * FROM users WHERE User_ID = @Email", 
                 new { 
-                    user_id = userid
+                    Email = email
                 }
 
                 );
@@ -57,7 +57,7 @@ namespace MileAway.Repositories
                     User_image = user.User_Image
                 });
 
-                return true;
+                return registerUser == 1;
             }
             catch (MySqlException e)
             {

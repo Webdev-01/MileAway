@@ -17,17 +17,18 @@ namespace MileAway.Repositories
             using var connect = DbUtils.GetDbConnection();
             try
             {
-                var Addcost = connect.Execute("INSERT INTO costs (Cost_ID, Typecost_Id, Vehicle_Id, Cost, Date_Of_Cost, Invoice_Doc) VALUES (@CostId, @TypecostId, @VehicleId, @Cost, @DateOfCost, InvoiceDoc)", new
+                var addCost = connect.Execute("INSERT INTO costs (Cost_ID, Typecost_Id, License, Cost, Fuel_Quantity, Date_Of_Cost, Invoice_Doc) VALUES (@CostId, @TypecostId, @License, @Cost, @Fuel_Quantity, @DateOfCost, InvoiceDoc)", new
                 {
                     CostId = costs.Cost_Id,
                     TypecostId = costs.Typecost_Id,
-                    VehicleId = costs.Vehicle_Id,
+                    License = costs.License,
                     Cost = costs.Cost,
+                    Fuel_Quantity = costs.Fuel_Quantity,
                     DateOfCost = costs.Date_Of_Cost,
                     InvoiceDoc = costs.Invoice_Doc
                 });
 
-                return true;
+                return addCost == 1;
             }
             catch (MySqlException e)
             {

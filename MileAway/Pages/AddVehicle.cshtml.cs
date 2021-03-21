@@ -26,7 +26,7 @@ namespace MileAway.Pages
 
         public void OnPostConfirm()
         {
-            Vehicle.User_Id = (int)HttpContext.Session.GetInt32("user_id");
+            Vehicle.Email = HttpContext.Session.GetString("email");
             new VehiclesRepository().AddVehicle(Vehicle);
         }
     }

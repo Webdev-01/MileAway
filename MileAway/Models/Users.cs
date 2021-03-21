@@ -4,9 +4,7 @@ namespace MileAway.Models
 {
     public class Users
     {
-        public int User_ID { get; set; }
-
-        [Required]
+        [Required, EmailAddress]
         public string Email { get; set; }
 
         [Required]

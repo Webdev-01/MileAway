@@ -16,13 +16,14 @@ namespace MileAway.Repositories
             using var connect = DbUtils.GetDbConnection();
             try
             {
-                var vehicleResult = connect.Execute("INSERT INTO vehicles (User_Id, License, Brand_Name, Model_Name, Manufacturing_Year, Color, Mileage_Km, Vehicle_Image) VALUES (@UserID, @License, @BrandName, @ModelName, @ManufacturingYear, @Color, @MileageKm, @VehicleImage)", new
+                var vehicleResult = connect.Execute("INSERT INTO vehicles (Email, License, Brand_Name, Model_Name, Manufacturing_Year, FuelType, Color, Mileage_Km, Vehicle_Image) VALUES (@Email, @License, @BrandName, @ModelName, @ManufacturingYear, @FuelType, @Color, @MileageKm, @VehicleImage)", new
                 {
-                    UserID = vehicles.User_Id,
+                    Email = vehicles.Email,
                     License = vehicles.License,
                     BrandName = vehicles.Brand_Name,
                     ModelName = vehicles.Model_Name,
                     ManufacturingYear = vehicles.Manufacturing_Year,
+                    FuelType = vehicles.FuelType,
                     Color = vehicles.Color,
                     MileageKm = vehicles.Mileage_Km,
                     VehicleImage = vehicles.Vehicle_Image

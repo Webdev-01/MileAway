@@ -10,15 +10,15 @@ using MileAway.Repositories;
 
 namespace MileAway.Pages.Shared
 {
-    public class profileModel : PageModel
+    public class ProfileModel : PageModel
     {
         [BindProperty]
         public Users User { get; set; }
         public void OnGet()
         {
-            if(HttpContext.Session.GetInt32("user_id") != null)
-            { 
-                User = UsersRepository.GetUserByID((int)HttpContext.Session.GetInt32("user_id"));
+            if (HttpContext.Session.GetInt32("email") != null)
+            {
+                User = UsersRepository.GetUserByEmail(HttpContext.Session.GetString("email"));
             }
         }
     }
