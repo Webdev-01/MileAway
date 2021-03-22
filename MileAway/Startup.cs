@@ -25,7 +25,7 @@ namespace MileAway
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSession();
-            services.AddRazorPages();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddLiveReload(config =>
             {
                 config.LiveReloadEnabled = true;
