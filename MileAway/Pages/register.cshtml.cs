@@ -37,7 +37,7 @@ namespace MileAway.Pages
         {
             if (ModelState.IsValid)
             {
-                var path = Path.Combine(ihostingEnvironment.WebRootPath, "images", User.Email + Photo.FileName);
+                var path = Path.Combine(ihostingEnvironment.WebRootPath, "images", User.Email + " - " + Photo.FileName);
                 var stream = new FileStream(path, FileMode.Create);
                 Photo.CopyToAsync(stream);
                 User.User_Image = Photo.FileName;
