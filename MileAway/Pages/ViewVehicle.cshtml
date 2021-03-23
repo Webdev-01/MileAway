@@ -52,38 +52,24 @@
                 <tbody>
                     @foreach (var item in Model.Costs)
                     {
-                    <tr>
-                        @if (item.Typecost_Id == 2)
-                        {
-                            <td>Reparatie: <i class="fa fa-download" aria-hidden="true"></i></td>
-                            <td>€@item.Cost</td>
-                            <td>@item.Date_Of_Cost</td>
-                        }
-                        else
-                        {
+                        <tr>
+                            @if (item.Typecost_Id == 2)
+                            {
+                                <td>Reparatie: <i class="fa fa-download" aria-hidden="true"></i></td>
+                                <td>€@item.Cost</td>
+                                <td>@item.Date_Of_Cost</td>
+                            }
+                            else
+                            {
 
-                            <td>@item.TypeCost_Name</td>
-                            <td>€@item.Cost</td>
-                            <td>@item.Date_Of_Cost</td>
-                        }
-                    </tr>
+                                <td>@item.TypeCost_Name</td>
+                                <td>€@item.Cost</td>
+                                <td>@item.Date_Of_Cost</td>
+                            }
+                        </tr>
                     }
-
-
-                    <tr>
-                        <td>Tanken: </td>
-                        <td>€76,35 </td>
-                    </tr>
-                    <tr>
-                        <td>Reparatie: <i class="fa fa-download" aria-hidden="true"></i></td>
-                        <td>€643,50 </td>
-                    </tr>
-                    <tr>
-                        <td>Tanken: </td>
-                        <td>€40,34 </td>
-                    </tr>
                 </tbody>
-                </table>
+            </table>
         </div>
     </div>
 </div>

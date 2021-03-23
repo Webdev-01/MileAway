@@ -22,7 +22,7 @@ namespace MileAway.Pages
         public void OnGet(string license)
         {
             Vehicle = VehiclesRepository.GetVehicleByLicense(license);
-            Costs = CostsRepository.GetCostsByLicense(license);
+            Costs = CostsRepository.GetCostsByLicenseInner(license);
             FixedCosts = CostsRepository.GetFixedCostsByLicense(license);
         }
     }
