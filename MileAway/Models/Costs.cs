@@ -10,6 +10,7 @@ namespace MileAway.Models
     {
         public int Cost_Id { get; set; }
         public int Typecost_Id { get; set; }
+        public string TypeCost_Name { get; set; }
         public string License { get; set; }
         [Required]
         public double Cost { get; set; }

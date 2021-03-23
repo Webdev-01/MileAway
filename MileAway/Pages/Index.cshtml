@@ -1,4 +1,5 @@
 ﻿@page
+@using System.Globalization
 @model IndexModel
 @{
     ViewData["Title"] = "Home";
@@ -44,9 +45,9 @@
                         <div class="card-text">
                             <h4>@vehicle.License</h4>
                             <b>Gemiddelde kosten per maand</b>
-                            <p class="m-0">€@vehicle.AvgCosts</p>
+                            <p class="m-0">€@Math.Round(vehicle.AvgCosts, 2)</p>
                             <b>Kilometerstand</b>
-                            <p class="m-0">@vehicle.Mileage_Km</p>
+                            <p class="m-0">@vehicle.Mileage_Km.ToString("N", new CultureInfo("nl-NL", false).NumberFormat).Split(',').FirstOrDefault()</p>
                         </div>
                         <img class="mx-auto d-block" width="200" src="https://parkers-images.bauersecure.com/gallery-image/pagefiles/204617/static-exterior/1752x1168/ar_896.jpg" alt="Car picture">
                     </a>

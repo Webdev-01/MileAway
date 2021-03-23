@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -37,10 +38,8 @@ namespace MileAway.Pages
 
             if (VehiclesRepository.AddVehicle(Vehicle))
                 if (CostsRepository.AddFixedCosts(Insurance, Road_Tax, Vehicle.License))
-                {
-                    return RedirectToPage("Index");
-                }
-
+                    if (Vehicle.Vehicle_Image != null)
+                        return RedirectToPage("Index");
             return Page();
         }
 

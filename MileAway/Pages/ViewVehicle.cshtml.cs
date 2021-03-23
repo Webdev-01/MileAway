@@ -15,10 +15,15 @@ namespace MileAway.Pages
         public Vehicles Vehicle { get; set; }
         [BindProperty]
         public List<Costs> Costs { get; set; }
+
+        [BindProperty]
+        public FixedCosts FixedCosts { get; set; }
+
         public void OnGet(string license)
         {
-            VehiclesRepository.GetVehicleByLicense(license);
-            CostsRepository.GetCostsByLicense(license);
+            Vehicle = VehiclesRepository.GetVehicleByLicense(license);
+            Costs = CostsRepository.GetCostsByLicenseInner(license);
+            FixedCosts = CostsRepository.GetFixedCostsByLicense(license);
         }
     }
 }

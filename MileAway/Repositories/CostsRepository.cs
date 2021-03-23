@@ -50,6 +50,20 @@ namespace MileAway.Repositories
             return costs;
         }
 
+        public static List<Costs> GetCostsByLicenseInner(string license)
+        {
+            using var connect = DbUtils.GetDbConnection();
+
+            var costs = connect.Query<Costs>("SELECT costs.*, typecosts.TypeCost_Name FROM costs INNER JOIN typecosts ON costs.TypeCost_ID = typecosts.TypeCost_ID WHERE License = @License ORDER BY Date_Of_Cost",
+                new
+                {
+                    License = license
+                }
+
+            ).ToList();
+            return costs;
+        }
+
         public static bool AddFixedCosts(double insurance, double roadTax, string vehicleLicense)
         {
             {
@@ -78,6 +92,22 @@ namespace MileAway.Repositories
                     return false;
                 }
             }
+        }
+
+        public static FixedCosts GetFixedCostsByLicense(string license)
+        {
+            using var connect = DbUtils.GetDbConnection();
+
+            var costs = connect.Query<Costs>(
+                "SELECT Cost,TypeCost_ID FROM costs WHERE License = @License AND (TypeCost_ID = 3 OR TypeCost_ID = 4)",
+                new
+                {
+                    License = license
+                }).ToList();
+            var fixedCosts = new FixedCosts();
+            fixedCosts.Road_Tax = costs[0].Cost;
+            fixedCosts.Insurance = costs[1].Cost;
+            return fixedCosts;
         }
     }
 }
