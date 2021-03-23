@@ -40,12 +40,11 @@ namespace MileAway.Repositories
         {
             using var connect = DbUtils.GetDbConnection();
 
-            var vehicles = connect.Query<Vehicles>("SELECT * FROM vehicles WHERE Email = @Email",
+            var vehicles = connect.Query<Vehicles>("SELECT vehicles.*, AVG(costs.Cost) AS AvgCosts FROM vehicles INNER JOIN costs ON vehicles.License = costs.License WHERE vehicles.Email = @Email GROUP BY vehicles.License",
                 new
                 {
                     Email = email
                 }
-
             ).ToList();
             return vehicles;
         }

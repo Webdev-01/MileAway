@@ -20,5 +20,6 @@ namespace MileAway.Models
         public string Color { get; set; }
         public int Mileage_Km { get; set; }
         public string Vehicle_Image { get; set; }
+        public double AvgCosts { get; set; }
     }
 }
