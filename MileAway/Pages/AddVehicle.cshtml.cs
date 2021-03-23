@@ -54,48 +54,53 @@ namespace MileAway.Pages
 
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            // List data response.
-            HttpResponseMessage response = client.GetAsync(urlParameters).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
-            if (response.IsSuccessStatusCode)
+            try
             {
-                // Parse the response body.
-                List<Apidata> Apidata2 = response.Content.ReadAsAsync<List<Apidata>>().Result;
-                var brandstof = Apidata2[0].brandstof_omschrijving;
-
-                client.Dispose();
-
-                //call second api
-                HttpClient client2 = new HttpClient();
-                client2.BaseAddress = new Uri(URL2);
-                // Add an Accept header for JSON format.
-                client2.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage response2 = client2.GetAsync(urlParameters).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
-
-                if (response2.IsSuccessStatusCode)
+                // List data response.
+                HttpResponseMessage response = client.GetAsync(urlParameters).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
+                if (response.IsSuccessStatusCode)
                 {
-                    //dataObjects = response.Content.ReadAsAsync<IEnumerable<Apidata>>().Result;
-                    List<Apidata> Apidata = response2.Content.ReadAsAsync<List<Apidata>>().Result;
-                    Apidata[0].brandstof_omschrijving = brandstof;
-                    client2.Dispose();
-                    return new JsonResult(Apidata);
+                    // Parse the response body.
+                    List<Apidata> Apidata2 = response.Content.ReadAsAsync<List<Apidata>>().Result;
+                    var brandstof = Apidata2[0].brandstof_omschrijving;
 
-                    //return Apidata;
+                    client.Dispose();
+
+                    //call second api
+                    HttpClient client2 = new HttpClient();
+                    client2.BaseAddress = new Uri(URL2);
+                    // Add an Accept header for JSON format.
+                    client2.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    HttpResponseMessage response2 = client2.GetAsync(urlParameters).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
+
+                    if (response2.IsSuccessStatusCode)
+                    {
+                        //dataObjects = response.Content.ReadAsAsync<IEnumerable<Apidata>>().Result;
+                        List<Apidata> Apidata = response2.Content.ReadAsAsync<List<Apidata>>().Result;
+                        Apidata[0].brandstof_omschrijving = brandstof;
+                        client2.Dispose();
+                        return new JsonResult(Apidata);
+
+                        //return Apidata;
+                    }
+                    else
+                    {
+                        client2.Dispose();
+                        return new JsonResult(false);
+                    }
                 }
                 else
                 {
-                    client2.Dispose();
-                    return new JsonResult("Null");
+                    client.Dispose();
+                    return new JsonResult(false);
                 }
             }
-            else
+            catch
             {
-                client.Dispose();
-                return new JsonResult("Null");
+                return new JsonResult(false);
             }
         }
     }
-
     public class Apidata
     {
         public string kenteken { get; set; }
