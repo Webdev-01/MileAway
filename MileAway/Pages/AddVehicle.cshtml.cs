@@ -24,7 +24,6 @@ namespace MileAway.Pages
         [BindProperty]
         public double Insurance { get; set; }
 
-        [BindProperty]
         public List<Apidata> Apidata { get; set; }
 
         public void OnGet()
@@ -78,24 +77,22 @@ namespace MileAway.Pages
                     //dataObjects = response.Content.ReadAsAsync<IEnumerable<Apidata>>().Result;
                     List<Apidata> Apidata = response2.Content.ReadAsAsync<List<Apidata>>().Result;
                     Apidata[0].brandstof_omschrijving = brandstof;
-
                     client2.Dispose();
+                    return new JsonResult(Apidata);
+
                     //return Apidata;
                 }
                 else
                 {
                     client2.Dispose();
-                    //return Apidata = null;
+                    return new JsonResult("Null");
                 }
             }
             else
             {
                 client.Dispose();
-                //return Apidata = null;
+                return new JsonResult("Null");
             }
-
-            return new JsonResult("DONE");
-
         }
     }
 

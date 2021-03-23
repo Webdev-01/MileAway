@@ -70,7 +70,7 @@
                     </div>*@
                 <div class="form-group">
                     <label for="brand">Merk*</label>
-                    <input type="text" class="form-control" asp-for="Vehicle.Brand_Name" id="brand" value="@{ if (Model.Apidata != null && String.IsNullOrEmpty(Model.Apidata[0].voertuigsoort) == false) { @Model.Apidata[0].voertuigsoort; } }">
+                    <input type="text" class="form-control" asp-for="Vehicle.Brand_Name" id="brand">
                     <span class="invalid-feedback" asp-validation-for="Vehicle.Brand_Name"></span>
                 </div>
                 <div class="form-group">
@@ -203,17 +203,26 @@
 
     window.addEventListener('load', function () {
         $("#licensePlate").on("blur", function () {
-
             var kenteken = $("#licensePlate").val();
-
-            alert(kenteken);
 
            $.ajax({
                 url: "@Url.Page("AddVehicle", "Apicall")",
                 type: "GET",
                 data: { kenteken: kenteken },
                 success: function (data) {
-                    $("#brand").val(data);
+                    //set data inside inputfields by RDW API
+                    var date = data[0].datum_eerste_toelating;
+                    var dateYear = date.substring(0, 4);
+                    $("#brand").val(data[0].merk.charAt(0).toUpperCase() + data[0].merk.slice(1).toLowerCase());
+                    $("#brand").attr('disabled', 'disabled');
+                    $("#model").val(data[0].voertuigsoort.charAt(0).toUpperCase() + data[0].voertuigsoort.slice(1).toLowerCase());
+                    $("#model").attr('disabled', 'disabled');
+                    $("#year").val(dateYear);
+                    $("#year").attr('disabled', 'disabled');
+                    $("#color").val(data[0].eerste_kleur.charAt(0).toUpperCase() + data[0].eerste_kleur.slice(1).toLowerCase());
+                    $("#color").attr('disabled', 'disabled');
+                    $("#fuelType").val(data[0].brandstof_omschrijving.charAt(0).toUpperCase() + data[0].brandstof_omschrijving.slice(1).toLowerCase());
+                    $("#fuelType").attr('disabled', 'disabled');
                 }
             });
 
