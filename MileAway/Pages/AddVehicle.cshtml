@@ -70,7 +70,7 @@
                     </div>*@
                 <div class="form-group">
                     <label for="brand">Merk*</label>
-                    <input type="text" class="form-control" asp-for="Vehicle.Brand_Name" id="brand">
+                    <input type="text" class="form-control" asp-for="Vehicle.Brand_Name" id="brand" value="@{ if (Model.Apidata != null && String.IsNullOrEmpty(Model.Apidata[0].voertuigsoort) == false) { @Model.Apidata[0].voertuigsoort; } }">
                     <span class="invalid-feedback" asp-validation-for="Vehicle.Brand_Name"></span>
                 </div>
                 <div class="form-group">
@@ -182,15 +182,13 @@
         </div>
     </form>
 </div>
-<script>
+<script type="text/javascript">
     var stepper;
     var kentekenplaat;
+
     document.addEventListener('DOMContentLoaded',
         function () {
             kentekenplaat = new Kentekenplaat(document.querySelector('.kentekenplaat'));
-        });
-    document.addEventListener('DOMContentLoaded',
-        function () {
             stepper = new Stepper(document.querySelector('.bs-stepper'));
         });
 
@@ -200,4 +198,24 @@
     function toStepper(step) {
         stepper.to(step);
     }
+
+    window.addEventListener('load', function () {
+        $("#licensePlate").on("blur", function () {
+
+            var kenteken = $("#licensePlate").val();
+
+            alert(kenteken);
+
+           $.ajax({
+                url: "@Url.Page("AddVehicle", "Apicall")",
+                type: "GET",
+                data: { kenteken: kenteken },
+                success: function (data) {
+                    $("#brand").val(data);
+                }
+            });
+
+        });
+    });
+
 </script>

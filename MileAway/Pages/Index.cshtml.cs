@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using MileAway.Models;
 using MileAway.Repositories;
 
+
 namespace MileAway.Pages
 {
     public class IndexModel : PageModel
@@ -22,7 +23,6 @@ namespace MileAway.Pages
         [BindProperty]
         public List<Vehicles> Vehicles { get; set; }
 
-
         public IActionResult OnGet()
         {
             if (HttpContext.Session.GetString("email") == null)
@@ -34,5 +34,6 @@ namespace MileAway.Pages
             //TODO: get fixed costs and get average costs
             return Page();
         }
+
     }
 }
