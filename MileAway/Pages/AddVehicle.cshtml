@@ -211,7 +211,7 @@
                 data: { kenteken: kenteken },
                success: function (data) {
                    if (data == false) {
-                       $("#licensePlate").after('<div class="alert alert-danger" role="alert">Het kenteken is niet geldig, probeer het opnieuw of vul de gegevens handmatig in.</div >');
+                       $("#licensePlate").after('<br><div class="alert alert-danger" role="alert">Het kenteken is niet geldig, probeer het opnieuw of vul de gegevens handmatig in.</div >');
                        return;
                    } else {
                        $(".alert").remove();
