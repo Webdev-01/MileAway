@@ -17,31 +17,31 @@
                 <tbody>
                     <tr>
                         <td>Kenteken: </td>
-                        <td>03-LL-GN </td>
+                        <td>@Model.Vehicle.License</td>
                     </tr>
                     <tr>
                         <td>Merk: </td>
-                        <td>Alfa Romeo </td>
+                        <td>@Model.Vehicle.Brand_Name </td>
                     </tr>
                     <tr>
                         <td>Model: </td>
-                        <td>147 </td>
+                        <td>@Model.Vehicle.Model_Name </td>
                     </tr>
                     <tr>
                         <td>Kleur: </td>
-                        <td>Grijs </td>
+                        <td>@Model.Vehicle.Color </td>
                     </tr>
                     <tr>
                         <td>Kilometerstand: </td>
-                        <td>227.500 </td>
+                        <td>@Model.Vehicle.Mileage_Km </td>
                     </tr>
                     <tr>
                         <td>Wegenbelasting: </td>
-                        <td>€110,- </td>
+                        <td>€@Model.FixedCosts.Road_Tax</td>
                     </tr>
                     <tr>
                         <td>Verzekering: </td>
-                        <td>€70,- </td>
+                        <td>€@Model.FixedCosts.Insurance </td>
                     </tr>
                 </tbody>
             </table>

@@ -79,5 +79,21 @@ namespace MileAway.Repositories
                 }
             }
         }
+
+        public static FixedCosts GetFixedCostsByLicense(string license)
+        {
+            using var connect = DbUtils.GetDbConnection();
+
+            var costs = connect.Query<Costs>(
+                "SELECT Cost,TypeCost_ID FROM costs WHERE License = @License AND (TypeCost_ID = 3 OR TypeCost_ID = 4)",
+                new
+                {
+                    License = license
+                }).ToList();
+            var fixedCosts = new FixedCosts();
+            fixedCosts.Road_Tax = costs[0].Cost;
+            fixedCosts.Insurance = costs[1].Cost;
+            return fixedCosts;
+        }
     }
 }
