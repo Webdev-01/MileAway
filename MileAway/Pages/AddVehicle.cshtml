@@ -212,8 +212,9 @@
                success: function (data) {
                    if (data == false) {
                        $("#licensePlate").after('<div class="alert alert-danger" role="alert">Het kenteken is niet geldig, probeer het opnieuw of vul de gegevens handmatig in.</div >');
-                       alert("gaat fout kill");
                        return;
+                   } else {
+                       $(".alert").remove();
                    }
                     //set data inside inputfields by RDW API
                     var date = data[0].datum_eerste_toelating;
