@@ -1,4 +1,5 @@
 ﻿@page "{license}"
+@using System.Globalization
 @model MileAway.Pages.ViewVehicleModel
 @{
     ViewData["Title"] = "Bekijk voertuig";
@@ -34,7 +35,7 @@
                     </tr>
                     <tr>
                         <td>Kilometerstand: </td>
-                        <td>@Model.Vehicle.Mileage_Km </td>
+                        <td>@Model.Vehicle.Mileage_Km.ToString("N", new CultureInfo("nl-NL", false).NumberFormat).Split(',').FirstOrDefault() </td>
                     </tr>
                     <tr>
                         <td>Wegenbelasting: </td>
@@ -64,10 +65,32 @@
 
                                 <td>@item.TypeCost_Name</td>
                                 <td>€@item.Cost</td>
-                                <td>@item.Date_Of_Cost</td>
+                                <td>@item.Date_Of_Cost.ToShortDateString()</td>
                             }
                         </tr>
                     }
+                    @*<tr>
+                            @foreach (var item in Model.Costs)
+                            {
+                                @if (item.Typecost_Id == 3)
+                                {
+                                    <td>@item.TypeCost_Name</td>
+                                    <td>€@item.Cost</td>
+                                    break;
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            @foreach (var item in Model.Costs)
+                            {
+                                @if (item.Typecost_Id == 4)
+                                {
+                                    <td>@item.TypeCost_Name</td>
+                                    <td>€@item.Cost</td>
+                                    break;
+                                }
+                            }
+                        </tr>*@
                 </tbody>
             </table>
         </div>
