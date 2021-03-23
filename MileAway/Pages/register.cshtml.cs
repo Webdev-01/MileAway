@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MileAway.Models;
 using MileAway.Repositories;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace MileAway.Pages
 {
@@ -16,6 +19,16 @@ namespace MileAway.Pages
 
         public string Error { get; set; }
 
+        private IHostingEnvironment ihostingEnvironment;
+
+        [BindProperty]
+        public IFormFile Photo { get; set; }
+
+        public RegisterModel(IHostingEnvironment ihostingEnvironment)
+        {
+            this.ihostingEnvironment = ihostingEnvironment;
+        }
+
         public void OnGet()
         {
         }
@@ -24,6 +37,11 @@ namespace MileAway.Pages
         {
             if (ModelState.IsValid)
             {
+                var path = Path.Combine(ihostingEnvironment.WebRootPath, "images", User.Email + " - " + Photo.FileName);
+                var stream = new FileStream(path, FileMode.Create);
+                Photo.CopyToAsync(stream);
+                User.User_Image = Photo.FileName;
+
                 User.Password = SecurePasswordHasher.Hash(User.Password);
                 var registerUser = UsersRepository.RegisterUser(User);
                 if (registerUser)

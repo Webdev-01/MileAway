@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using MileAway.Models;
 using MileAway.Repositories;
 
+
 namespace MileAway.Pages
 {
     public class IndexModel : PageModel
@@ -25,7 +26,6 @@ namespace MileAway.Pages
         public List<Vehicles> Vehicles { get; set; }
         [BindProperty]
         public List<Costs> Costs { get; set; }
-
 
         public IActionResult OnGet()
         {
