@@ -63,6 +63,34 @@ namespace MileAway.Repositories
             ).ToList();
             return costs;
         }
+        public static List<Costs> GetCostsByEmail(string email)
+        {
+            using var connect = DbUtils.GetDbConnection();
+
+            var costs = connect.Query<Costs>("SELECT costs.Cost, costs.Date_Of_Cost, vehicles.License, vehicles.Email, typecosts.TypeCost_Name FROM costs INNER JOIN typecosts ON costs.TypeCost_ID = typecosts.TypeCost_ID INNER JOIN vehicles ON costs.License = vehicles.License WHERE vehicles.Email = @Email",
+                new
+                {
+                    Email = email
+                }
+
+            ).ToList();
+            return costs;
+        }
+        public static IList<double?> GetPureCostsByLicense(string license)
+        {
+            using var connect = DbUtils.GetDbConnection();
+
+            IList<double?> costs = connect.Query<double?>("SELECT costs.Cost FROM costs INNER JOIN typecosts ON costs.TypeCost_ID = typecosts.TypeCost_ID INNER JOIN vehicles ON costs.License = vehicles.License WHERE vehicles.License = @License",
+                new
+                {
+                    License = license
+                }
+
+            ).ToList();
+            if (costs != null)
+                return costs;
+            return null;
+        }
 
         public static bool AddFixedCosts(double insurance, double roadTax, string vehicleLicense)
         {
