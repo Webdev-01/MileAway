@@ -12,7 +12,7 @@ namespace MileAway.Pages
     {
         public IActionResult OnGet()
         {
-            HttpContext.Session.Remove("user_id");
+            HttpContext.Session.Remove("email");
             return RedirectToPage("Index");
         }
     }
