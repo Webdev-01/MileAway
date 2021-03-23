@@ -15,6 +15,7 @@ namespace MileAway.Pages
         public Vehicles Vehicle { get; set; }
         [BindProperty]
         public List<Costs> Costs { get; set; }
+
         [BindProperty]
         public FixedCosts FixedCosts { get; set; }
 

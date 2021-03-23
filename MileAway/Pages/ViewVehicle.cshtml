@@ -18,6 +18,7 @@
                     <tr>
                         <td>Kenteken: </td>
                         <td>@Model.Vehicle.License</td>
+
                     </tr>
                     <tr>
                         <td>Merk: </td>
@@ -49,6 +50,26 @@
             <h2>Kostengeschiedenis</h2>
             <table class="table table-sm">
                 <tbody>
+                    @foreach (var item in Model.Costs)
+                    {
+                    <tr>
+                        @if (item.Typecost_Id == 2)
+                        {
+                            <td>Reparatie: <i class="fa fa-download" aria-hidden="true"></i></td>
+                            <td>€@item.Cost</td>
+                            <td>@item.Date_Of_Cost</td>
+                        }
+                        else
+                        {
+
+                            <td>@item.TypeCost_Name</td>
+                            <td>€@item.Cost</td>
+                            <td>@item.Date_Of_Cost</td>
+                        }
+                    </tr>
+                    }
+
+
                     <tr>
                         <td>Tanken: </td>
                         <td>€76,35 </td>
@@ -62,7 +83,7 @@
                         <td>€40,34 </td>
                     </tr>
                 </tbody>
-            </table>
+                </table>
         </div>
     </div>
 </div>
