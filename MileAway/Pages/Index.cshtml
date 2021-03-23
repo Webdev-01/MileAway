@@ -33,28 +33,31 @@
     <h1 class="display-4">Uw voertuigen</h1>
 </div>
 <div class="row">
-    @foreach (var vehicle in Model.Vehicles)
+    @if (Model.Vehicles != null)
     {
-        <div class="card col-xs-12 col-md-6 text-center">
-            <div class="card-body ">
-                <a href="/ViewVehicle/@vehicle.License">
-                    <h3 class="card-title mb-0">@vehicle.Brand_Name @vehicle.Model_Name</h3>
-                    <div class="card-text">
-                        <h4>@vehicle.License</h4>
-                        <b>Gemiddelde kosten per maand</b>
-                        <p class="m-0">€170,40</p>
-                        <b>Kilometerstand</b>
-                        <p class="m-0">@vehicle.Mileage_Km</p>
-                    </div>
-                    <img class="mx-auto d-block" width="200" src="https://parkers-images.bauersecure.com/gallery-image/pagefiles/204617/static-exterior/1752x1168/ar_896.jpg" alt="Car picture">
-                </a>
-                <a href="/AddCost/@vehicle.License" class="mt-2 btn btn-light border-dark">Kosten toevoegen</a>
+        @foreach (var vehicle in Model.Vehicles)
+        {
+            <div class="card col-xs-12 col-md-6 text-center">
+                <div class="card-body ">
+                    <a href="/ViewVehicle/@vehicle.License">
+                        <h3 class="card-title mb-0">@vehicle.Brand_Name @vehicle.Model_Name</h3>
+                        <div class="card-text">
+                            <h4>@vehicle.License</h4>
+                            <b>Gemiddelde kosten per maand</b>
+                            <p class="m-0">€@vehicle.AvgCosts</p>
+                            <b>Kilometerstand</b>
+                            <p class="m-0">@vehicle.Mileage_Km</p>
+                        </div>
+                        <img class="mx-auto d-block" width="200" src="https://parkers-images.bauersecure.com/gallery-image/pagefiles/204617/static-exterior/1752x1168/ar_896.jpg" alt="Car picture">
+                    </a>
+                    <a href="/AddCost/@vehicle.License" class="mt-2 btn btn-light border-dark">Kosten toevoegen</a>
+                </div>
             </div>
-        </div>
+        }
     }
     <div class="card add col-xs-12 col-md-6 align-content-center">
         <a asp-page="/AddVehicle" class="mx-auto">
-            <img class="col-xs-6 w-50 mx-auto d-block" src="~/assets/icons/plus.png"/>
+            <img class="col-xs-6 w-50 mx-auto d-block" src="~/assets/icons/plus.png" />
         </a>
     </div>
 </div>
