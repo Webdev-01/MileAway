@@ -214,7 +214,7 @@ namespace MileAway.Repositories
             return null;
         }
 
-        public static bool AddFixedCosts(double insurance, double roadTax, string vehicleLicense)
+        public static bool AddFixedCosts(FixedCosts fixedCosts, string vehicleLicense)
         {
             {
                 using var connect = DbUtils.GetDbConnection();
@@ -224,15 +224,15 @@ namespace MileAway.Repositories
                     {
                         TypeCost_ID = 4,
                         License = vehicleLicense,
-                        Cost = insurance,
-                        Date_Of_Cost = DateTime.Now
+                        Cost = fixedCosts.Insurance,
+                        Date_Of_Cost = fixedCosts.Insurance_Date
                     });
                     var roadTaxResult = connect.Execute("INSERT INTO costs (TypeCost_ID, License, Cost, Date_Of_Cost) VALUES (@TypeCost_ID, @License, @Cost, @Date_Of_Cost)", new
                     {
                         TypeCost_ID = 3,
                         License = vehicleLicense,
-                        Cost = roadTax,
-                        Date_Of_Cost = DateTime.Now
+                        Cost = fixedCosts.Road_Tax,
+                        Date_Of_Cost = fixedCosts.Road_Tax_Date
                     });
                     //TODO: add date of cost
                     return insuranceResult == 1 && roadTaxResult == 1;
