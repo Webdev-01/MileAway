@@ -12,8 +12,14 @@
         <div class="card-body ">
             <h5 class="card-title">@Model.Vehicle.Brand_Name @Model.Vehicle.Model_Name</h5>
             <div>@Model.Vehicle.License</div>
-            <img class="mx-auto d-block" width="200" src="https://parkers-images.bauersecure.com/gallery-image/pagefiles/204617/static-exterior/1752x1168/ar_896.jpg" alt="Car picture">
-
+            @if (Model.Vehicle.Vehicle_Image != null)
+            {
+                <img class="cropped" src="/images/@Model.Vehicle.License - @Model.Vehicle.Vehicle_Image" alt="Vehicle picture" />
+            }
+            else
+            {
+                <img class="mx-auto d-block" width="200" src="~/images/stock car.png" alt="Car picture">
+            }
             <table class="table table-sm mt-3">
                 <tbody>
                     <tr>
@@ -70,27 +76,27 @@
                         </tr>
                     }
                     @*<tr>
-                            @foreach (var item in Model.Costs)
-                            {
-                                @if (item.Typecost_Id == 3)
-                                {
-                                    <td>@item.TypeCost_Name</td>
-                                    <td>€@item.Cost</td>
-                                    break;
-                                }
-                            }
-                        </tr>
-                        <tr>
-                            @foreach (var item in Model.Costs)
-                            {
-                                @if (item.Typecost_Id == 4)
-                                {
-                                    <td>@item.TypeCost_Name</td>
-                                    <td>€@item.Cost</td>
-                                    break;
-                                }
-                            }
-                        </tr>*@
+                    @foreach (var item in Model.Costs)
+                    {
+                        @if (item.Typecost_Id == 3)
+                        {
+                            <td>@item.TypeCost_Name</td>
+                            <td>€@item.Cost</td>
+                            break;
+                        }
+                    }
+                </tr>
+                <tr>
+                    @foreach (var item in Model.Costs)
+                    {
+                        @if (item.Typecost_Id == 4)
+                        {
+                            <td>@item.TypeCost_Name</td>
+                            <td>€@item.Cost</td>
+                            break;
+                        }
+                    }
+                </tr>*@
                 </tbody>
             </table>
         </div>
