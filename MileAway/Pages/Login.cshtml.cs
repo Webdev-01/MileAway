@@ -22,7 +22,11 @@ namespace MileAway.Pages
         public void OnGet()
         {
         }
-
+        public static int GetMonthDifference(DateTime startDate, DateTime endDate)
+        {
+            int monthsApart = 12 * (startDate.Year - endDate.Year) + startDate.Month - endDate.Month;
+            return Math.Abs(monthsApart);
+        }
         public IActionResult OnPostLogin()
         {
             var user = UsersRepository.GetUserByLogin(User);

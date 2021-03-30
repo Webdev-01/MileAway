@@ -28,6 +28,9 @@ ul {
         margin-left: -1em;
         font-size: larger;
     }
+nav ul li::before {
+    content: none;
+}
 
 img.navbar-icon {
     width: 200px !important;

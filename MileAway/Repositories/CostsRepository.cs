@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Dapper;
 using MySql.Data.MySqlClient;
 using MileAway.Models;
+using NodaTime;
 
 namespace MileAway.Repositories
 {
@@ -116,61 +117,31 @@ namespace MileAway.Repositories
                 License = license
             }).ToList();
 
-            var dateOne = DateTime.Now;
+            var dateToday = DateTime.Now;
             var dateTax = roadtax[0].Date_Of_Cost;
             var dateInsurance = insurance[0].Date_Of_Cost;
 
-            TimeSpan differenceTax = dateOne - dateTax;
-            TimeSpan differenceInsurance = dateOne - dateInsurance;
+            LocalDate start = new LocalDate(dateToday.Year, dateToday.Month, dateToday.Day);
+            LocalDate end = new LocalDate(dateTax.Year, dateTax.Month, dateTax.Day);
+            Period period = Period.Between(start, end);
+            int differenceTax = Math.Abs(period.Months);
 
-            if (dateTax.Month == 2)
+            var dateTaxCalculated = dateTax;
+            for (var i = 0; i < differenceTax; i++)
             {
-                if (differenceTax.Days >= 27)
-                {
-                    var dateTaxCalculated = dateTax.AddMonths(1);
-                    addFixedMonthlyTax(roadtax[0].Cost, license, dateTaxCalculated);
-                }
-            }
-            else if (dateTax.Month == 1 || dateTax.Month == 3 || dateTax.Month == 5 || dateTax.Month == 7 || dateTax.Month == 8 || dateTax.Month == 10 || dateTax.Month == 12)
-            {
-                if (differenceTax.Days >= 31)
-                {
-                    var dateTaxCalculated = dateTax.AddMonths(1);
-                    addFixedMonthlyTax(roadtax[0].Cost, license, dateTaxCalculated);
-                }
-            }
-            else if (dateTax.Month == 4 || dateTax.Month == 6 || dateTax.Month == 9 || dateTax.Month == 11)
-            {
-                if (differenceTax.Days >= 30)
-                {
-                    var dateTaxCalculated = dateTax.AddMonths(1);
-                    addFixedMonthlyTax(roadtax[0].Cost, license, dateTaxCalculated);
-                }
+                dateTaxCalculated = dateTaxCalculated.AddMonths(1);
+                addFixedMonthlyTax(roadtax[0].Cost, license, dateTaxCalculated);
             }
 
-            if (dateInsurance.Month == 2)
+            end = new LocalDate(dateInsurance.Year, dateInsurance.Month, dateInsurance.Day);
+            period = Period.Between(start, end);
+            int differenceInsurance = Math.Abs(period.Months);
+
+            var dateInsuranceCalculated = dateInsurance;
+            for (var i = 0; i < differenceInsurance; i++)
             {
-                if (differenceInsurance.Days >= 27)
-                {
-                    var dateInsuranceCalculated = dateInsurance.AddMonths(1);
-                    addFixedMonthlyInsurance(insurance[0].Cost, license, dateInsuranceCalculated);
-                }
-            }
-            else if (dateInsurance.Month == 1 || dateInsurance.Month == 3 || dateInsurance.Month == 5 || dateInsurance.Month == 7 || dateInsurance.Month == 8 || dateInsurance.Month == 10 || dateInsurance.Month == 12)
-            {
-                if (differenceInsurance.Days >= 31)
-                {
-                    var dateInsuranceCalculated = dateInsurance.AddMonths(1);
-                    addFixedMonthlyInsurance(insurance[0].Cost, license, dateInsuranceCalculated);
-                }
-            }
-            else if (dateInsurance.Month == 4 || dateInsurance.Month == 6 || dateInsurance.Month == 9 || dateInsurance.Month == 11)
-            {
-                if (differenceInsurance.Days >= 30)
-                {
-                    var dateInsuranceCalculated = dateInsurance.AddMonths(1);
-                    addFixedMonthlyInsurance(insurance[0].Cost, license, dateInsuranceCalculated);
-                }
+                dateInsuranceCalculated = dateInsuranceCalculated.AddMonths(1);
+                addFixedMonthlyInsurance(insurance[0].Cost, license, dateInsuranceCalculated);
             }
 
             return true;
