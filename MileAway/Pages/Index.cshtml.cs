@@ -51,16 +51,16 @@ namespace MileAway.Pages
 
             data.Datasets = new List<Dataset>();
             Random random = new Random();
-            DateTime dateTime = new DateTime();
+            DateTime dateTime = DateTime.Now;
             foreach (var vehicle in Vehicles)
             {
                 int[,] randomColor = new int[3, 1] { { random.Next(0, 255) }, { random.Next(0, 255) }, { random.Next(0, 255) } };
                 //TODO: year for annualCosts in form
-                IList<double?> pureCosts = CostsRepository.GetAnnualCosts(vehicle.License, dateTime.Year);
+                IList<double?> annualCosts = CostsRepository.GetAnnualCosts(vehicle.License, dateTime.Year);
                 LineDataset dataset = new LineDataset()
                 {
                     Label = vehicle.Brand_Name + ' ' + vehicle.Model_Name,
-                    Data = pureCosts,
+                    Data = annualCosts,
                     Fill = "false",
                     LineTension = 0.1,
                     BackgroundColor = ChartColor.FromRgba((byte)randomColor[0, 0], (byte)randomColor[1, 0], (byte)randomColor[2, 0], 0.4),
