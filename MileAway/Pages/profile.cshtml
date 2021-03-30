@@ -39,10 +39,26 @@
 @*//TODO: add edit buttons in Modal, image can change too*@
 
 <div class="row">
-    <div class="col-6 text-center">
-        <button id="btn-anpassen" type="button" class="btn btn-primary btn-lg">Aanpassen</button>
+    <div class="col-6 text-center mx-auto">
+        <button id="btn-aanpassen" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editModal">Wijzigen</button>
     </div>
-    <div class="col-6  text-center">
-        <button id="btn-changepass" type="button" class="btn btn-primary btn-lg">Wachtwoord veranderen</button>
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Profiel wijzigen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="font-size: 16px">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
