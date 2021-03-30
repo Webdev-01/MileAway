@@ -36,9 +36,16 @@ namespace MileAway.Pages
             Vehicle.Email = HttpContext.Session.GetString("email");
 
             if (VehiclesRepository.AddVehicle(Vehicle))
+            {
                 if (CostsRepository.AddFixedCosts(Insurance, Road_Tax, Vehicle.License))
+                {
                     return RedirectToPage("Index");
-                    //if (Vehicle.Vehicle_Image != null)
+                }
+            }
+            else
+            {
+                return Page();
+            }
 
             return Page();
         }
