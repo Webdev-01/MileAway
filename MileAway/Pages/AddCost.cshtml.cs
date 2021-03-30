@@ -57,6 +57,10 @@ namespace MileAway.Pages
             else if (CostType == "Reparatie")
             {
                 CostsRepository.AddCostRepair(Costs);
+                if (Vehicles.Mileage_Km != Milage_KM)
+                {
+                    VehiclesRepository.UpdateMilage_KM(license, Vehicles.Mileage_Km);
+                }
             }
 
             return RedirectToPage("Index");
