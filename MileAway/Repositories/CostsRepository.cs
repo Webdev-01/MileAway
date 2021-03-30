@@ -24,7 +24,7 @@ namespace MileAway.Repositories
                     License = costs.License,
                     Cost = costs.Cost,
                     DateOfCost = costs.Date_Of_Cost,
-                    InvoiceDoc = "" //costs.Invoice_Doc
+                    InvoiceDoc = ""
                 });
 
                 return addCostRepair == 1;

@@ -147,44 +147,41 @@
             </div>
             <div id="confirm-part" class="content" role="tabpanel" aria-labelledby="confirm-part-trigger">
                 <h2 class="text-center">Bevestigen</h2>
-                @if (Model.Vehicle != null)
-                {
                     <table class="table table-sm">
                         <tbody>
                             <tr>
                                 <td>Kenteken: </td>
-                                <td>@Model.Vehicle.License </td>
+                                <td id="TableKenteken"></td>
                             </tr>
                             <tr>
                                 <td>Merk:</td>
-                                <td>@Model.Vehicle.Brand_Name </td>
+                                <td id="TableMerk"> </td>
                             </tr>
                             <tr>
                                 <td>Model: </td>
-                                <td>@Model.Vehicle.Model_Name </td>
+                                <td id="TableModel"> </td>
                             </tr>
                             <tr>
                                 <td>Kleur: </td>
-                                <td>@Model.Vehicle.Color </td>
+                                <td id="TableKleur"> </td>
                             </tr>
                             <tr>
                                 <td>Kilometerstand: </td>
-                                <td>@Model.Vehicle.Mileage_Km </td>
+                                <td> </td>
                             </tr>
                             <tr>
                                 <td>Wegenbelasting: </td>
-                                <td>@Model.FixedCosts.Road_Tax </td>
-                                <td>@Model.FixedCosts.Road_Tax_Date </td>
+                                <td> </td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>Verzekering: </td>
-                                <td>@Model.FixedCosts.Insurance </td>
-                                <td>@Model.FixedCosts.Insurance_Date </td>
+                                <td> </td>
+                                <td> </td>
                             </tr>
                         </tbody>
                     </table>
-                    <img src="https://lh3.googleusercontent.com/proxy/oBFixbbSrMB5_nTjKzwt_UKQCM88vr4NgyMcwJ-IaGV-WU1_-bBVPI-uULqyQBiK6vbyW_sOYBMslV3CfzdPfM4rRKfI6NauX_kcTurLMZUra6c7or6IaSyedY7k7gs7jH_xyQEtl_RG-bPbudyTQeLeT2ZdJvCeG2Se9jF7nw" />
-                }
+                    @*<img src="https://lh3.googleusercontent.com/proxy/oBFixbbSrMB5_nTjKzwt_UKQCM88vr4NgyMcwJ-IaGV-WU1_-bBVPI-uULqyQBiK6vbyW_sOYBMslV3CfzdPfM4rRKfI6NauX_kcTurLMZUra6c7or6IaSyedY7k7gs7jH_xyQEtl_RG-bPbudyTQeLeT2ZdJvCeG2Se9jF7nw" />*@
                 <button type="button" class="btn btn-light border-dark" onclick="toStepper(3); return false;">Vorige</button>
                 <button type="submit" class="btn btn-light border-dark">Toevoegen</button>
             </div>
