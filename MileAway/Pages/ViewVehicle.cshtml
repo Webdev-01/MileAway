@@ -58,8 +58,7 @@
                 <img class="cropped mx-auto d-block" src="/images/@Model.Vehicle.License - @Model.Vehicle.Vehicle_Image" alt="Vehicle picture" /> }
             else
             {
-                <img class="cropped mx-auto d-block" src="~/images/stock car.png" alt="Vehicle picture">
-            }
+                <img class="cropped mx-auto d-block" src="~/images/stock car.png" alt="Vehicle picture">}
             <table class="table table-sm mt-3">
                 <tbody>
                     <tr>
@@ -115,28 +114,6 @@
                             }
                         </tr>
                     }
-                    @*<tr>
-                            @foreach (var item in Model.Costs)
-                            {
-                                @if (item.Typecost_Id == 3)
-                                {
-                                    <td>@item.TypeCost_Name</td>
-                                    <td>€@item.Cost</td>
-                                    break;
-                                }
-                            }
-                        </tr>
-                        <tr>
-                            @foreach (var item in Model.Costs)
-                            {
-                                @if (item.Typecost_Id == 4)
-                                {
-                                    <td>@item.TypeCost_Name</td>
-                                    <td>€@item.Cost</td>
-                                    break;
-                                }
-                            }
-                        </tr>*@
                 </tbody>
             </table>
         </div>
