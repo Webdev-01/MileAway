@@ -25,8 +25,12 @@
 
         <div id="collapseGraphs" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
             <div class="card-body">
+                <form method="get">
+                    <input class="form-control col-2 d-inline" value="@Model.Year" asp-for="Year"/>
+                    <button type="submit" class="btn btn-primary" asp-route-id="@Model.Year">Go!</button>
+                </form>
                 <div><canvas id="lineChart"></canvas></div>
-                @{ChartJSCore.Models.Chart chart = (ChartJSCore.Models.Chart)ViewData["chart"]; }            
+                @{ChartJSCore.Models.Chart chart = (ChartJSCore.Models.Chart) ViewData["chart"]; }
             </div>
         </div>
     </div>

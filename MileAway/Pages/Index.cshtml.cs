@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using ChartJSCore.Helpers;
@@ -27,14 +28,21 @@ namespace MileAway.Pages
         [BindProperty]
         public List<Costs> Costs { get; set; }
 
+        [BindProperty]
+        public int Year { get; set; }
+
+
         public IActionResult OnGet()
         {
             if (HttpContext.Session.GetString("email") == null)
             {
                 return RedirectToPage("Login");
             }
-
-
+            var year = HttpContext.Request.Query["Year"];
+            if (!string.IsNullOrWhiteSpace(year))
+                Year = Convert.ToInt32(year);
+            else
+                Year = DateTime.Now.Year;
             Costs = CostsRepository.GetCostsByEmail(HttpContext.Session.GetString("email"));
             Vehicles = VehiclesRepository.GetVehiclesByEmail(HttpContext.Session.GetString("email"));
 
@@ -51,12 +59,10 @@ namespace MileAway.Pages
 
             data.Datasets = new List<Dataset>();
             Random random = new Random();
-            DateTime dateTime = DateTime.Now;
             foreach (var vehicle in Vehicles)
             {
                 int[,] randomColor = new int[3, 1] { { random.Next(0, 255) }, { random.Next(0, 255) }, { random.Next(0, 255) } };
-                //TODO: year for annualCosts in form
-                IList<double?> annualCosts = CostsRepository.GetAnnualCosts(vehicle.License, dateTime.Year);
+                IList<double?> annualCosts = CostsRepository.GetAnnualCosts(vehicle.License, Year);
                 LineDataset dataset = new LineDataset()
                 {
                     Label = vehicle.Brand_Name + ' ' + vehicle.Model_Name,
@@ -90,6 +96,5 @@ namespace MileAway.Pages
 
             return Page();
         }
-
     }
 }
