@@ -48,10 +48,9 @@ namespace MileAway.Pages
                 Photo.CopyToAsync(stream);
                 Vehicle.Vehicle_Image = Photo.FileName;
             }
-            //TODO: default image
-            //TODO: see image in index
+
             if (VehiclesRepository.AddVehicle(Vehicle))
-                if (CostsRepository.AddFixedCosts(FixedCosts.Insurance, Vehicle.License))
+                if (CostsRepository.AddFixedCosts(FixedCosts, Vehicle.License))
                     return RedirectToPage("Index");
             //if (Vehicle.Vehicle_Image != null)
 
