@@ -5,7 +5,8 @@
     ViewData["Title"] = "Home";
     Layout = "_Layout";
 }
-<link rel="stylesheet" href="~/css/Overview.css">
+<link rel="stylesheet" href="~/css/index.css">
+
 @if (TempData.ContainsKey("SuccesMessage"))
 {
     <div class="alert alert-success" role="alert">
@@ -52,11 +53,11 @@
                         </div>
                         @if (vehicle.Vehicle_Image != null)
                         {
-                            <img class="cropped" src="/images/@vehicle.License - @vehicle.Vehicle_Image" alt="Vehicle picture" />
+                            <img class="cropped mx-auto d-block" src="/images/@vehicle.License - @vehicle.Vehicle_Image" alt="Vehicle picture" />
                         }
                         else
                         {
-                            <img class="mx-auto d-block" width="200" src="~/images/stock car.png" alt="Car picture">
+                            <img class="cropped mx-auto d-block" src="~/images/stock car.png" alt="Vehicle picture">
                         }
                     </a>
                     <a href="/AddCost/@vehicle.License" class="mt-2 btn btn-light border-dark">Kosten toevoegen</a>

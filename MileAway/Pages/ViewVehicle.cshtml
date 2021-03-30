@@ -1,25 +1,64 @@
 ﻿@page "{license}"
 @using System.Globalization
 @model MileAway.Pages.ViewVehicleModel
-@{
-    ViewData["Title"] = "Bekijk voertuig";
-    Layout = "_Layout";
-}
+@{ ViewData["Title"] = "Bekijk voertuig";
+    Layout = "_Layout"; }
 <link rel="stylesheet" href="~/css/ViewVehicle.css">
 
 <div class="row">
     <div class="card col-xs-12 col-md-6 mx-auto text-center">
         <div class="card-body ">
-            <h5 class="card-title">@Model.Vehicle.Brand_Name @Model.Vehicle.Model_Name</h5>
-            <div>@Model.Vehicle.License</div>
+            <div style="font-size: 20px">
+                <a data-toggle="modal" data-target="#editModal"><i class="fas fa-edit float-left"></i></a>
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt float-right" style="color: red;"></i></a>
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel">Voertuig verwijderen</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="font-size: 16px">
+                                <p>Weet u zeker dat u <b>@Model.Vehicle.Brand_Name @Model.Vehicle.Model_Name</b> wilt verwijderen, dit is niet om te keren.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                                <a class="btn btn-danger" asp-page-handler="DeleteVehicle" asp-route-id="@Model.Vehicle.License">Verwijderen</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="card-title m-0">@Model.Vehicle.Brand_Name @Model.Vehicle.Model_Name</h2>
+            <h5>@Model.Vehicle.License</h5>
             @if (Model.Vehicle.Vehicle_Image != null)
             {
-                <img class="cropped" src="/images/@Model.Vehicle.License - @Model.Vehicle.Vehicle_Image" alt="Vehicle picture" />
-            }
+                <img class="cropped mx-auto d-block" src="/images/@Model.Vehicle.License - @Model.Vehicle.Vehicle_Image" alt="Vehicle picture" /> }
             else
             {
-                <img class="mx-auto d-block" width="200" src="~/images/stock car.png" alt="Car picture">
-            }
+                <img class="cropped mx-auto d-block" src="~/images/stock car.png" alt="Vehicle picture">}
             <table class="table table-sm mt-3">
                 <tbody>
                     <tr>
@@ -75,28 +114,6 @@
                             }
                         </tr>
                     }
-                    @*<tr>
-                    @foreach (var item in Model.Costs)
-                    {
-                        @if (item.Typecost_Id == 3)
-                        {
-                            <td>@item.TypeCost_Name</td>
-                            <td>€@item.Cost</td>
-                            break;
-                        }
-                    }
-                </tr>
-                <tr>
-                    @foreach (var item in Model.Costs)
-                    {
-                        @if (item.Typecost_Id == 4)
-                        {
-                            <td>@item.TypeCost_Name</td>
-                            <td>€@item.Cost</td>
-                            break;
-                        }
-                    }
-                </tr>*@
                 </tbody>
             </table>
         </div>

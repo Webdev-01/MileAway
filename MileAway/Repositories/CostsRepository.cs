@@ -287,5 +287,23 @@ namespace MileAway.Repositories
             fixedCosts.Insurance = Convert.ToInt32(insurance[0].Cost);
             return fixedCosts;
         }
+
+        public static bool DeleteVehicleCosts(string license)
+        {
+            using var connect = DbUtils.GetDbConnection();
+            try
+            {
+                var deleteCosts = connect.Execute("DELETE FROM costs WHERE License = @License", new
+                {
+                    License = license
+                });
+
+                return deleteCosts != 0;
+            }
+            catch (MySqlException e)
+            {
+                return false;
+            }
+        }
     }
 }
