@@ -5,15 +5,15 @@
     Layout = "_Layout";
 }
 <link rel="stylesheet" href="~/css/profile.css">
+
 <div class="text-center">
     <h1>Gebruikersgegevens</h1>
 </div>
 
 <br />
-
 <div class="row">
     <div class="col-12 text-center">
-        <img src="/images/@Model.User.Email - @Model.User.User_Image" alt="Profile picture" />
+        <img class="cropped" src="/images/@Model.User.Email - @Model.User.User_Image" alt="Profile picture" />
     </div>
 </div>
 
@@ -28,6 +28,8 @@
 
 <br />
 <br />
+
+@*//TODO: add edit buttons in Modal, image can change too*@
 
 <div class="row">
     <div class="col-6 text-center">
