@@ -141,8 +141,8 @@
                 </div>
                 <br />
                 <div class="text-center">
-                    <button type="button" class="btn btn-light border-dark" onclick="toConfirm(); return false;">Vorige</button>
-                    <button type="button" class="btn btn-light border-dark" onclick="nextStepper(); return false">Volgende</button>
+                    <button type="button" class="btn btn-light border-dark" onclick="toStepper(2); return false;">Vorige</button>
+                    <button type="button" class="btn btn-light border-dark" onclick="toConfirm(); return false">Volgende</button>
                 </div>
             </div>
             <div id="confirm-part" class="content" role="tabpanel" aria-labelledby="confirm-part-trigger">
@@ -155,29 +155,43 @@
                             </tr>
                             <tr>
                                 <td>Merk:</td>
-                                <td id="TableMerk"> </td>
+                                <td id="TableMerk"></td>
                             </tr>
                             <tr>
                                 <td>Model: </td>
-                                <td id="TableModel"> </td>
+                                <td id="TableModel"></td>
+                            </tr>
+                            <tr>
+                                <td>Jaar: </td>
+                                <td id="TableJaar"></td>
                             </tr>
                             <tr>
                                 <td>Kleur: </td>
-                                <td id="TableKleur"> </td>
+                                <td id="TableKleur"></td>
+                            </tr>
+                            <tr>
+                                <td>Brandstof: </td>
+                                <td id="TableFuel"></td>
                             </tr>
                             <tr>
                                 <td>Kilometerstand: </td>
-                                <td> </td>
+                                <td id="TableKM"></td>
                             </tr>
                             <tr>
                                 <td>Wegenbelasting: </td>
-                                <td> </td>
+                                <td id="TableWegenbelasting"></td>
+                            </tr>
+                            <tr>
                                 <td></td>
+                                <td id="TableWegenbelastingDate"></td>
                             </tr>
                             <tr>
                                 <td>Verzekering: </td>
-                                <td> </td>
-                                <td> </td>
+                                <td id="TableVerzekering"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td id="TableVerzekeringDate"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -206,6 +220,18 @@
     }
     function toConfirm() {
         stepper.to(4);
+
+        $("#TableKenteken").html($("#licensePlate").val());
+        $("#TableMerk").html($("#brand").val());
+        $("#TableModel").html($("#model").val());
+        $("#TableJaar").html($("#year").val());
+        $("#TableKleur").html($("#color").val());
+        $("#TableFuel").html($("#fuelType").val());
+        $("#TableKM").html($("#inputMileage").val());
+        $("#TableWegenbelasting").html($("#roadTax").val());
+        $("#TableWegenbelastingDate").html($("#inputRoad_Tax_Date").val());
+        $("#TableVerzekering").html($("#insurance").val());
+        $("#TableVerzekeringDate").html($("#inputInsurance_Date").val());
     }
 
     window.addEventListener('load', function () {
@@ -228,22 +254,18 @@
                     var dateYear = date.substring(0, 4);
                     $("#brand").val(data[0].merk.charAt(0).toUpperCase() + data[0].merk.slice(1).toLowerCase());
                     $("#brand").focus();
-                    //$("#brand").attr('disabled', 'disabled');
                     var merk = data[0].merk.charAt(0).toUpperCase() + data[0].merk.slice(1).toLowerCase();
                     var model = data[0].handelsbenaming.charAt(0).toUpperCase() + data[0].handelsbenaming.slice(1).toLowerCase();
                     model = model.replace(merk, "");
+
                     $("#model").val(model.trim());
                     $("#model").focus();
-                    //$("#model").attr('disabled', 'disabled');
                     $("#year").val(dateYear);
                     $("#year").focus();
-                    //$("#year").attr('disabled', 'disabled');
                     $("#color").val(data[0].eerste_kleur.charAt(0).toUpperCase() + data[0].eerste_kleur.slice(1).toLowerCase());
                     $("#color").focus();
-                    //$("#color").attr('disabled', 'disabled');
                     $("#fuelType").val(data[0].brandstof_omschrijving.charAt(0).toUpperCase() + data[0].brandstof_omschrijving.slice(1).toLowerCase());
                     $("#fuelType").focus();
-                    //$("#fuelType").attr('disabled', 'disabled');
                     $("#inputMileage").focus();
                 }
             });
