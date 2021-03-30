@@ -34,9 +34,14 @@ namespace MileAway.Pages
                 return RedirectToPage("Login");
             }
 
+
             Costs = CostsRepository.GetCostsByEmail(HttpContext.Session.GetString("email"));
             Vehicles = VehiclesRepository.GetVehiclesByEmail(HttpContext.Session.GetString("email"));
 
+            foreach (var item in Vehicles)
+            {
+                CostsRepository.FixedCostsMontly(item.License);
+            }
 
             Chart chart = new Chart();
 
