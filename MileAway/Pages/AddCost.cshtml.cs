@@ -28,7 +28,7 @@ namespace MileAway.Pages
 
         public IActionResult OnPostAddCost()
         {
-
+            //TODO: do something in the post :P
             return Page();
         }
     }

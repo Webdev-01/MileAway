@@ -41,16 +41,17 @@ namespace MileAway.Pages
         //TODO: look into validation, if everything is correct
         public IActionResult OnPostConfirm()
         {
+            Vehicle.Email = HttpContext.Session.GetString("email");
+
             if (Photo != null)
             {
-                var path = Path.Combine(ihostingEnvironment.WebRootPath, "images", Vehicle.Email + " - " + Photo.FileName);
+                var path = Path.Combine(ihostingEnvironment.WebRootPath, "images", Vehicle.License + " - " + Photo.FileName);
                 var stream = new FileStream(path, FileMode.Create);
                 Photo.CopyToAsync(stream);
                 Vehicle.Vehicle_Image = Photo.FileName;
             }
-
-            Vehicle.Email = HttpContext.Session.GetString("email");
-
+            //TODO: default image
+            //TODO: see image in index
             if (VehiclesRepository.AddVehicle(Vehicle))
                 if (CostsRepository.AddFixedCosts(Insurance, Road_Tax, Vehicle.License))
                     return RedirectToPage("Index");
