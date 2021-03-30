@@ -14,11 +14,11 @@
             <div>@Model.Vehicle.License</div>
             @if (Model.Vehicle.Vehicle_Image != null)
             {
-                <img class="cropped" src="/images/@Model.Vehicle.License - @Model.Vehicle.Vehicle_Image" alt="Vehicle picture" />
+                <img class="cropped mx-auto d-block" src="/images/@Model.Vehicle.License - @Model.Vehicle.Vehicle_Image" alt="Vehicle picture" />
             }
             else
             {
-                <img class="mx-auto d-block" width="200" src="~/images/stock car.png" alt="Car picture">
+                <img class="cropped mx-auto d-block" src="~/images/stock car.png" alt="Vehicle picture">
             }
             <table class="table table-sm mt-3">
                 <tbody>
