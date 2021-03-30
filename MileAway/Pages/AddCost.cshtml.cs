@@ -41,7 +41,7 @@ namespace MileAway.Pages
                 CostsRepository.AddCostRepair(Costs);
             }
 
-            return Page();
+            return RedirectToPage("Index");
         }
     }
 }
