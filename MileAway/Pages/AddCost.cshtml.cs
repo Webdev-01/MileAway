@@ -24,15 +24,14 @@ namespace MileAway.Pages
         public ActionResult OnGet(string license)
         {
             CostType = HttpContext.Request.Query["type"];
-            testsave = CostType;
             License = license;
             return Page();
         }
 
-        public IActionResult OnPostAddCost()
+        public IActionResult OnPost(string license)
         {
             CostType = HttpContext.Request.Query["type"];
-            //TODO: do something in the post :P
+            Costs.License = license;
             if (CostType == "Brandstof")
             {
                 CostsRepository.AddCostFuel(Costs);
