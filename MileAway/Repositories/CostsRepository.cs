@@ -100,8 +100,8 @@ namespace MileAway.Repositories
             var dateOne = DateTime.Now;
             var dateTwo = insurance[0].Date_Of_Cost;
 
-            TimeSpan differnce = dateTwo - dateOne;
-            if (differnce.Days <= -30)
+            TimeSpan differnce = dateOne - dateTwo;
+            if (differnce.Days >= 30)
             {
                 AddFixedCosts(insurance[0].Cost, roadtax[0].Cost, license);
             }
