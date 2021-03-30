@@ -36,6 +36,7 @@ namespace MileAway.Repositories
                 return false;
             }
         }
+
         public static List<Vehicles> GetVehiclesByEmail(string email)
         {
             using var connect = DbUtils.GetDbConnection();
@@ -62,7 +63,22 @@ namespace MileAway.Repositories
             );
             return vehicle;
         }
+        public static bool DeleteVehicle(string license)
+        {
+            using var connect = DbUtils.GetDbConnection();
+            try
+            {
+                var deleteVehicle = connect.Execute("DELETE FROM vehicles WHERE License = @License", new
+                {
+                    License = license
+                });
 
-        //TODO: add delete
+                return deleteVehicle == 1;
+            }
+            catch (MySqlException e)
+            {
+                return false;
+            }
+        }
     }
 }
