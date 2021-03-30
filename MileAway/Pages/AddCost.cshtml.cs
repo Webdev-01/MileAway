@@ -14,35 +14,56 @@ namespace MileAway.Pages
         public string CostType { get; set; }
         public string License { get; set; }
 
+        public int Milage_KM { get; set; }
+
         [BindProperty]
         public Costs Costs { get; set; }
         [BindProperty]
         public Vehicles Vehicles { get; set; }
-
-        public string testsave;
-
         public ActionResult OnGet(string license)
         {
             CostType = HttpContext.Request.Query["type"];
-            testsave = CostType;
             License = license;
+
+            var vehicle = VehiclesRepository.GetVehicleByLicense(License);
+            if (vehicle != null)
+            {
+                Milage_KM = vehicle.Mileage_Km;
+            }
+
             return Page();
         }
 
-        public IActionResult OnPostAddCost()
+        public IActionResult OnPost(string license)
         {
             CostType = HttpContext.Request.Query["type"];
-            //TODO: do something in the post :P
+            Costs.License = license;
+
+            var vehicle = VehiclesRepository.GetVehicleByLicense(license);
+            if(vehicle != null)
+            {
+                Milage_KM = vehicle.Mileage_Km;
+            }
+            
+
             if (CostType == "Brandstof")
             {
+                if (Vehicles.Mileage_Km != Milage_KM)
+                {
+                    VehiclesRepository.UpdateMilage_KM(license, Vehicles.Mileage_Km);
+                }
                 CostsRepository.AddCostFuel(Costs);
             }
             else if (CostType == "Reparatie")
             {
                 CostsRepository.AddCostRepair(Costs);
+                if (Vehicles.Mileage_Km != Milage_KM)
+                {
+                    VehiclesRepository.UpdateMilage_KM(license, Vehicles.Mileage_Km);
+                }
             }
 
-            return Page();
+            return RedirectToPage("Index");
         }
     }
 }

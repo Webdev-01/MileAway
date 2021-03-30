@@ -63,6 +63,26 @@ namespace MileAway.Repositories
             );
             return vehicle;
         }
+
+        public static bool UpdateMilage_KM(string license, int milage_KM)
+        {
+        using var connect = DbUtils.GetDbConnection();
+        try
+        {
+            var UpdateMilage_KM = connect.Execute("UPDATE vehicles SET Mileage_KM = @MilageKM WHERE License = @License", new
+            {
+                License = license,
+                MilageKM = milage_KM
+            });
+
+            return UpdateMilage_KM == 1;
+        }
+        catch (MySqlException e)
+        {
+            return false;
+        }
+        }
+
         public static bool DeleteVehicle(string license)
         {
             using var connect = DbUtils.GetDbConnection();
