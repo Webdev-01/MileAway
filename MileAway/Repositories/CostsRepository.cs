@@ -13,23 +13,43 @@ namespace MileAway.Repositories
     {
         public static object Calculated { get; private set; }
 
-        public static bool AddCost(Costs costs)
+        public static bool AddCostRepair(Costs costs)
         {
             using var connect = DbUtils.GetDbConnection();
             try
             {
-                var addCost = connect.Execute("INSERT INTO costs (Cost_ID, Typecost_Id, License, Cost, Fuel_Quantity, Date_Of_Cost, Invoice_Doc) VALUES (@CostId, @TypecostId, @License, @Cost, @Fuel_Quantity, @DateOfCost, InvoiceDoc)", new
+                var addCostRepair = connect.Execute("INSERT INTO costs (Typecost_Id, License, Cost, Date_Of_Cost, Invoice_Doc) VALUES (@TypecostId, @License, @Cost, @DateOfCost, @InvoiceDoc)", new
                 {
-                    CostId = costs.Cost_Id,
+                    TypecostId = costs.Typecost_Id,
+                    License = costs.License,
+                    Cost = costs.Cost,
+                    DateOfCost = costs.Date_Of_Cost,
+                    InvoiceDoc = "" //costs.Invoice_Doc
+                });
+
+                return addCostRepair == 1;
+            }
+            catch (MySqlException e)
+            {
+                return false;
+            }
+        }
+
+        public static bool AddCostFuel(Costs costs) 
+        {
+            using var connect = DbUtils.GetDbConnection();
+            try
+            {
+                var addCostFuel = connect.Execute("INSERT INTO costs (Typecost_Id, License, Cost, Fuel_Quantity, Date_Of_Cost) VALUES (@TypecostId, @License, @Cost, @Fuel_Quantity, @DateOfCost)", new
+                {
                     TypecostId = costs.Typecost_Id,
                     License = costs.License,
                     Cost = costs.Cost,
                     Fuel_Quantity = costs.Fuel_Quantity,
                     DateOfCost = costs.Date_Of_Cost,
-                    InvoiceDoc = costs.Invoice_Doc
                 });
 
-                return addCost == 1;
+                return addCostFuel == 1;
             }
             catch (MySqlException e)
             {
