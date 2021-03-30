@@ -20,9 +20,7 @@ namespace MileAway.Pages
         public Vehicles Vehicle { get; set; }
 
         [BindProperty]
-        public double Road_Tax { get; set; }
-        [BindProperty]
-        public double Insurance { get; set; }
+        public FixedCosts FixedCosts { get; set; }
 
         public List<Apidata> Apidata { get; set; }
 
@@ -50,10 +48,9 @@ namespace MileAway.Pages
                 Photo.CopyToAsync(stream);
                 Vehicle.Vehicle_Image = Photo.FileName;
             }
-            //TODO: default image
-            //TODO: see image in index
+
             if (VehiclesRepository.AddVehicle(Vehicle))
-                if (CostsRepository.AddFixedCosts(Insurance, Road_Tax, Vehicle.License))
+                if (CostsRepository.AddFixedCosts(FixedCosts, Vehicle.License))
                     return RedirectToPage("Index");
             //if (Vehicle.Vehicle_Image != null)
 

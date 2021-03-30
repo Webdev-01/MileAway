@@ -111,8 +111,6 @@
                     <input accept="image/*" type="file" class="form-control" id="vehiclePicture" asp-for="Photo" />
                     <span class="invalid-feedback" asp-validation-for="Photo"></span>
                 </div>
-                @*<button type="" class="btn btn-light border-dark">Uploaden...</button>*@
-                @*//TODO: image upload*@
                 <br />
                 <div class="text-center">
                     <button type="button" class="btn btn-light border-dark" onclick="toStepper(1);return false;">Vorige</button>
@@ -123,13 +121,23 @@
                 <h2 class="text-center">Kosten</h2>
                 <div class="form-group">
                     <label for="roadTax">Wegenbelasting bedrag</label>
-                    <input type="text" asp-for="Road_Tax" class="form-control" id="roadTax">
-                    <span class="invalid-feedback" asp-validation-for="Road_Tax"></span>
+                    <input type="text" asp-for="FixedCosts.Road_Tax" class="form-control" id="roadTax">
+                    <span class="invalid-feedback" asp-validation-for="FixedCosts.Road_Tax"></span>
+                </div>
+                <div class="form-group">
+                    <label for="inputRoad_Tax_Date">Wegenbelasting datum</label>
+                    <input asp-for="FixedCosts.Road_Tax_Date" type="date" class="form-control" id="inputRoad_Tax_Date" placeholder="">
+                    <span class="invalid-feedback" asp-validation-for="FixedCosts.Road_Tax_Date"></span>
                 </div>
                 <div class="form-group">
                     <label for="insurance">Verzekering bedrag</label>
-                    <input type="text" asp-for="Insurance" class="form-control" id="insurance">
-                    <span class="invalid-feedback" asp-validation-for="Insurance"></span>
+                    <input type="text" asp-for="FixedCosts.Insurance" class="form-control" id="insurance">
+                    <span class="invalid-feedback" asp-validation-for="FixedCosts.Insurance"></span>
+                </div>
+                <div class="form-group">
+                    <label for="inputInsurance_Date">Verzekering datum</label>
+                    <input asp-for="FixedCosts.Insurance_Date" type="date" class="form-control" id="inputInsurance_Date" placeholder="">
+                    <span class="invalid-feedback" asp-validation-for="FixedCosts.Insurance_Date"></span>
                 </div>
                 <br />
                 <div class="text-center">
@@ -165,11 +173,13 @@
                             </tr>
                             <tr>
                                 <td>Wegenbelasting: </td>
-                                <td>@Model.Road_Tax </td>
+                                <td>@Model.FixedCosts.Road_Tax </td>
+                                <td>@Model.FixedCosts.Road_Tax_Date </td>
                             </tr>
                             <tr>
                                 <td>Verzekering: </td>
-                                <td>@Model.Insurance </td>
+                                <td>@Model.FixedCosts.Insurance </td>
+                                <td>@Model.FixedCosts.Insurance_Date </td>
                             </tr>
                         </tbody>
                     </table>
