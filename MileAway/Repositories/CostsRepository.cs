@@ -35,7 +35,7 @@ namespace MileAway.Repositories
             }
         }
 
-        public static bool AddCostFuel(Costs costs) 
+        public static bool AddCostFuel(Costs costs)
         {
             using var connect = DbUtils.GetDbConnection();
             try
@@ -176,7 +176,7 @@ namespace MileAway.Repositories
             return true;
         }
 
-        public static bool addFixedMonthlyTax(double price, string vehicleLicense, DateTime date) 
+        public static bool addFixedMonthlyTax(double price, string vehicleLicense, DateTime date)
         {
             using var connect = DbUtils.GetDbConnection();
             try
@@ -216,17 +216,25 @@ namespace MileAway.Repositories
             }
         }
 
-        public static IList<double?> GetPureCostsByLicense(string license)
+        public static IList<double?> GetAnnualCosts(string license, int year)
         {
             using var connect = DbUtils.GetDbConnection();
-
-            IList<double?> costs = connect.Query<double?>("SELECT costs.Cost FROM costs INNER JOIN typecosts ON costs.TypeCost_ID = typecosts.TypeCost_ID INNER JOIN vehicles ON costs.License = vehicles.License WHERE vehicles.License = @License",
-                new
-                {
-                    License = license
-                }
-
-            ).ToList();
+            List<double?> costs = new List<double?>();
+            for (int i = 0; i < 12; i++)
+            {
+                var avgMonthlyCosts = connect.QuerySingleOrDefault<double?>("SELECT AVG(costs.Cost) FROM costs INNER JOIN typecosts ON costs.TypeCost_ID = typecosts.TypeCost_ID INNER JOIN vehicles ON costs.License = vehicles.License WHERE vehicles.License = @License AND EXTRACT(month from Date_Of_Cost) = @Month AND EXTRACT(year from Date_Of_Cost) = @Year",
+                    new
+                    {
+                        License = license,
+                        Month = i,
+                        Year = year
+                    }
+                );
+                if (avgMonthlyCosts == null)
+                    costs.Add(0);
+                else
+                    costs.Add(avgMonthlyCosts);
+            }
             if (costs != null)
                 return costs;
             return null;
