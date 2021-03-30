@@ -1,10 +1,8 @@
 ﻿@page "{license}"
 @using System.Globalization
 @model MileAway.Pages.ViewVehicleModel
-@{
-    ViewData["Title"] = "Bekijk voertuig";
-    Layout = "_Layout";
-}
+@{ ViewData["Title"] = "Bekijk voertuig";
+    Layout = "_Layout"; }
 <link rel="stylesheet" href="~/css/ViewVehicle.css">
 
 <div class="row">
@@ -57,12 +55,12 @@
             <h5>@Model.Vehicle.License</h5>
             @if (Model.Vehicle.Vehicle_Image != null)
             {
-                <img class="cropped" src="/images/@Model.Vehicle.License - @Model.Vehicle.Vehicle_Image" alt="Vehicle picture" />
-            }
+                <img class="cropped mx-auto d-block" src="/images/@Model.Vehicle.License - @Model.Vehicle.Vehicle_Image" alt="Vehicle picture" /> }
             else
             {
-                <img class="mx-auto d-block" width="200" src="~/images/stock car.png" alt="Car picture">
-            }            <table class="table table-sm mt-3">
+                <img class="cropped mx-auto d-block" src="~/images/stock car.png" alt="Vehicle picture">
+            }
+            <table class="table table-sm mt-3">
                 <tbody>
                     <tr>
                         <td>Kenteken: </td>
