@@ -29,7 +29,7 @@ namespace MileAway.Pages
             return Page();
         }
 
-        public IActionResult OnPostAddCost()
+        public IActionResult OnPost()
         {
             CostType = HttpContext.Request.Query["type"];
             //TODO: do something in the post :P
