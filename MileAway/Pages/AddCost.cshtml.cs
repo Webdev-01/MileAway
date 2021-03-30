@@ -11,7 +11,8 @@ namespace MileAway.Pages
 {
     public class AddCostModel : PageModel
     {
-        public string costType { get; set; }
+        public string CostType { get; set; }
+        public string License { get; set; }
 
         [BindProperty]
         public Costs Costs { get; set; }
@@ -20,13 +21,14 @@ namespace MileAway.Pages
 
         public ActionResult OnGet(string license)
         {
-            costType = HttpContext.Request.Query["type"];
+            CostType = HttpContext.Request.Query["type"];
+            License = license;
             return Page();
         }
 
         public IActionResult OnPostAddCost()
         {
-
+            //TODO: do something in the post :P
             return Page();
         }
     }
