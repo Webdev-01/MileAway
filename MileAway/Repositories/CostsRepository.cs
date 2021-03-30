@@ -126,15 +126,23 @@ namespace MileAway.Repositories
         {
             using var connect = DbUtils.GetDbConnection();
 
-            var costs = connect.Query<Costs>(
-                "SELECT Cost,TypeCost_ID FROM costs WHERE License = @License AND (TypeCost_ID = 3 OR TypeCost_ID = 4)",
+            var roadtax = connect.QuerySingleOrDefault<Costs>(
+                "SELECT Cost,TypeCost_ID FROM costs WHERE License = @License AND TypeCost_ID = 3",
                 new
                 {
                     License = license
-                }).ToList();
+                });
+
+            var insurance = connect.QuerySingleOrDefault<Costs>(
+            "SELECT Cost,TypeCost_ID FROM costs WHERE License = @License AND TypeCost_ID = 4",
+            new
+            {
+                License = license
+            });
+
             var fixedCosts = new FixedCosts();
-            fixedCosts.Road_Tax = costs[0].Cost;
-            fixedCosts.Insurance = costs[1].Cost;
+            fixedCosts.Road_Tax = Convert.ToInt32(roadtax.Cost);
+            fixedCosts.Insurance = Convert.ToInt32(insurance.Cost);
             return fixedCosts;
         }
     }

@@ -13,7 +13,14 @@
 <br />
 <div class="row">
     <div class="col-12 text-center">
-        <img class="cropped" src="/images/@Model.User.Email - @Model.User.User_Image" alt="Profile picture" />
+        @if (Model.User.User_Image != null)
+        {
+            <img class="cropped" src="/images/@Model.User.Email - @Model.User.User_Image" alt="Profile picture" />
+        }
+        else
+        {
+            <img class="cropped" src="/assets/icons/profile.png" alt="Profile picture" />
+        }
     </div>
 </div>
 
