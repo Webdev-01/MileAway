@@ -7,6 +7,7 @@ namespace MileAway.Models
 {
     public class FixedCosts
     {
+        public int Cost_Id { get; set; }
         public double Insurance { get; set; }
         public double Road_Tax { get; set; }
 
