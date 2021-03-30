@@ -8,32 +8,31 @@
 
 <script>
     window.addEventListener("load", function () {
-        @if (Model.costType == "Brandstof")
+        @if (Model.CostType == "Brandstof")
         {
             <text>$("#type option[value='Brandstof']").attr("selected", "selected");</text>
         }
-        @if (Model.costType == "Reparatie")
+        @if (Model.CostType == "Reparatie")
         {
             <text>$("#type option[value='Reparatie']").attr("selected", "selected");</text>
         }
     });
     var CheckType = "Brandstof";
-
     function test() {
-        var e = document.getElementById("type");
-        console.log(e.value);
-        CheckType = e.value;
+        CheckType = document.getElementById("type").value;
+        License = document.getElementById("license").value;
         if (CheckType == "Brandstof") {
-            window.location.href = "/AddCost?type=Brandstof";
+            window.location.href = "/AddCost/" + License +"?type=Brandstof";
         }
         if (CheckType == "Reparatie") {
-            window.location.href = "/AddCost?type=Reparatie";
+            window.location.href = "/AddCost/" + License +"?type=Reparatie";
         }
     }
     //TODO: fix redirect in url with license and querystring
 </script>
 
 <form method="post" asp-page-handler="AddCost">
+    <input hidden="true" id="license" value="@Model.License"/>
     <div class="form-group">
         <select class="form-control" id="type" onchange="test()">
             <option selected>Open this select menu</option>
@@ -42,7 +41,7 @@
         </select>
     </div>
 
-    @if (Model.costType == "Brandstof")
+    @if (Model.CostType == "Brandstof")
     {
         //Brandstof form
         <div class="form-group">
@@ -56,36 +55,36 @@
             <span class="invalid-feedback" asp-validation-for="Vehicles.Mileage_Km"></span>
         </div>
         @*<div class="form-group">
-            <label for="inputFuel_Quantity">Liters*</label>
-            <input asp-for="Costs.Fuel_Quantity" type="password" class="form-control" id="inputFuel_Quantity" placeholder="30L">
-            <span class="invalid-feedback" asp-validation-for="Costs.Fuel_Quantity"></span>
-        </div>*@
+                <label for="inputFuel_Quantity">Liters*</label>
+                <input asp-for="Costs.Fuel_Quantity" type="password" class="form-control" id="inputFuel_Quantity" placeholder="30L">
+                <span class="invalid-feedback" asp-validation-for="Costs.Fuel_Quantity"></span>
+            </div>*@
         <div class="form-group">
             <label for="inputDate_Of_Cost">Datum</label>
             <input asp-for="Costs.Date_Of_Cost" type="date" class="form-control" id="inputDate_Of_Cost" placeholder="">
             <span class="invalid-feedback" asp-validation-for="Costs.Date_Of_Cost"></span>
             @*//TODO: to bootstrap datepicker*@
         </div>
-        <br />
+        <br/>
         <div class="text-center">
             <button type="submit" class="btn btn-primary  col-6 col-md-4">Toevoegen</button>
         </div>
     }
 
 
-    @if (Model.costType == "Reparatie")
+    @if (Model.CostType == "Reparatie")
     {
         //Reparatie forum
         <div class="form-group">
             <label for="inputCost">Bedrag*</label>
-            <input asp-for="Costs.Cost" type="text" class="form-control" id="inputCost" placeholder="€50">
+            <input asp-for="Costs.Cost" type="text" class="form-control" id="inputCost" placeholder="50">
             <span class="invalid-feedback" asp-validation-for="Costs.Cost"></span>
         </div>
         @*<div class="form-group">
-            <label for="inputRepair_Information">Onderdelen vervangen</label>
-            <input asp-for="Costs.Repair_Information" type="text" class="form-control" id="inputRepair_Information" placeholder="Koppeling, Versnellingspook">
-            <span class="invalid-feedback" asp-validation-for="Costs.Repair_Information"></span>
-        </div>*@
+                <label for="inputRepair_Information">Onderdelen vervangen</label>
+                <input asp-for="Costs.Repair_Information" type="text" class="form-control" id="inputRepair_Information" placeholder="Koppeling, Versnellingspook">
+                <span class="invalid-feedback" asp-validation-for="Costs.Repair_Information"></span>
+            </div>*@
         @*<div class="form-group">
                 <label for="inputLiters">Man-uren</label>
                 <input asp-for="User.FirstName" type="text" class="form-control" id="inputManHours" placeholder="28">
@@ -98,7 +97,7 @@
         </div>
         <div class="form-group">
             <label for="inputMileage_Km">Kilometerstand</label>
-            <input asp-for="Vehicles.Mileage_Km" type="text" class="form-control" id="inputMileage_Km" placeholder="122000km">
+            <input asp-for="Vehicles.Mileage_Km" type="text" class="form-control" id="inputMileage_Km" placeholder="122000">
             <span class="invalid-feedback" asp-validation-for="Vehicles.Mileage_Km"></span>
         </div>
         <div class="form-group">
@@ -106,7 +105,7 @@
             <input asp-for="Costs.Date_Of_Cost" type="date" class="form-control" id="inputDate_Of_Cost" placeholder="">
             <span class="invalid-feedback" asp-validation-for="Costs.Date_Of_Cost"></span>
         </div>
-        <br />
+        <br/>
         <div class="text-center">
             <button type="submit" class="btn btn-primary  col-6 col-md-4">Volgende</button>
         </div>
