@@ -9,7 +9,9 @@ namespace MileAway.Models
     {
         public int Cost_Id { get; set; }
         public double Insurance { get; set; }
+        public DateTime Insurance_Date { get; set; }
         public double Road_Tax { get; set; }
+        public DateTime Road_Tax_Date { get; set; }
 
     }
 }
