@@ -1,6 +1,18 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
     bool noNav = ViewData["No Nav"] != null;
 }
+
+@{
+    string email = null;
+    if(HttpContextAccessor.HttpContext.Session.GetString("email") != null)
+    {
+        email = HttpContextAccessor.HttpContext.Session.GetString("email");
+    }
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +36,14 @@
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Profile">
-                                    <img width="40" src="~/assets/icons/profile.png" />
+                                    @if (email != null)
+                                    {
+                                        <img width="50" height="50" src="~/images/@email - Avatar.png" style="border-radius: 50%;" />
+                                    }
+                                    else
+                                    {
+                                        <img width="50" height="50" src="~/assets/icons/profile.png" style="border-radius: 50%;" />
+                                    }
                                 </a>
                             </li>
                         </ul>
