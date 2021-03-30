@@ -31,7 +31,7 @@
     //TODO: fix redirect in url with license and querystring
 </script>
 
-<form method="post" asp-page-handler="AddCost">
+<form method="post">
     <input hidden="true" id="license" value="@Model.License" />
     <div class="form-group">
         <select class="form-control" id="type" onchange="test()">
@@ -40,6 +40,8 @@
             <option value="Reparatie">Reparatie</option>
         </select>
     </div>
+
+
 
     @if (Model.CostType == "Brandstof")
     {
@@ -51,7 +53,7 @@
         </div>
         <div class="form-group">
             <label for="inputFuel_Quantity">Liters*</label>
-            <input asp-for="Costs.Fuel_Quantity" type="password" class="form-control" id="inputFuel_Quantity" placeholder="30">
+            <input asp-for="Costs.Fuel_Quantity" type="text" class="form-control" id="inputFuel_Quantity" placeholder="30">
             <span class="invalid-feedback" asp-validation-for="Costs.Fuel_Quantity"></span>
         </div>
         <div class="form-group">
@@ -68,8 +70,9 @@
         <br />
         <div class="text-center">
             <button type="submit" class="btn btn-primary  col-6 col-md-4">Toevoegen</button>
-        </div>
-    }
+        </div>}
+
+
 
 
     @if (Model.CostType == "Reparatie")
@@ -79,13 +82,11 @@
             <label for="inputCost">Bedrag*</label>
             <input asp-for="Costs.Cost" type="text" class="form-control" id="inputCost" placeholder="50">
             <span class="invalid-feedback" asp-validation-for="Costs.Cost"></span>
-        </div>
-        @*<div class="form-group">
+        </div> @*<div class="form-group">
                 <label for="inputRepair_Information">Onderdelen vervangen</label>
                 <input asp-for="Costs.Repair_Information" type="text" class="form-control" id="inputRepair_Information" placeholder="Koppeling, Versnellingspook">
                 <span class="invalid-feedback" asp-validation-for="Costs.Repair_Information"></span>
-            </div>*@
-        @*<div class="form-group">
+            </div>*@ @*<div class="form-group">
                 <label for="inputLiters">Man-uren</label>
                 <input asp-for="User.FirstName" type="text" class="form-control" id="inputManHours" placeholder="28">
                 <span class="invalid-feedback" asp-validation-for="User.FirstName"></span>

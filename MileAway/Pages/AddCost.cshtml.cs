@@ -19,16 +19,29 @@ namespace MileAway.Pages
         [BindProperty]
         public Vehicles Vehicles { get; set; }
 
+        public string testsave;
+
         public ActionResult OnGet(string license)
         {
             CostType = HttpContext.Request.Query["type"];
+            testsave = CostType;
             License = license;
             return Page();
         }
 
         public IActionResult OnPostAddCost()
         {
+            CostType = HttpContext.Request.Query["type"];
             //TODO: do something in the post :P
+            if (CostType == "Brandstof")
+            {
+                CostsRepository.AddCostFuel(Costs);
+            }
+            else if (CostType == "Reparatie")
+            {
+                CostsRepository.AddCostRepair(Costs);
+            }
+
             return Page();
         }
     }
