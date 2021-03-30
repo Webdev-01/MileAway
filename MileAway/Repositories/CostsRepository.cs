@@ -76,6 +76,39 @@ namespace MileAway.Repositories
             ).ToList();
             return costs;
         }
+
+        public static bool FixedCostsMontly(string license)
+        {
+            using var connect = DbUtils.GetDbConnection();
+
+            var roadtax = connect.Query<Costs>(
+            "SELECT Cost,TypeCost_ID, Date_Of_Cost FROM costs WHERE License = @License AND TypeCost_ID = 3 ORDER BY Date_Of_Cost DESC",
+            new
+            {
+                License = license
+            }).ToList();
+
+            var insurance = connect.Query<Costs>(
+            "SELECT Cost,TypeCost_ID, Date_Of_Cost FROM costs WHERE License = @License AND TypeCost_ID = 4 ORDER BY Date_Of_Cost DESC",
+            new
+            {
+                License = license
+            }).ToList();
+
+            //var dateNow = DateTime.Now;
+
+            var dateOne = DateTime.Now;
+            var dateTwo = insurance[0].Date_Of_Cost;
+
+            TimeSpan differnce = dateTwo - dateOne;
+            if (differnce.Days <= -30)
+            {
+                AddFixedCosts(insurance[0].Cost, roadtax[0].Cost, license);
+            }
+
+            return true;
+        }
+
         public static IList<double?> GetPureCostsByLicense(string license)
         {
             using var connect = DbUtils.GetDbConnection();
@@ -126,23 +159,23 @@ namespace MileAway.Repositories
         {
             using var connect = DbUtils.GetDbConnection();
 
-            var roadtax = connect.QuerySingleOrDefault<Costs>(
+            var roadtax = connect.Query<Costs>(
                 "SELECT Cost,TypeCost_ID FROM costs WHERE License = @License AND TypeCost_ID = 3",
                 new
                 {
                     License = license
-                });
+                }).ToList();
 
-            var insurance = connect.QuerySingleOrDefault<Costs>(
+            var insurance = connect.Query<Costs>(
             "SELECT Cost,TypeCost_ID FROM costs WHERE License = @License AND TypeCost_ID = 4",
             new
             {
                 License = license
-            });
+            }).ToList();
 
             var fixedCosts = new FixedCosts();
-            fixedCosts.Road_Tax = Convert.ToInt32(roadtax.Cost);
-            fixedCosts.Insurance = Convert.ToInt32(insurance.Cost);
+            fixedCosts.Road_Tax = Convert.ToInt32(roadtax[0].Cost);
+            fixedCosts.Insurance = Convert.ToInt32(insurance[0].Cost);
             return fixedCosts;
         }
     }
