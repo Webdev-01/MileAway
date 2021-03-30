@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MileAway.Models;
 using MileAway.Repositories;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Google.Protobuf.WellKnownTypes;
 
 namespace MileAway.Pages
 {
@@ -26,19 +26,35 @@ namespace MileAway.Pages
 
         public List<Apidata> Apidata { get; set; }
 
+        private IHostingEnvironment ihostingEnvironment;
+
+        [BindProperty]
+        public IFormFile Photo { get; set; }
+
+        public AddVehicleModel(IHostingEnvironment ihostingEnvironment)
+        {
+            this.ihostingEnvironment = ihostingEnvironment;
+        }
         public void OnGet()
         {
         }
-
         //TODO: look into validation, if everything is correct
         public IActionResult OnPostConfirm()
         {
+            if (Photo != null)
+            {
+                var path = Path.Combine(ihostingEnvironment.WebRootPath, "images", Vehicle.Email + " - " + Photo.FileName);
+                var stream = new FileStream(path, FileMode.Create);
+                Photo.CopyToAsync(stream);
+                Vehicle.Vehicle_Image = Photo.FileName;
+            }
+
             Vehicle.Email = HttpContext.Session.GetString("email");
 
             if (VehiclesRepository.AddVehicle(Vehicle))
                 if (CostsRepository.AddFixedCosts(Insurance, Road_Tax, Vehicle.License))
                     return RedirectToPage("Index");
-                    //if (Vehicle.Vehicle_Image != null)
+            //if (Vehicle.Vehicle_Image != null)
 
             return Page();
         }
@@ -103,7 +119,8 @@ namespace MileAway.Pages
                     return new JsonResult(false);
                 }
             }
-            else{
+            else
+            {
                 return new JsonResult(false);
             }
         }
