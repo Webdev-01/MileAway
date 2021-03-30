@@ -112,27 +112,27 @@
                         </tr>
                     }
                     @*<tr>
-                            @foreach (var item in Model.Costs)
-                            {
-                                @if (item.Typecost_Id == 3)
-                                {
-                                    <td>@item.TypeCost_Name</td>
-                                    <td>€@item.Cost</td>
-                                    break;
-                                }
-                            }
-                        </tr>
-                        <tr>
-                            @foreach (var item in Model.Costs)
-                            {
-                                @if (item.Typecost_Id == 4)
-                                {
-                                    <td>@item.TypeCost_Name</td>
-                                    <td>€@item.Cost</td>
-                                    break;
-                                }
-                            }
-                        </tr>*@
+                    @foreach (var item in Model.Costs)
+                    {
+                        @if (item.Typecost_Id == 3)
+                        {
+                            <td>@item.TypeCost_Name</td>
+                            <td>€@item.Cost</td>
+                            break;
+                        }
+                    }
+                </tr>
+                <tr>
+                    @foreach (var item in Model.Costs)
+                    {
+                        @if (item.Typecost_Id == 4)
+                        {
+                            <td>@item.TypeCost_Name</td>
+                            <td>€@item.Cost</td>
+                            break;
+                        }
+                    }
+                </tr>*@
                 </tbody>
             </table>
         </div>

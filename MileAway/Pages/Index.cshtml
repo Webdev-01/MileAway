@@ -50,7 +50,14 @@
                             <b>Kilometerstand</b>
                             <p class="m-0">@vehicle.Mileage_Km.ToString("N", new CultureInfo("nl-NL", false).NumberFormat).Split(',').FirstOrDefault()</p>
                         </div>
-                        <img class="mx-auto d-block" width="200" src="https://parkers-images.bauersecure.com/gallery-image/pagefiles/204617/static-exterior/1752x1168/ar_896.jpg" alt="Car picture">
+                        @if (vehicle.Vehicle_Image != null)
+                        {
+                            <img class="cropped" src="/images/@vehicle.License - @vehicle.Vehicle_Image" alt="Vehicle picture" />
+                        }
+                        else
+                        {
+                            <img class="mx-auto d-block" width="200" src="~/images/stock car.png" alt="Car picture">
+                        }
                     </a>
                     <a href="/AddCost/@vehicle.License" class="mt-2 btn btn-light border-dark">Kosten toevoegen</a>
                 </div>
