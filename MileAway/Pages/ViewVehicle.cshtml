@@ -55,11 +55,6 @@
             <h5>@Model.Vehicle.License</h5>
             @if (Model.Vehicle.Vehicle_Image != null)
             {
-                <img class="cropped mx-auto d-block" src="/images/@Model.Vehicle.License - @Model.Vehicle.Vehicle_Image" alt="Vehicle picture" /> }
-            else
-            {
-                <img class="cropped mx-auto d-block" src="~/images/stock car.png" alt="Vehicle picture">
-            }
             <table class="table table-sm mt-3">
                 <tbody>
                     <tr>
@@ -97,46 +92,24 @@
             <h2>Kostengeschiedenis</h2>
             <table class="table table-sm">
                 <tbody>
-                    @foreach (var item in Model.Costs)
-                    {
-        <tr>
-            @if (item.Typecost_Id == 2)
-            {
-<td>Reparatie: <i class="fa fa-download" aria-hidden="true"></i></td>
-                    <td>€@item.Cost</td>
-                                        <td>@item.Date_Of_Cost.ToShortDateString()</td>
- }
-                                    else
-                                    {
+                @foreach (var item in Model.Costs)
+                {
+                <tr>
+                @if (item.Typecost_Id == 2)
+                {
+                <td>Reparatie: <i class="fa fa-download" aria-hidden="true"></i></td>
+                <td>€@item.Cost</td>
+                <td>@item.Date_Of_Cost.ToShortDateString()</td>
+                }
+                else
+                {
 
-                    <td>@item.TypeCost_Name</td>
-                                        <td>€@item.Cost</td>
-                                                            <td>@item.Date_Of_Cost.ToShortDateString()</td>
-}
-        </tr>
-}
-                    @*<tr>
-                            @foreach (var item in Model.Costs)
-                            {
-                                @if (item.Typecost_Id == 3)
-                                {
-                                    <td>@item.TypeCost_Name</td>
-                                    <td>€@item.Cost</td>
-                                    break;
-                                }
-                            }
-                        </tr>
-                        <tr>
-                            @foreach (var item in Model.Costs)
-                            {
-                                @if (item.Typecost_Id == 4)
-                                {
-                                    <td>@item.TypeCost_Name</td>
-                                    <td>€@item.Cost</td>
-                                    break;
-                                }
-                            }
-                        </tr>*@
+                <td>@item.TypeCost_Name</td>
+                <td>€@item.Cost</td>
+                <td>@item.Date_Of_Cost.ToShortDateString()</td>
+                }
+                </tr>
+                }
                 </tbody>
             </table>
         </div>
