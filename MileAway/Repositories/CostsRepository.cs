@@ -20,7 +20,7 @@ namespace MileAway.Repositories
             {
                 var addCostRepair = connect.Execute("INSERT INTO costs (Typecost_Id, License, Cost, Date_Of_Cost, Invoice_Doc) VALUES (@TypecostId, @License, @Cost, @DateOfCost, @InvoiceDoc)", new
                 {
-                    TypecostId = costs.Typecost_Id,
+                    TypecostId = 2,
                     License = costs.License,
                     Cost = costs.Cost,
                     DateOfCost = costs.Date_Of_Cost,
@@ -42,7 +42,7 @@ namespace MileAway.Repositories
             {
                 var addCostFuel = connect.Execute("INSERT INTO costs (Typecost_Id, License, Cost, Fuel_Quantity, Date_Of_Cost) VALUES (@TypecostId, @License, @Cost, @Fuel_Quantity, @DateOfCost)", new
                 {
-                    TypecostId = costs.Typecost_Id,
+                    TypecostId = 1,
                     License = costs.License,
                     Cost = costs.Cost,
                     Fuel_Quantity = costs.Fuel_Quantity,
