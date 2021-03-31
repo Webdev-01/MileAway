@@ -13,79 +13,84 @@
         @TempData["SuccesMessage"]
     </div>
 }
-<div class="accordion mt-0" id="accordionExample">
-    <div class="card">
-        <button class="btn btn-link w-100 collapsed mx-auto d-block" type="button" data-toggle="collapse" data-target="#collapseGraphs" aria-expanded="false" aria-controls="collapseGraphs" onclick="switchCaret()">
-            <div class="card-header">
-                <h5 class="mb-0">
-                    <i id="accordionIcon" class="fas fa-caret-down"></i>
-                </h5>
-            </div>
-        </button>
 
-        <div id="collapseGraphs" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-            <div class="card-body">
-                <form method="get">
-                    <input class="form-control col-2 d-inline" value="@Model.Year" asp-for="Year"/>
-                    <button type="submit" class="btn btn-primary" asp-route-id="@Model.Year">Go!</button>
-                </form>
-                <div><canvas id="lineChart"></canvas></div>
-                @{ChartJSCore.Models.Chart chart = (ChartJSCore.Models.Chart) ViewData["chart"]; }
-            </div>
-        </div>
+<div class="row justify-content-between">
+    <div class="col-auto">
+        <h1>Uw voertuigen</h1>
     </div>
-</div>
-
-<div class="text-center">
-    <h1 class="display-4">Uw voertuigen</h1>
+    <div class="col-auto">
+        <a asp-page="/AddVehicle" class="btn btn-primary">
+            Voertuig toevoegen <i class="fas fa-plus"></i>
+        </a>
+    </div>
 </div>
 <div class="row">
     @if (Model.Vehicles != null)
     {
         @foreach (var vehicle in Model.Vehicles)
         {
-            <div class="card col-xs-12 col-md-6 text-center">
-                <div class="card-body ">
-                    <a href="/ViewVehicle/@vehicle.License">
-                        <h3 class="card-title mb-0">@vehicle.Brand_Name @vehicle.Model_Name</h3>
-                        <div class="card-text">
-                            <h4>@vehicle.License</h4>
-                            <b>Gemiddelde kosten per maand</b>
-                            <p class="m-0">€@Math.Round(vehicle.AvgCosts, 2)</p>
-                            <b>Kilometerstand</b>
-                            <p class="m-0">@vehicle.Mileage_Km.ToString("N", new CultureInfo("nl-NL", false).NumberFormat).Split(',').FirstOrDefault()</p>
+            <div class="col-xs-12 col-md-6 pb-3">
+                <a href="/ViewVehicle/@vehicle.License" class="add">
+                    <div class="card text-center">
+                        <div class="card-body add">
+                            <h3 class="card-title mb-0">@vehicle.Brand_Name @vehicle.Model_Name</h3>
+                            <div class="card-text">
+                                <h4>@vehicle.License</h4>
+                                <b>Gemiddelde kosten per maand</b>
+                                <p class="m-0">€@Math.Round(vehicle.AvgCosts, 2)</p>
+                                <b>Kilometerstand</b>
+                                <p class="m-0">@vehicle.Mileage_Km.ToString("N", new CultureInfo("nl-NL", false).NumberFormat).Split(',').FirstOrDefault()</p>
+                            </div>
+                            @if (vehicle.Vehicle_Image != null)
+                            {
+                                <img class="cropped mx-auto d-block" src="/images/@vehicle.License - @vehicle.Vehicle_Image" alt="Vehicle picture" />
+                            }
+                            else
+                            {
+                                <img class="cropped mx-auto d-block" src="~/images/stock car.png" alt="Vehicle picture">
+                            }
+                        
+                            <object><a href="/AddCost/@vehicle.License" class="mt-2 btn btn-light border-dark">Kosten toevoegen <i class="fas fa-plus"></i></a></object>
                         </div>
-                        @if (vehicle.Vehicle_Image != null)
-                        {
-                            <img class="cropped mx-auto d-block" src="/images/@vehicle.License - @vehicle.Vehicle_Image" alt="Vehicle picture" />
-                        }
-                        else
-                        {
-                            <img class="cropped mx-auto d-block" src="~/images/stock car.png" alt="Vehicle picture">
-                        }
-                    </a>
-                    <a href="/AddCost/@vehicle.License" class="mt-2 btn btn-light border-dark">Kosten toevoegen</a>
-                </div>
+                    </div>
+                </a>
             </div>
         }
     }
-    <div class="card add col-xs-12 col-md-6 align-content-center">
-        <a asp-page="/AddVehicle" class="mx-auto">
-            <img class="col-xs-6 w-50 mx-auto d-block" src="~/assets/icons/plus.png" />
-        </a>
+</div>
+
+<div class="accordion mt-0" id="accordionExample">
+    <div class="card">
+        <div class="card-header" id="headingThree" style="margin-bottom: 0px;">
+            <button class="btn btn-light btn-block collapsed" type="button" data-toggle="collapse" data-target="#collapseGraphs" aria-expanded="false" aria-controls="collapseGraphs" onclick="switchCaret()">
+                Laat een grafiek zien van jouw voertuigen <i id="accordionIcon" style="font-size: 30px; vertical-align: middle;" class="fas fa-caret-down"></i>
+            </button>
+        </div>
+        <div id="collapseGraphs" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+            <div class="card-body">
+                <div><canvas id="lineChart"></canvas></div>
+                @{ChartJSCore.Models.Chart chart = (ChartJSCore.Models.Chart)ViewData["chart"]; }
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
     function switchCaret() {
         var element = document.getElementById("accordionIcon");
-        if (document.querySelector(".accordion .btn-link").classList.contains('collapsed')) {
+        if (document.querySelector(".accordion .btn").classList.contains('collapsed')) {
             element.classList.add('fa-caret-up');
         } else {
             element.classList.remove('fa-caret-up');
             element.classList.add('fa-caret-down');
         }
     }
+    window.addEventListener('load', function () {
+        $('#collapseGraphs').on('shown.bs.collapse', function () {
+            this.scrollIntoView({
+                behavior: "smooth" });
+        });
+    });
 
     window.addEventListener("load",
         function() {
