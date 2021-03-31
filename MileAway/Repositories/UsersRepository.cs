@@ -11,14 +11,11 @@ namespace MileAway.Repositories
 {
     public class UsersRepository
     {
-        public static List<Users> GetUsers()
-        {
-            using var connect = DbUtils.GetDbConnection();
-
-            var users = connect.Query<Users>("SELECT * FROM users").ToList();
-            return users;
-        }
-
+        /// <summary>
+        /// Gets user by login details
+        /// </summary>
+        /// <param name="user">Login details</param>
+        /// <returns>Selected user or NULL if no user</returns>
         public static Users GetUserByLogin(Users user)
         {
             using var connect = DbUtils.GetDbConnection();
@@ -30,6 +27,11 @@ namespace MileAway.Repositories
             return userVars;
         }
 
+        /// <summary>
+        /// Gets user by email
+        /// </summary>
+        /// <param name="email">Email of a user</param>
+        /// <returns>Selected user or NULL if no user</returns>
         public static Users GetUserByEmail(string email)
         {
             using var connect = DbUtils.GetDbConnection();
@@ -42,6 +44,11 @@ namespace MileAway.Repositories
             return users;
         }
 
+        /// <summary>
+        /// Registers a new user
+        /// </summary>
+        /// <param name="user">User details</param>
+        /// <returns>True if success</returns>
         public static bool RegisterUser(Users user)
         {
             using var connect = DbUtils.GetDbConnection();

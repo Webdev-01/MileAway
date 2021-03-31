@@ -26,6 +26,11 @@ namespace MileAway.Pages
             FixedCosts = CostsRepository.GetFixedCostsByLicense(license);
         }
 
+        /// <summary>
+        /// Deletes vehicle
+        /// </summary>
+        /// <param name="license">License of vehicle</param>
+        /// <returns>Redirect to index if success, if fail to same page</returns>
         public IActionResult OnGetDeleteVehicle(string license)
         {
             if (CostsRepository.DeleteVehicleCosts(license))

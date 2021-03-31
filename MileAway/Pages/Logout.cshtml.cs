@@ -10,10 +10,14 @@ namespace MileAway.Pages
 {
     public class LogoutModel : PageModel
     {
+        /// <summary>
+        /// Removes session and redirects to login
+        /// </summary>
+        /// <returns>Redirect to login</returns>
         public IActionResult OnGet()
         {
             HttpContext.Session.Remove("email");
-            return RedirectToPage("Index");
+            return RedirectToPage("Login");
         }
     }
 }

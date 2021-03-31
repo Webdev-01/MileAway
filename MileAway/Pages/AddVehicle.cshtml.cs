@@ -37,6 +37,10 @@ namespace MileAway.Pages
         {
         }
         //TODO: look into validation, if everything is correct
+        /// <summary>
+        /// Registers new vehicle
+        /// </summary>
+        /// <returns>Redirect to index if success, if fail redirect to same page</returns>
         public IActionResult OnPostConfirm()
         {
             Vehicle.Email = HttpContext.Session.GetString("email");
@@ -57,6 +61,11 @@ namespace MileAway.Pages
             return Page();
         }
 
+        /// <summary>
+        /// Gets RDW api
+        /// </summary>
+        /// <param name="kenteken">License of vehicle</param>
+        /// <returns>JsonResult</returns>
         public IActionResult OnGetApicall(string kenteken)
         {
             if (kenteken != null)
@@ -122,16 +131,5 @@ namespace MileAway.Pages
                 return new JsonResult(false);
             }
         }
-
-    }
-    public class Apidata
-    {
-        public string kenteken { get; set; }
-        public string voertuigsoort { get; set; }
-        public string merk { get; set; }
-        public string handelsbenaming { get; set; }
-        public string datum_eerste_toelating { get; set; }
-        public string eerste_kleur { get; set; }
-        public string brandstof_omschrijving { get; set; }
     }
 }

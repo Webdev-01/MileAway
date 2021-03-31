@@ -38,27 +38,30 @@ namespace MileAway.Pages
             {
                 return RedirectToPage("Login");
             }
-            var year = HttpContext.Request.Query["Year"];
-            if (!string.IsNullOrWhiteSpace(year))
-                Year = Convert.ToInt32(year);
-            else
-                Year = DateTime.Now.Year;
             Costs = CostsRepository.GetCostsByEmail(HttpContext.Session.GetString("email"));
             Vehicles = VehiclesRepository.GetVehiclesByEmail(HttpContext.Session.GetString("email"));
 
+            //Calculates all overdue fixedCosts
             foreach (var item in Vehicles)
             {
                 CostsRepository.FixedCostsMontly(item.License);
             }
 
+            //Chart settings
             Chart chart = new Chart();
-
             chart.Type = Enums.ChartType.Line;
             ChartJSCore.Models.Data data = new ChartJSCore.Models.Data();
             data.Labels = new List<string>() { "Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December" };
-
             data.Datasets = new List<Dataset>();
             Random random = new Random();
+
+            var year = HttpContext.Request.Query["Year"];
+            if (!string.IsNullOrWhiteSpace(year))
+                Year = Convert.ToInt32(year);
+            else
+                Year = DateTime.Now.Year;
+
+            //Foreach to loop through every vehicle to get AnnualCosts and set it in the chart
             foreach (var vehicle in Vehicles)
             {
                 int[,] randomColor = new int[3, 1] { { random.Next(0, 255) }, { random.Next(0, 255) }, { random.Next(0, 255) } };

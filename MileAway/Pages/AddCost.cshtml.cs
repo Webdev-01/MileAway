@@ -50,7 +50,7 @@ namespace MileAway.Pages
             {
                 if (Vehicles.Mileage_Km != Milage_KM)
                 {
-                    VehiclesRepository.UpdateMilage_KM(license, Vehicles.Mileage_Km);
+                    VehiclesRepository.UpdateMileage_KM(license, Vehicles.Mileage_Km);
                 }
                 CostsRepository.AddCostFuel(Costs);
             }
@@ -59,7 +59,7 @@ namespace MileAway.Pages
                 CostsRepository.AddCostRepair(Costs);
                 if (Vehicles.Mileage_Km != Milage_KM)
                 {
-                    VehiclesRepository.UpdateMilage_KM(license, Vehicles.Mileage_Km);
+                    VehiclesRepository.UpdateMileage_KM(license, Vehicles.Mileage_Km);
                 }
             }
 

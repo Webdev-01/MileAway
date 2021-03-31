@@ -33,6 +33,10 @@ namespace MileAway.Pages
         {
         }
 
+        /// <summary>
+        /// Registers a new user
+        /// </summary>
+        /// <returns>If success redirect to login, if fail redirect to same page</returns>
         public IActionResult OnPostRegister()
         {
             if (ModelState.IsValid)

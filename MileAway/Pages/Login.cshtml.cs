@@ -22,11 +22,11 @@ namespace MileAway.Pages
         public void OnGet()
         {
         }
-        public static int GetMonthDifference(DateTime startDate, DateTime endDate)
-        {
-            int monthsApart = 12 * (startDate.Year - endDate.Year) + startDate.Month - endDate.Month;
-            return Math.Abs(monthsApart);
-        }
+
+        /// <summary>
+        /// Login
+        /// </summary>
+        /// <returns>Page redirect to index if success or login if fail</returns>
         public IActionResult OnPostLogin()
         {
             var user = UsersRepository.GetUserByLogin(User);
@@ -47,6 +47,9 @@ namespace MileAway.Pages
         }
     }
 
+    /// <summary>
+    /// Hashes password
+    /// </summary>
     public static class SecurePasswordHasher
     {
         private const int SaltSize = 16;

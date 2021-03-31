@@ -14,6 +14,11 @@ namespace MileAway.Repositories
     {
         public static object Calculated { get; private set; }
 
+        /// <summary>
+        /// Adds a new cost (reparation) 
+        /// </summary>
+        /// <param name="costs">Cost information</param>
+        /// <returns>True if success</returns>
         public static bool AddCostRepair(Costs costs)
         {
             using var connect = DbUtils.GetDbConnection();
@@ -36,6 +41,11 @@ namespace MileAway.Repositories
             }
         }
 
+        /// <summary>
+        /// Adds a new cost (fuel tanking)
+        /// </summary>
+        /// <param name="costs">Cost information</param>
+        /// <returns>True if success</returns>
         public static bool AddCostFuel(Costs costs)
         {
             using var connect = DbUtils.GetDbConnection();
@@ -58,6 +68,11 @@ namespace MileAway.Repositories
             }
         }
 
+        /// <summary>
+        /// Gets all costs by license of vehicle
+        /// </summary>
+        /// <param name="license">License of vehicle</param>
+        /// <returns>List with all costs</returns>
         public static List<Costs> GetCostsByLicense(string license)
         {
             using var connect = DbUtils.GetDbConnection();
@@ -72,6 +87,11 @@ namespace MileAway.Repositories
             return costs;
         }
 
+        /// <summary>
+        /// Gets all costs by license of vehicle + the names of the typecosts
+        /// </summary>
+        /// <param name="license">License of vehicle</param>
+        /// <returns>List with all costs</returns>
         public static List<Costs> GetCostsByLicenseInner(string license)
         {
             using var connect = DbUtils.GetDbConnection();
@@ -85,6 +105,12 @@ namespace MileAway.Repositories
             ).ToList();
             return costs;
         }
+
+        /// <summary>
+        /// Gets all costs of all vehicles of a user
+        /// </summary>
+        /// <param name="email">User's email</param>
+        /// <returns>List of all costs of a user</returns>
         public static List<Costs> GetCostsByEmail(string email)
         {
             using var connect = DbUtils.GetDbConnection();
@@ -99,55 +125,74 @@ namespace MileAway.Repositories
             return costs;
         }
 
+        /// <summary>
+        /// Calculates all overdue costs and adds them to the cost history of every vehicle of a user
+        /// </summary>
+        /// <param name="license">License of a vehicle</param>
+        /// <returns>True if success</returns>
         public static bool FixedCostsMontly(string license)
         {
             using var connect = DbUtils.GetDbConnection();
-
-            var roadtax = connect.Query<Costs>(
-            "SELECT Cost,TypeCost_ID, Date_Of_Cost FROM costs WHERE License = @License AND TypeCost_ID = 3 ORDER BY Date_Of_Cost DESC",
-            new
+            try
             {
-                License = license
-            }).ToList();
+                var roadtax = connect.Query<Costs>(
+                "SELECT Cost,TypeCost_ID, Date_Of_Cost FROM costs WHERE License = @License AND TypeCost_ID = 3 ORDER BY Date_Of_Cost DESC",
+                new
+                {
+                    License = license
+                }).ToList();
 
-            var insurance = connect.Query<Costs>(
-            "SELECT Cost,TypeCost_ID, Date_Of_Cost FROM costs WHERE License = @License AND TypeCost_ID = 4 ORDER BY Date_Of_Cost DESC",
-            new
-            {
-                License = license
-            }).ToList();
+                var insurance = connect.Query<Costs>(
+                "SELECT Cost,TypeCost_ID, Date_Of_Cost FROM costs WHERE License = @License AND TypeCost_ID = 4 ORDER BY Date_Of_Cost DESC",
+                new
+                {
+                    License = license
+                }).ToList();
 
-            var dateToday = DateTime.Now;
-            var dateTax = roadtax[0].Date_Of_Cost;
-            var dateInsurance = insurance[0].Date_Of_Cost;
+                var dateToday = DateTime.Now;
+                var dateTax = roadtax[0].Date_Of_Cost;
+                var dateInsurance = insurance[0].Date_Of_Cost;
 
-            LocalDate start = new LocalDate(dateToday.Year, dateToday.Month, dateToday.Day);
-            LocalDate end = new LocalDate(dateTax.Year, dateTax.Month, dateTax.Day);
-            Period period = Period.Between(start, end);
-            int differenceTax = Math.Abs(period.Months);
+                LocalDate start = new LocalDate(dateToday.Year, dateToday.Month, dateToday.Day);
+                LocalDate end = new LocalDate(dateTax.Year, dateTax.Month, dateTax.Day);
+                Period period = Period.Between(start, end);
+                int differenceTax = Math.Abs(period.Months);
 
-            var dateTaxCalculated = dateTax;
-            for (var i = 0; i < differenceTax; i++)
-            {
-                dateTaxCalculated = dateTaxCalculated.AddMonths(1);
-                addFixedMonthlyTax(roadtax[0].Cost, license, dateTaxCalculated);
+                var dateTaxCalculated = dateTax;
+                for (var i = 0; i < differenceTax; i++)
+                {
+                    dateTaxCalculated = dateTaxCalculated.AddMonths(1);
+                    AddFixedMonthlyTax(roadtax[0].Cost, license, dateTaxCalculated);
+                }
+
+                end = new LocalDate(dateInsurance.Year, dateInsurance.Month, dateInsurance.Day);
+                period = Period.Between(start, end);
+                int differenceInsurance = Math.Abs(period.Months);
+
+                var dateInsuranceCalculated = dateInsurance;
+                for (var i = 0; i < differenceInsurance; i++)
+                {
+                    dateInsuranceCalculated = dateInsuranceCalculated.AddMonths(1);
+                    AddFixedMonthlyInsurance(insurance[0].Cost, license, dateInsuranceCalculated);
+                }
+                return true;
             }
 
-            end = new LocalDate(dateInsurance.Year, dateInsurance.Month, dateInsurance.Day);
-            period = Period.Between(start, end);
-            int differenceInsurance = Math.Abs(period.Months);
-
-            var dateInsuranceCalculated = dateInsurance;
-            for (var i = 0; i < differenceInsurance; i++)
+            catch (Exception e)
             {
-                dateInsuranceCalculated = dateInsuranceCalculated.AddMonths(1);
-                addFixedMonthlyInsurance(insurance[0].Cost, license, dateInsuranceCalculated);
+                Console.WriteLine(e);
+                return false;
             }
-
-            return true;
         }
 
-        public static bool addFixedMonthlyTax(double price, string vehicleLicense, DateTime date)
+        /// <summary>
+        /// Adds a new tax cost to a date
+        /// </summary>
+        /// <param name="price">The amount to be paid</param>
+        /// <param name="vehicleLicense">License of a vehicle</param>
+        /// <param name="date">Date of the cost</param>
+        /// <returns>True if success</returns>
+        public static bool AddFixedMonthlyTax(double price, string vehicleLicense, DateTime date)
         {
             using var connect = DbUtils.GetDbConnection();
             try
@@ -167,7 +212,14 @@ namespace MileAway.Repositories
             }
         }
 
-        public static bool addFixedMonthlyInsurance(double price, string vehicleLicense, DateTime date)
+        /// <summary>
+        /// Adds a new insurance tax costs to a date
+        /// </summary>
+        /// <param name="price">The amount to be paid</param>
+        /// <param name="vehicleLicense">License of a vehicle</param>
+        /// <param name="date">Date of the cost</param>
+        /// <returns>True if success</returns>
+        public static bool AddFixedMonthlyInsurance(double price, string vehicleLicense, DateTime date)
         {
             using var connect = DbUtils.GetDbConnection();
             try
@@ -187,6 +239,12 @@ namespace MileAway.Repositories
             }
         }
 
+        /// <summary>
+        /// Gets annual costs of a vehicle, average of each month
+        /// </summary>
+        /// <param name="license">License of a vehicle</param>
+        /// <param name="year">Year to get costs of</param>
+        /// <returns>List of annual costs</returns>
         public static IList<double?> GetAnnualCosts(string license, int year)
         {
             using var connect = DbUtils.GetDbConnection();
@@ -211,6 +269,12 @@ namespace MileAway.Repositories
             return null;
         }
 
+        /// <summary>
+        /// Adds fixed costs (tax, insurance)
+        /// </summary>
+        /// <param name="fixedCosts">All fixed costs, including dates</param>
+        /// <param name="vehicleLicense">License of a vehicle</param>
+        /// <returns>True if success</returns>
         public static bool AddFixedCosts(FixedCosts fixedCosts, string vehicleLicense)
         {
             {
@@ -241,6 +305,11 @@ namespace MileAway.Repositories
             }
         }
 
+        /// <summary>
+        /// Gets fixed costs (tax, insurance)
+        /// </summary>
+        /// <param name="license">License of a vehicle</param>
+        /// <returns>Filled FixedCosts class</returns>
         public static FixedCosts GetFixedCostsByLicense(string license)
         {
             using var connect = DbUtils.GetDbConnection();
@@ -265,6 +334,11 @@ namespace MileAway.Repositories
             return fixedCosts;
         }
 
+        /// <summary>
+        /// Delete all costs of a vehicle
+        /// </summary>
+        /// <param name="license">License of a vehicle</param>
+        /// <returns>True if success</returns>
         public static bool DeleteVehicleCosts(string license)
         {
             using var connect = DbUtils.GetDbConnection();

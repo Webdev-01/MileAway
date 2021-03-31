@@ -21,10 +21,5 @@ namespace MileAway.Pages.Shared
                 User = UsersRepository.GetUserByEmail(HttpContext.Session.GetString("email"));
             }
         }
-
-        public void OnPost()
-        {
-
-        }
     }
 }
