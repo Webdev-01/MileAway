@@ -21,7 +21,7 @@ namespace MileAway.Repositories
             using var connect = DbUtils.GetDbConnection();
             try
             {
-                var vehicleResult = connect.Execute("INSERT INTO vehicle (Email, License, Brand_Name, Model_Name, Manufacturing_Year, FuelType, Color, Mileage_Km, Vehicle_Image) VALUES (@Email, @License, @BrandName, @ModelName, @ManufacturingYear, @FuelType, @Color, @MileageKm, @VehicleImage)", new
+                var vehicleResult = connect.Execute("INSERT INTO vehicles (Email, License, Brand_Name, Model_Name, Manufacturing_Year, FuelType, Color, Mileage_Km, Vehicle_Image) VALUES (@Email, @License, @BrandName, @ModelName, @ManufacturingYear, @FuelType, @Color, @MileageKm, @VehicleImage)", new
                 {
                     Email = vehicle.Email,
                     License = vehicle.License,
@@ -51,7 +51,7 @@ namespace MileAway.Repositories
         {
             using var connect = DbUtils.GetDbConnection();
 
-            var vehicles = connect.Query<Vehicles>("SELECT vehicle.*, AVG(costs.Cost) AS AvgCosts FROM vehicle INNER JOIN costs ON vehicle.License = costs.License WHERE vehicle.Email = @Email GROUP BY vehicle.License",
+            var vehicles = connect.Query<Vehicles>("SELECT vehicles.*, AVG(costs.Cost) AS AvgCosts FROM vehicles INNER JOIN costs ON vehicles.License = costs.License WHERE vehicles.Email = @Email GROUP BY vehicles.License",
                 new
                 {
                     Email = email
@@ -69,7 +69,7 @@ namespace MileAway.Repositories
         {
             using var connect = DbUtils.GetDbConnection();
 
-            var vehicle = connect.QueryFirstOrDefault<Vehicles>("SELECT * FROM vehicle WHERE License = @License",
+            var vehicle = connect.QueryFirstOrDefault<Vehicles>("SELECT * FROM vehicles WHERE License = @License",
                 new
                 {
                     License = license
@@ -90,7 +90,7 @@ namespace MileAway.Repositories
             using var connect = DbUtils.GetDbConnection();
             try
             {
-                var UpdateMilage_KM = connect.Execute("UPDATE vehicle SET Mileage_KM = @MilageKM WHERE License = @License", new
+                var UpdateMilage_KM = connect.Execute("UPDATE vehicles SET Mileage_KM = @MilageKM WHERE License = @License", new
                 {
                     License = license,
                     MilageKM = mileage_KM
@@ -114,7 +114,7 @@ namespace MileAway.Repositories
             using var connect = DbUtils.GetDbConnection();
             try
             {
-                var deleteVehicle = connect.Execute("DELETE FROM vehicle WHERE License = @License", new
+                var deleteVehicle = connect.Execute("DELETE FROM vehicles WHERE License = @License", new
                 {
                     License = license
                 });
