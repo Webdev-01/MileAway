@@ -1,8 +1,9 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
-* {
+body {
     font-family: "Roboto", sans-serif;
 }
+
 i.link:hover {
     cursor: pointer;
 }
@@ -30,6 +31,11 @@ ul {
         margin-left: -1em;
         font-size: larger;
     }
+
+.list-group li::before {
+    content: none;
+}
+
 nav ul li::before {
     content: none;
 }
@@ -135,4 +141,3 @@ a.add:hover {
 div.add:hover {
     box-shadow: 3px 3px 5px 6px #ccc;
 }
-

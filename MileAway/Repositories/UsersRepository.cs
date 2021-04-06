@@ -70,5 +70,26 @@ namespace MileAway.Repositories
                 return false;
             }
         }
+
+        public static bool UpdateUser(Users user)
+        {
+            using var connect = DbUtils.GetDbConnection();
+            try
+            {
+                var updateUser = connect.Execute("UPDATE users SET Password = @Password, First_Name = @Firstname, Last_Name = @Lastname, User_Image = @User_Image", new
+                {
+                    Password = user.Password,
+                    Firstname = user.First_Name,
+                    Lastname = user.Last_Name,
+                    User_image = user.User_Image
+                });
+
+                return updateUser != 0;
+            }
+            catch (MySqlException e)
+            {
+                return false;
+            }
+        }
     }
 }

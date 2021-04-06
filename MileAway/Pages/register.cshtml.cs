@@ -53,9 +53,8 @@ namespace MileAway.Pages
                     System.IO.File.Copy(Path.Combine(ihostingEnvironment.WebRootPath, "images" + "/profile.png"), Path.Combine(ihostingEnvironment.WebRootPath, "images/" + User.Email + " - Avatar.png"));
                 }
 
-                User.Password = SecurePasswordHasher.Hash(User.Password);
-                var registerUser = UsersRepository.RegisterUser(User);
-                if (registerUser)
+                User.Password = UserMethods.SecurePasswordHasher.Hash(User.Password);
+                if (UsersRepository.RegisterUser(User))
                 {
                     return RedirectToPage("Login");
                 }
