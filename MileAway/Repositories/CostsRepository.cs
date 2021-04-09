@@ -96,7 +96,7 @@ namespace MileAway.Repositories
         {
             using var connect = DbUtils.GetDbConnection();
 
-            var costs = connect.Query<Costs>("SELECT costs.*, typecosts.TypeCost_Name FROM costs INNER JOIN typecosts ON costs.TypeCost_ID = typecosts.TypeCost_ID WHERE License = @License ORDER BY Date_Of_Cost",
+            var costs = connect.Query<Costs>("SELECT costs.*, typecosts.TypeCost_Name FROM costs INNER JOIN typecosts ON costs.TypeCost_ID = typecosts.TypeCost_ID WHERE License = @License ORDER BY Date_Of_Cost DESC",
                 new
                 {
                     License = license
@@ -153,10 +153,11 @@ namespace MileAway.Repositories
                 var dateTax = roadtax[0].Date_Of_Cost;
                 var dateInsurance = insurance[0].Date_Of_Cost;
 
-                LocalDate start = new LocalDate(dateToday.Year, dateToday.Month, dateToday.Day);
-                LocalDate end = new LocalDate(dateTax.Year, dateTax.Month, dateTax.Day);
+                LocalDate start = new LocalDate(dateTax.Year, dateTax.Month, dateTax.Day);
+                LocalDate end = new LocalDate(dateToday.Year, dateToday.Month, dateToday.Day);
                 Period period = Period.Between(start, end);
                 int differenceTax = Math.Abs(period.Months);
+                differenceTax += period.Years * 12;
 
                 var dateTaxCalculated = dateTax;
                 for (var i = 0; i < differenceTax; i++)
@@ -165,9 +166,10 @@ namespace MileAway.Repositories
                     AddFixedMonthlyTax(roadtax[0].Cost, license, dateTaxCalculated);
                 }
 
-                end = new LocalDate(dateInsurance.Year, dateInsurance.Month, dateInsurance.Day);
+                start = new LocalDate(dateInsurance.Year, dateInsurance.Month, dateInsurance.Day);
                 period = Period.Between(start, end);
                 int differenceInsurance = Math.Abs(period.Months);
+                differenceInsurance += period.Years * 12;
 
                 var dateInsuranceCalculated = dateInsurance;
                 for (var i = 0; i < differenceInsurance; i++)
@@ -224,14 +226,14 @@ namespace MileAway.Repositories
             using var connect = DbUtils.GetDbConnection();
             try
             {
-                var InsuranceResult = connect.Execute("INSERT INTO costs (TypeCost_ID, License, Cost, Date_Of_Cost) VALUES (@TypeCost_ID, @License, @Cost, @Date_Of_Cost)", new
+                var insuranceResult = connect.Execute("INSERT INTO costs (TypeCost_ID, License, Cost, Date_Of_Cost) VALUES (@TypeCost_ID, @License, @Cost, @Date_Of_Cost)", new
                 {
                     TypeCost_ID = 4,
                     License = vehicleLicense,
                     Cost = price,
                     Date_Of_Cost = date
                 });
-                return InsuranceResult == 1;
+                return insuranceResult == 1;
             }
             catch (MySqlException e)
             {

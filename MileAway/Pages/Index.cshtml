@@ -72,7 +72,7 @@
                     <input class="form-control col-2 d-inline" value="@Model.Year" asp-for="Year" />
                     <button type="submit" class="btn btn-primary" asp-route-id="@Model.Year">Go!</button>
                 </form>
-                <div><canvas id="lineChart"></canvas></div>
+                <div id="accordionContent"><canvas id="lineChart"></canvas></div>
                 @{ChartJSCore.Models.Chart chart = (ChartJSCore.Models.Chart)ViewData["chart"]; }
             </div>
         </div>
@@ -80,20 +80,6 @@
 </div>
 
 <script>
-    function switchCaret() {
-        var element = document.getElementById("accordionIcon");
-        if (document.querySelector(".accordion .btn").classList.contains('collapsed')) {
-            element.classList.add('fa-caret-up');
-            setTimeout(function() {
-                document.getElementById('lineChart').scrollIntoView({
-                    behavior: "smooth"
-                });
-            }, 400);
-        } else {
-            element.classList.remove('fa-caret-up');
-            element.classList.add('fa-caret-down');
-        }
-    }
 
     window.addEventListener("load",
         function() {

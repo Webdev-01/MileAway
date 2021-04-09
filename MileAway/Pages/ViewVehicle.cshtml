@@ -1,8 +1,11 @@
 ﻿@page "{license}"
 @using System.Globalization
 @model MileAway.Pages.ViewVehicleModel
-@{ ViewData["Title"] = "Bekijk voertuig";
-    Layout = "_Layout"; }
+@{
+    ViewData["Title"] = "Bekijk voertuig";
+    Layout = "_Layout";
+    var i = 0;
+}
 <link rel="stylesheet" href="~/css/ViewVehicle.css">
 
 <div class="row">
@@ -98,21 +101,59 @@
                 <tbody>
                     @foreach (var item in Model.Costs)
                     {
-                        <tr>
-                            @if (item.Typecost_Id == 2)
-                            {
-                                <td>Reparatie: <i class="fa fa-download" aria-hidden="true"></i></td>
-                                <td>€@item.Cost</td>
-                                <td>@item.Date_Of_Cost.ToShortDateString()</td>
-                            }
-                            else
-                            {
+                        @if (i < 12)
+                        {
+                            <tr>
+                                @if (item.Typecost_Id == 2)
+                                {
+                                    <td>Reparatie: <i class="fa fa-download" aria-hidden="true"></i></td>
+                                    <td>€@item.Cost</td>
+                                    <td>@item.Date_Of_Cost.ToString("dd-MM-yyyy")</td>
+                                }
+                                else
+                                {
 
-                                <td>@item.TypeCost_Name</td>
-                                <td>€@item.Cost</td>
-                                <td>@item.Date_Of_Cost.ToShortDateString()</td>
-                            }
-                        </tr>
+                                    <td>@item.TypeCost_Name</td>
+                                    <td>€@item.Cost</td>
+                                    <td>@item.Date_Of_Cost.ToString("dd-MM-yyyy")</td>
+                                }
+                            </tr>
+                        }
+                        @if (i == 12)
+                        {
+                            <tr>
+                                <td colspan="3" class="accordion">
+                                    <div class="card-header p-0" id="collapseHeader" style="margin-bottom: 0px;">
+                                        <button class="btn btn-light btn-block m-0 p-3 collapsed" type="button" data-toggle="collapse" data-target="#collapseTable" aria-expanded="false" aria-controls="collapseTable" onclick="switchCaret()">
+                                            <b>Toon meer/minder kosten</b> <i id="accordionIcon" style="font-size: 30px; vertical-align: middle;" class="fas fa-caret-down"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                        @if (i > 12)
+                        {
+                            <tr class="collapse" id="collapseTable">
+                                @if (i == 13)
+                                {
+                                    <div id="accordionContent" />
+                                }
+                                @if (item.Typecost_Id == 2)
+                                {
+                                    <td>Reparatie: <i class="fa fa-download" aria-hidden="true"></i></td>
+                                    <td>€@item.Cost</td>
+                                    <td>@item.Date_Of_Cost.ToString("dd-MM-yyyy")</td>
+                                }
+                                else
+                                {
+
+                                    <td>@item.TypeCost_Name</td>
+                                    <td>€@item.Cost</td>
+                                    <td>@item.Date_Of_Cost.ToString("dd-MM-yyyy")</td>
+                                }
+                            </tr>
+                        }
+                        { i++; }
                     }
                 </tbody>
             </table>

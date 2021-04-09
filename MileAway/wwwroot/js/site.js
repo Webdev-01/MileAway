@@ -3,3 +3,17 @@
 
 // Write your Javascript code.
 
+function switchCaret() {
+    var element = document.getElementById("accordionIcon");
+    if (document.querySelector(".accordion .btn").classList.contains('collapsed')) {
+        element.classList.add('fa-caret-up');
+        setTimeout(function () {
+            document.getElementById('accordionContent').scrollIntoView({
+                behavior: "smooth"
+            });
+        }, 400);
+    } else {
+        element.classList.remove('fa-caret-up');
+        element.classList.add('fa-caret-down');
+    }
+}
