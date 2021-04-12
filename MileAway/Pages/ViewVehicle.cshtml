@@ -177,9 +177,18 @@
                             <tr>
                                 @if (item.Typecost_Id == 2)
                                 {
-                                    <td>Reparatie: <a href ="/invoices/@item.License - @item.Invoice_Doc" download="invoice @item.Invoice_Doc" data-toggle="tooltip" data-placement="top" title="@item.Invoice_Doc"><i class="fa fa-download" aria-hidden="true"></i></a> </td>
-                                        <td>€@item.Cost</td>
+                                    <td>
+                                        Reparatie:
+                                        @if (@item.Invoice_Doc != null)
+                                        {
+                                            <a href="/invoices/@item.License - @item.Invoice_Doc" download="invoice @item.Invoice_Doc" data-toggle="tooltip" data-placement="top" title="@item.Invoice_Doc">
+                                                <i class="fa fa-download" aria-hidden="true"></i>
+                                            </a>
+                                        }
+                                    </td>
+                                    <td>€@item.Cost</td>
                                     <td>@item.Date_Of_Cost.ToString("dd-MM-yyyy")</td>
+                                    <td><i class="fas fa-trash-alt float-right link" style="color: red;" data-toggle="modal" data-target="#deleteCostModal@(item.Cost_Id)"></i></td>
                                 }
                                 else
                                 {
@@ -193,27 +202,35 @@
                         }
                         @if (i > 12)
                         {
-                <tr class="collapse" id="collapseTable">
-                    @if (i == 13)
-                    {
-                        <div id="accordionContent" />
-                    }
-                    @if (item.Typecost_Id == 2)
-                    {
-                        <td>Reparatie: <i class="fa fa-download" aria-hidden="true"></i></td>
-                        <td>€@item.Cost</td>
-                        <td>@item.Date_Of_Cost.ToString("dd-MM-yyyy")</td>
-                        <td><i class="fas fa-trash-alt float-right link" style="color: red;" data-toggle="modal" data-target="#deleteCostModal@(item.Cost_Id)"></i></td>
-                    }
-                    else
-                    {
+                            <tr class="collapse" id="collapseTable">
+                                @if (i == 13)
+                                {
+                                    <div id="accordionContent" />
+                                }
+                                @if (item.Typecost_Id == 2)
+                                {
+                                    <td>
+                                        Reparatie:
+                                        @if (@item.Invoice_Doc != null)
+                                        {
+                                            <a href="/invoices/@item.License - @item.Invoice_Doc" download="invoice @item.Invoice_Doc" data-toggle="tooltip" data-placement="top" title="@item.Invoice_Doc">
+                                                <i class="fa fa-download" aria-hidden="true"></i>
+                                            </a>
+                                        }
+                                    </td>
+                                    <td>€@item.Cost</td>
+                                    <td>@item.Date_Of_Cost.ToString("dd-MM-yyyy")</td>
+                                    <td><i class="fas fa-trash-alt float-right link" style="color: red;" data-toggle="modal" data-target="#deleteCostModal@(item.Cost_Id)"></i></td>
+                                }
+                                else
+                                {
 
-                        <td>@item.TypeCost_Name</td>
-                        <td>€@item.Cost</td>
-                        <td>@item.Date_Of_Cost.ToString("dd-MM-yyyy")</td>
-                        <td><i class="fas fa-trash-alt float-right link" style="color: red;" data-toggle="modal" data-target="#deleteCostModal@(item.Cost_Id)"></i></td>
-                    }
-                </tr>
+                                    <td>@item.TypeCost_Name</td>
+                                    <td>€@item.Cost</td>
+                                    <td>@item.Date_Of_Cost.ToString("dd-MM-yyyy")</td>
+                                    <td><i class="fas fa-trash-alt float-right link" style="color: red;" data-toggle="modal" data-target="#deleteCostModal@(item.Cost_Id)"></i></td>
+                                }
+                            </tr>
                         }
                         <div class="modal fade" id="deleteCostModal@(item.Cost_Id)" tabindex="-1" role="dialog" aria-labelledby="deleteCostModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">

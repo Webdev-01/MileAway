@@ -5,7 +5,18 @@
     Layout = "_Layout";
     //var test = Model.costType == "brandstof" ? "selected" : "";
 }
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
 
+    <script>
+    var settings = {
+        validClass: "is-valid",
+        errorClass: "is-invalid"
+    };
+    $.validator.setDefaults(settings);
+    $.validator.unobtrusive.options = settings;</script>
+}
 <script>
     window.addEventListener("load", function () {
         @if (Model.CostType == "Brandstof")
