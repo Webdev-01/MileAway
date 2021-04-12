@@ -5,6 +5,7 @@
 @{
     ViewData["Title"] = "Register";
     Layout = "_Layout";
+    ViewData["No Nav"] = true;
 }
 
 @section Scripts
@@ -21,49 +22,61 @@
 }
 
 <link rel="stylesheet" href="~/css/profile.css">
-<div class="text-center">
-    <h1>Registreren</h1>
-</div>
+<link rel="stylesheet" href="~/css/login.css">
 
-<form method="post" asp-page-handler="Register" enctype="multipart/form-data">
-    @if (Model.Error != null)
-    {
-        <div class="alert alert-danger" role="alert">
-            @Model.Error
+<div class="container">
+    <div class="row">
+        <div class="col text-center mt-3">
+            <a href="/Login">
+                <img class="navbar-icon" alt="MileAway logo" src="~/assets/logo.png" />
+            </a>
         </div>
-    }
-    <div class="form-group">
-        <label for="inputSirName">Voornaam*</label>
-        <input asp-for="User.First_Name" type="text" class="form-control" id="inputSirName" placeholder="Voornaam">
-        <span class="invalid-feedback" asp-validation-for="User.First_Name"></span>
     </div>
-    <div class="form-group">
-        <label for="inputLastName">Achternaam</label>
-        <input asp-for="User.Last_Name" type="text" class="form-control" id="inputLastName" placeholder="Achternaam">
-        <span class="invalid-feedback" asp-validation-for="User.Last_Name"></span>
+    <div class="Wrapper_login mt-4">
+        <div class="text-center">
+            <h2>Registreren</h2>
+        </div>
+        <form method="post" asp-page-handler="Register" enctype="multipart/form-data">
+            @if (Model.Error != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @Model.Error
+                </div>
+            }
+            <div class="form-group">
+                <label for="inputSirName">Voornaam*</label>
+                <input asp-for="User.First_Name" type="text" class="form-control" id="inputSirName" placeholder="Voornaam">
+                <span class="invalid-feedback" asp-validation-for="User.First_Name"></span>
+            </div>
+            <div class="form-group">
+                <label for="inputLastName">Achternaam</label>
+                <input asp-for="User.Last_Name" type="text" class="form-control" id="inputLastName" placeholder="Achternaam">
+                <span class="invalid-feedback" asp-validation-for="User.Last_Name"></span>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail">Email address*</label>
+                <input asp-for="User.Email" type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="E-mail">
+                <span class="invalid-feedback" asp-validation-for="User.Email"></span>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Wachtwoord*</label>
+                <input asp-for="User.Password" type="password" class="form-control" id="inputPassword" placeholder="Wachtwoord">
+                <span class="invalid-feedback" asp-validation-for="User.Password"></span>
+            </div>
+            <div class="form-group">
+                <label for="inputRepeatPassword">Wachtwoord herhalen*</label>
+                <input asp-for="User.ConfirmPassword" type="password" class="form-control" id="inputRepeatPassword" placeholder="Wachtwoord">
+                <span class="invalid-feedback" asp-validation-for="User.ConfirmPassword"></span>
+            </div>
+            <div>
+                <label class="form-label" for="profilePicture">Profielfoto</label>
+                <input accept="image/*" type="file" class="form-control" id="profilePicture" asp-for="Photo" />
+                <span class="invalid-feedback" asp-validation-for="Photo"></span>
+            </div>
+            <br />
+            <div class="text-center">
+                <button type="submit" class="btn btn-light border-dark">Registreren</button>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="inputEmail">Email address*</label>
-        <input asp-for="User.Email" type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="E-mail">
-        <span class="invalid-feedback" asp-validation-for="User.Email"></span>
-    </div>
-    <div class="form-group">
-        <label for="inputPassword">Wachtwoord*</label>
-        <input asp-for="User.Password" type="password" class="form-control" id="inputPassword" placeholder="Wachtwoord">
-        <span class="invalid-feedback" asp-validation-for="User.Password"></span>
-    </div>
-    <div class="form-group">
-        <label for="inputRepeatPassword">Wachtwoord herhalen*</label>
-        <input asp-for="User.ConfirmPassword" type="password" class="form-control" id="inputRepeatPassword" placeholder="Wachtwoord">
-        <span class="invalid-feedback" asp-validation-for="User.ConfirmPassword"></span>
-    </div>
-    <div>
-        <label class="form-label" for="profilePicture">Profielfoto</label>
-        <input accept="image/*" type="file" class="form-control" id="profilePicture" asp-for="Photo" />
-        <span class="invalid-feedback" asp-validation-for="Photo"></span>
-    </div>
-    <br />
-    <div class="text-center">
-        <button type="submit" class="btn btn-light border-dark">Registreren</button>
-    </div>
-</form>
+</div>

@@ -4,8 +4,8 @@
 }
 
 .Wrapper_login, .Wrapper_RDW1, .Wrapper_RDW2 {
-    -webkit-border-radius: 10px 10px 10px 10px;
-    border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
     background: #fff;
     position: relative;
     padding: 20px !important;
