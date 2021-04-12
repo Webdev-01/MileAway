@@ -71,6 +71,11 @@ namespace MileAway.Pages
                     return RedirectToPage("Index");
             return Page();
         }
-        
+
+        public IActionResult OnGetDeleteCost(int id)
+        {
+            CostsRepository.DeleteCost(id);
+            return RedirectToPage("Index");
+        }
     }
 }

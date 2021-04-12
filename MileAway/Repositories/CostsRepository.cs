@@ -380,5 +380,23 @@ namespace MileAway.Repositories
                 return false;
             }
         }
+
+        public static bool DeleteCost(int costId)
+        {
+            using var connect = DbUtils.GetDbConnection();
+            try
+            {
+                var deleteCost = connect.Execute("DELETE FROM costs WHERE Cost_ID = @CostId", new
+                {
+                    CostId = costId
+                });
+
+                return deleteCost != 0;
+            }
+            catch (MySqlException e)
+            {
+                return false;
+            }
+        }
     }
 }
