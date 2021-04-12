@@ -21,5 +21,9 @@ namespace MileAway.Models
         public int Mileage_Km { get; set; }
         public string Vehicle_Image { get; set; }
         public double AvgCosts { get; set; }
+        public double Insurance { get; set; }
+        public DateTime Insurance_Date { get; set; }
+        public double Road_Tax { get; set; }
+        public DateTime Road_Tax_Date { get; set; }
     }
 }

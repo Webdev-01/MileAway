@@ -20,7 +20,7 @@ namespace MileAway.Pages
         public Vehicles Vehicle { get; set; }
 
         [BindProperty]
-        public FixedCosts FixedCosts { get; set; }
+        public FixedCosts FixedCost { get; set; }
 
         public List<Apidata> Apidata { get; set; }
 
@@ -54,10 +54,15 @@ namespace MileAway.Pages
             }
 
             if (VehiclesRepository.AddVehicle(Vehicle))
-                if (CostsRepository.AddFixedCosts(FixedCosts, Vehicle.License))
+            {
+                FixedCost.Insurance = Vehicle.Insurance;
+                FixedCost.Insurance_Date = Vehicle.Insurance_Date;
+                FixedCost.Road_Tax = Vehicle.Road_Tax;
+                FixedCost.Road_Tax_Date = Vehicle.Road_Tax_Date;
+                if (CostsRepository.AddFixedCosts(FixedCost, Vehicle.License))
                     return RedirectToPage("Index");
-            //if (Vehicle.Vehicle_Image != null)
-
+                //if (Vehicle.Vehicle_Image != null)
+            }
             return Page();
         }
 

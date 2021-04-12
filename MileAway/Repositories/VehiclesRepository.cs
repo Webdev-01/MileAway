@@ -21,7 +21,7 @@ namespace MileAway.Repositories
             using var connect = DbUtils.GetDbConnection();
             try
             {
-                var vehicleResult = connect.Execute("INSERT INTO vehicles (Email, License, Brand_Name, Model_Name, Manufacturing_Year, FuelType, Color, Mileage_Km, Vehicle_Image) VALUES (@Email, @License, @BrandName, @ModelName, @ManufacturingYear, @FuelType, @Color, @MileageKm, @VehicleImage)", new
+                var vehicleResult = connect.Execute("INSERT INTO vehicles (Email, License, Brand_Name, Model_Name, Manufacturing_Year, FuelType, Color, Mileage_Km, Vehicle_Image, Insurance, Insurance_Date, Road_Tax, Road_Tax_Date) VALUES (@Email, @License, @BrandName, @ModelName, @ManufacturingYear, @FuelType, @Color, @MileageKm, @VehicleImage, @Insurance, @Insurance_Date, @Road_Tax, @Road_Tax_Date)", new
                 {
                     Email = vehicle.Email,
                     License = vehicle.License,
@@ -31,7 +31,11 @@ namespace MileAway.Repositories
                     FuelType = vehicle.FuelType,
                     Color = vehicle.Color,
                     MileageKm = vehicle.Mileage_Km,
-                    VehicleImage = vehicle.Vehicle_Image
+                    VehicleImage = vehicle.Vehicle_Image,
+                    Insurance = vehicle.Insurance,
+                    Insurance_Date = vehicle.Insurance_Date,
+                    Road_Tax = vehicle.Road_Tax,
+                    Road_Tax_Date = vehicle.Road_Tax_Date,
                 });
 
                 return vehicleResult == 1;
