@@ -17,7 +17,3 @@ function switchCaret() {
         element.classList.add('fa-caret-down');
     }
 }
-
-function tooltip () {
-    $('[data-toggle="tooltip"]').tooltip()
-}
