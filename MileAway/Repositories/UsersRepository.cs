@@ -12,22 +12,6 @@ namespace MileAway.Repositories
     public class UsersRepository
     {
         /// <summary>
-        /// Gets user by login details
-        /// </summary>
-        /// <param name="user">Login details</param>
-        /// <returns>Selected user or NULL if no user</returns>
-        public static Users GetUserByLogin(Users user)
-        {
-            using var connect = DbUtils.GetDbConnection();
-            var userVars = connect.QuerySingleOrDefault<Users>("SELECT * FROM users WHERE Email=@Email",
-            new
-            {
-                Email = user.Email
-            });
-            return userVars;
-        }
-
-        /// <summary>
         /// Gets user by email
         /// </summary>
         /// <param name="email">Email of a user</param>

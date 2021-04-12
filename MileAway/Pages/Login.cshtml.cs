@@ -29,7 +29,7 @@ namespace MileAway.Pages
         /// <returns>Page redirect to index if success or login if fail</returns>
         public IActionResult OnPostLogin()
         {
-            var user = UsersRepository.GetUserByLogin(User);
+            var user = UsersRepository.GetUserByEmail(User.Email);
             if (user != null)
             {
                 //verify ( input , password DB)

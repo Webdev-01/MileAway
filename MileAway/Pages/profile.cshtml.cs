@@ -64,7 +64,7 @@ namespace MileAway.Pages.Shared
                     User.User_Image = "Avatar.png";
                 }
                 User.Email = HttpContext.Session.GetString("email");
-                var user = UsersRepository.GetUserByLogin(User);
+                var user = UsersRepository.GetUserByEmail(User.Email);
                 if (user != null)
                 {
                     if (UserMethods.SecurePasswordHasher.Verify(OldPassword, user.Password))
