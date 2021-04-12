@@ -160,8 +160,8 @@
                             <tr>
                                 @if (item.Typecost_Id == 2)
                                 {
-                                    <td>Reparatie: <i class="fa fa-download" aria-hidden="true"></i></td>
-                                    <td>€@item.Cost</td>
+                                    <td>Reparatie: <a href ="/invoices/@item.License - @item.Invoice_Doc" download="invoice @item.Invoice_Doc" data-toggle="tooltip" data-placement="top" title="@item.Invoice_Doc"><i class="fa fa-download" aria-hidden="true"></i></a> </td>
+                                        <td>€@item.Cost</td>
                                     <td>@item.Date_Of_Cost.ToString("dd-MM-yyyy")</td>
                                 }
                                 else

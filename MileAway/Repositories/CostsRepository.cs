@@ -30,7 +30,29 @@ namespace MileAway.Repositories
                     License = costs.License,
                     Cost = costs.Cost,
                     DateOfCost = costs.Date_Of_Cost,
-                    InvoiceDoc = ""
+                    InvoiceDoc = costs.Invoice_Doc
+                });
+
+                return addCostRepair == 1;
+            }
+            catch (MySqlException e)
+            {
+                return false;
+            }
+        }
+
+        public static bool AddCostRepairFile(Costs costs, String File)
+        {
+            using var connect = DbUtils.GetDbConnection();
+            try
+            {
+                var addCostRepair = connect.Execute("INSERT INTO costs (Typecost_Id, License, Cost, Date_Of_Cost, Invoice_Doc) VALUES (@TypecostId, @License, @Cost, @DateOfCost, @InvoiceDoc)", new
+                {
+                    TypecostId = 2,
+                    License = costs.License,
+                    Cost = costs.Cost,
+                    DateOfCost = costs.Date_Of_Cost,
+                    InvoiceDoc = costs.Invoice_Doc + " - " + File
                 });
 
                 return addCostRepair == 1;
