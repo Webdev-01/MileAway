@@ -16,19 +16,74 @@
                 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
+                            <form method="post" asp-page-handler="Update" enctype="multipart/form-data">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editModalLabel">Voertuig wijzigen</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" style="font-size: 16px">
+                                    @if (Model.Error != null)
+                                    {
+                                        <div class="alert alert-danger" role="alert">
+                                            @Model.Error
+                                        </div>
+                                    }
+                                    <div class="form-group">
+                                        <label for="inputBrand">Merknaam</label>
+                                        <input asp-for="Vehicle.Brand_Name" type="text" class="form-control" id="inputBrand" placeholder="Merknaam">
+                                        <span class="invalid-feedback" asp-validation-for="Vehicle.Brand_Name"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputModel">Modelnaam</label>
+                                        <input asp-for="Vehicle.Model_Name" type="text" class="form-control" id="inputModel" placeholder="Modelnaam">
+                                        <span class="invalid-feedback" asp-validation-for="Vehicle.Model_Name"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputColor">Bouwjaar</label>
+                                        <input asp-for="Vehicle.Manufacturing_Year" type="text" class="form-control" id="inputYear" placeholder="Bouwjaar">
+                                        <span class="invalid-feedback" asp-validation-for="Vehicle.Manufacturing_Year"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputColor">Kleur</label>
+                                        <input asp-for="Vehicle.Color" type="text" class="form-control" id="inputColor" placeholder="Kleur">
+                                        <span class="invalid-feedback" asp-validation-for="Vehicle.Color"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputFuel">Brandstoftype</label>
+                                        <input asp-for="Vehicle.FuelType" type="text" class="form-control" id="inputFuel" placeholder="Brandstoftype">
+                                        <span class="invalid-feedback" asp-validation-for="Vehicle.FuelType"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputMileage">Kilometerstand</label>
+                                        <input asp-for="Vehicle.Mileage_Km" type="text" class="form-control" id="inputMileage" placeholder="Kilometerstand">
+                                        <span class="invalid-feedback" asp-validation-for="Vehicle.Mileage_Km"></span>
+                                    </div>
+                                    <div>
+                                        <label class="form-label" for="vehiclePicture">Voertuigafbeelding</label>
+                                        <input accept="image/*" type="file" class="form-control" id="vehiclePicture" asp-for="Photo" />
+                                        <span class="invalid-feedback" asp-validation-for="Photo"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputMileage">Wegenbelasting bedrag</label>
+                                        <input asp-for="Vehicle.Road_Tax" type="text" class="form-control" id="inputRoadTax" placeholder="Wegenbelasting">
+                                        <span class="invalid-feedback" asp-validation-for="Vehicle.Road_Tax"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputMileage">Verzekering bedrag</label>
+                                        <input asp-for="Vehicle.Insurance" type="text" class="form-control" id="inputInsurance" placeholder="Verzekering">
+                                        <span class="invalid-feedback" asp-validation-for="Vehicle.Insurance"></span>
+                                    </div>
+                                    <br />
+                                    <div class="text-center">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                                    <button type="submit" class="btn btn-primary">Wijzigingen opslaan</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -67,7 +122,6 @@
                     <tr>
                         <td>Kenteken: </td>
                         <td>@Model.Vehicle.License</td>
-
                     </tr>
                     <tr>
                         <td>Merk: </td>
@@ -119,18 +173,6 @@
                                 }
                             </tr>
                         }
-                        @if (i == 12)
-                        {
-                            <tr>
-                                <td colspan="3" class="accordion">
-                                    <div class="card-header p-0" id="collapseHeader" style="margin-bottom: 0px;">
-                                        <button class="btn btn-light btn-block m-0 p-3 collapsed" type="button" data-toggle="collapse" data-target="#collapseTable" aria-expanded="false" aria-controls="collapseTable" onclick="switchCaret()">
-                                            <b>Toon meer/minder kosten</b> <i id="accordionIcon" style="font-size: 30px; vertical-align: middle;" class="fas fa-caret-down"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        }
                         @if (i > 12)
                         {
                             <tr class="collapse" id="collapseTable">
@@ -157,6 +199,13 @@
                     }
                 </tbody>
             </table>
+            <div class="accordion">
+                <div class="card-header p-0" id="collapseHeader" style="margin-bottom: 0px;">
+                    <button class="btn btn-light btn-block m-0 p-3 collapsed" type="button" data-toggle="collapse" data-target="#collapseTable" aria-expanded="false" aria-controls="collapseTable" onclick="switchCaret()">
+                        <b>Toon meer/minder kosten</b> <i id="accordionIcon" style="font-size: 30px; vertical-align: middle;" class="fas fa-caret-down"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

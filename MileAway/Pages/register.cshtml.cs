@@ -44,9 +44,11 @@ namespace MileAway.Pages
                 if (Photo != null)
                 {
                     var path = Path.Combine(ihostingEnvironment.WebRootPath, "images", User.Email + " - Avatar.png");
-                    var stream = new FileStream(path, FileMode.Create);
-                    Photo.CopyToAsync(stream);
-                    User.User_Image = "Avatar.png";
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        Photo.CopyToAsync(stream);
+                        User.User_Image = "Avatar.png";
+                    }
                 }
                 else
                 {
