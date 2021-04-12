@@ -3,9 +3,23 @@
 
 // Write your Javascript code.
 
+var url = new URL(window.location.href);
+if (url.searchParams.get("Year")) {
+    setTimeout(function () {
+        $("#collapseGraphs").collapse('toggle');
+        switchCaret();
+        setTimeout(function () {
+            document.getElementById('accordionContent').scrollIntoView({
+                behavior: "smooth"
+            });
+        }, 400);
+    }, 500);
+}
+
 function switchCaret() {
     var element = document.getElementById("accordionIcon");
     if (document.querySelector(".accordion .btn").classList.contains('collapsed')) {
+        element.classList.remove('fa-caret-down');
         element.classList.add('fa-caret-up');
         setTimeout(function () {
             document.getElementById('accordionContent').scrollIntoView({
