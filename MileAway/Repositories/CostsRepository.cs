@@ -328,36 +328,6 @@ namespace MileAway.Repositories
                 }
             }
         }
-
-        /// <summary>
-        /// Gets fixed costs (tax, insurance)
-        /// </summary>
-        /// <param name="license">License of a vehicle</param>
-        /// <returns>Filled FixedCosts class</returns>
-        public static FixedCosts GetFixedCostsByLicense(string license)
-        {
-            using var connect = DbUtils.GetDbConnection();
-
-            var roadtax = connect.Query<Costs>(
-                "SELECT Cost,TypeCost_ID FROM costs WHERE License = @License AND TypeCost_ID = 3",
-                new
-                {
-                    License = license
-                }).ToList();
-
-            var insurance = connect.Query<Costs>(
-            "SELECT Cost,TypeCost_ID FROM costs WHERE License = @License AND TypeCost_ID = 4",
-            new
-            {
-                License = license
-            }).ToList();
-
-            var fixedCosts = new FixedCosts();
-            fixedCosts.Road_Tax = Convert.ToInt32(roadtax[0].Cost);
-            fixedCosts.Insurance = Convert.ToInt32(insurance[0].Cost);
-            return fixedCosts;
-        }
-
         /// <summary>
         /// Delete all costs of a vehicle
         /// </summary>

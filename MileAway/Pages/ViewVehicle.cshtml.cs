@@ -36,7 +36,6 @@ namespace MileAway.Pages
         {
             Vehicle = VehiclesRepository.GetVehicleByLicense(license);
             Costs = CostsRepository.GetCostsByLicenseInner(license);
-            FixedCosts = CostsRepository.GetFixedCostsByLicense(license);
         }
 
 
