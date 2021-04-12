@@ -6,6 +6,18 @@
     Layout = "_Layout";
     var i = 0;
 }
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        var settings = {
+            validClass: "is-valid",
+            errorClass: "is-invalid"
+        };
+        $.validator.setDefaults(settings);
+        $.validator.unobtrusive.options = settings;</script>
+}
 <link rel="stylesheet" href="~/css/ViewVehicle.css">
 
 <div class="row">
@@ -30,6 +42,7 @@
                                             @Model.Error
                                         </div>
                                     }
+                                    <h4>Voertuig</h4>
                                     <div class="form-group">
                                         <label for="inputBrand">Merknaam</label>
                                         <input asp-for="Vehicle.Brand_Name" type="text" class="form-control" id="inputBrand" placeholder="Merknaam">
@@ -65,6 +78,8 @@
                                         <input accept="image/*" type="file" class="form-control" id="vehiclePicture" asp-for="Photo" />
                                         <span class="invalid-feedback" asp-validation-for="Photo"></span>
                                     </div>
+                                    <br />
+                                    <h4>Kosten</h4>
                                     <div class="form-group">
                                         <label for="inputMileage">Wegenbelasting bedrag</label>
                                         <input asp-for="Vehicle.Road_Tax" type="text" class="form-control" id="inputRoadTax" placeholder="Wegenbelasting">

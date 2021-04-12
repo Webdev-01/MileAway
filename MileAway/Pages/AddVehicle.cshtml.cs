@@ -22,8 +22,6 @@ namespace MileAway.Pages
         [BindProperty]
         public FixedCosts FixedCost { get; set; }
 
-        public List<Apidata> Apidata { get; set; }
-
         private IHostingEnvironment ihostingEnvironment;
 
         [BindProperty]

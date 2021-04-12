@@ -141,7 +141,7 @@ namespace MileAway.Repositories
             using var connect = DbUtils.GetDbConnection();
             try
             {
-                var updateUser = connect.Execute("UPDATE vehicles SET Password = @Password, First_Name = @Firstname, Last_Name = @Lastname, User_Image = @User_Image", new
+                var updateVehicle = connect.Execute("UPDATE vehicles SET Brand_Name = @Brand_Name, Model_Name = @Model_Name, Manufacturing_Year = @Manufacturing_Year, FuelType = @FuelType, Color = @Color, Mileage_KM = @Mileage_KM, Vehicle_Image = @Vehicle_Image, Insurance = @Insurance, Road_Tax = @Road_Tax WHERE @License = License", new
                 {
                     Brand_Name = vehicle.Brand_Name,
                     Model_Name = vehicle.Model_Name,
@@ -151,10 +151,11 @@ namespace MileAway.Repositories
                     Mileage_KM = vehicle.Mileage_Km,
                     Vehicle_Image = vehicle.Vehicle_Image,
                     Insurance = vehicle.Insurance,
-                    Road_Tax = vehicle.Road_Tax
+                    Road_Tax = vehicle.Road_Tax,
+                    License = vehicle.License
                 });
 
-                return updateUser != 0;
+                return updateVehicle != 0;
             }
             catch (MySqlException e)
             {

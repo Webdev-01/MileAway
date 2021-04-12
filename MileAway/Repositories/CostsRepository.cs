@@ -126,7 +126,7 @@ namespace MileAway.Repositories
         }
 
         /// <summary>
-        /// Calculates all overdue costs and adds them to the cost history of every vehicle of a user
+        /// Calculates all overdue costs and adds them to the cost history of every vehicle of a user.
         /// </summary>
         /// <param name="license">License of a vehicle</param>
         /// <returns>True if success</returns>
@@ -136,24 +136,31 @@ namespace MileAway.Repositories
             try
             {
                 var roadtax = connect.Query<Costs>(
-                "SELECT Cost,TypeCost_ID, Date_Of_Cost FROM costs WHERE License = @License AND TypeCost_ID = 3 ORDER BY Date_Of_Cost DESC",
+                "SELECT Date_Of_Cost FROM costs WHERE License = @License AND TypeCost_ID = 3 ORDER BY Date_Of_Cost DESC",
                 new
                 {
                     License = license
                 }).ToList();
 
                 var insurance = connect.Query<Costs>(
-                "SELECT Cost,TypeCost_ID, Date_Of_Cost FROM costs WHERE License = @License AND TypeCost_ID = 4 ORDER BY Date_Of_Cost DESC",
+                "SELECT Date_Of_Cost FROM costs WHERE License = @License AND TypeCost_ID = 4 ORDER BY Date_Of_Cost DESC",
                 new
                 {
                     License = license
                 }).ToList();
 
+                var fixedCosts = connect.QueryFirstOrDefault<Vehicles>(
+                "SELECT Insurance,Insurance_Date,Road_Tax,Road_Tax_Date FROM vehicles WHERE License = @License",
+                new
+                {
+                    License = license
+                });
+
                 var dateToday = DateTime.Now;
                 var dateTax = roadtax[0].Date_Of_Cost;
                 var dateInsurance = insurance[0].Date_Of_Cost;
 
-                LocalDate start = new LocalDate(dateTax.Year, dateTax.Month, dateTax.Day);
+                LocalDate start = new LocalDate(dateTax.Year, dateTax.Month, fixedCosts.Road_Tax_Date.Day);
                 LocalDate end = new LocalDate(dateToday.Year, dateToday.Month, dateToday.Day);
                 Period period = Period.Between(start, end);
                 int differenceTax = Math.Abs(period.Months);
@@ -163,10 +170,10 @@ namespace MileAway.Repositories
                 for (var i = 0; i < differenceTax; i++)
                 {
                     dateTaxCalculated = dateTaxCalculated.AddMonths(1);
-                    AddFixedMonthlyTax(roadtax[0].Cost, license, dateTaxCalculated);
+                    AddFixedMonthlyTax(fixedCosts.Road_Tax, license, dateTaxCalculated);
                 }
 
-                start = new LocalDate(dateInsurance.Year, dateInsurance.Month, dateInsurance.Day);
+                start = new LocalDate(dateInsurance.Year, dateInsurance.Month, fixedCosts.Insurance_Date.Day);
                 period = Period.Between(start, end);
                 int differenceInsurance = Math.Abs(period.Months);
                 differenceInsurance += period.Years * 12;
@@ -175,7 +182,7 @@ namespace MileAway.Repositories
                 for (var i = 0; i < differenceInsurance; i++)
                 {
                     dateInsuranceCalculated = dateInsuranceCalculated.AddMonths(1);
-                    AddFixedMonthlyInsurance(insurance[0].Cost, license, dateInsuranceCalculated);
+                    AddFixedMonthlyInsurance(fixedCosts.Insurance, license, dateInsuranceCalculated);
                 }
                 return true;
             }

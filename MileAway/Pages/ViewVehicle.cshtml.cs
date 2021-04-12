@@ -39,14 +39,20 @@ namespace MileAway.Pages
             FixedCosts = CostsRepository.GetFixedCostsByLicense(license);
         }
 
-
-        public IActionResult OnPostUpdate()
+        /// <summary>
+        /// Updates a vehicle
+        /// </summary>
+        /// <param name="license">License of vehicle</param>
+        /// <returns>Redirect to index if success, if fail to same page.</returns>
+        public IActionResult OnPostUpdate(string license)
         {
-            if (ModelState.IsValid)
+            if (ModelState.ErrorCount == 1)
             {
+                Vehicle.License = license;
                 if (Photo != null)
                 {
-                    var path = Path.Combine(ihostingEnvironment.WebRootPath, "images", Vehicle.License + " - " + Photo.FileName);
+                    var path = Path.Combine(ihostingEnvironment.WebRootPath, "images",
+                        Vehicle.License + " - " + Photo.FileName);
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
                         Photo.CopyToAsync(stream);
