@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MileAway.Models;
@@ -20,6 +23,17 @@ namespace MileAway.Pages
         public Costs Costs { get; set; }
         [BindProperty]
         public Vehicles Vehicles { get; set; }
+
+        private IHostingEnvironment ihostingEnvironment;
+
+        [BindProperty]
+        public IFormFile Invoice { get; set; }
+
+        public AddCostModel(IHostingEnvironment ihostingEnvironment)
+        {
+            this.ihostingEnvironment = ihostingEnvironment;
+        }
+
         public ActionResult OnGet(string license)
         {
             CostType = HttpContext.Request.Query["type"];
@@ -56,11 +70,32 @@ namespace MileAway.Pages
             }
             else if (CostType == "Reparatie")
             {
-                CostsRepository.AddCostRepair(Costs);
-                if (Vehicles.Mileage_Km != Milage_KM)
+                if (Invoice != null)
                 {
-                    VehiclesRepository.UpdateMileage_KM(license, Vehicles.Mileage_Km);
+                    var path = Path.Combine(ihostingEnvironment.WebRootPath, "invoices", license + " - " + Costs.Invoice_Doc + " - " + Invoice.FileName);
+
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        Invoice.CopyToAsync(stream);
+                    }
+
+                    CostsRepository.AddCostRepairFile(Costs, Invoice.FileName);
+                    if (Vehicles.Mileage_Km != Milage_KM)
+                    {
+                        VehiclesRepository.UpdateMileage_KM(license, Vehicles.Mileage_Km);
+                    }
+
                 }
+                else
+                {
+
+                    CostsRepository.AddCostRepair(Costs);
+                    if (Vehicles.Mileage_Km != Milage_KM)
+                    {
+                        VehiclesRepository.UpdateMileage_KM(license, Vehicles.Mileage_Km);
+                    }
+                }
+
             }
 
             return RedirectToPage("Index");

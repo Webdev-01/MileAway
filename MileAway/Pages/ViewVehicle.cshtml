@@ -175,8 +175,8 @@
                             <tr>
                                 @if (item.Typecost_Id == 2)
                                 {
-                                    <td>Reparatie: <i class="fa fa-download" aria-hidden="true"></i></td>
-                                    <td>€@item.Cost</td>
+                                    <td>Reparatie: <a href ="/invoices/@item.License - @item.Invoice_Doc" download="invoice @item.Invoice_Doc" data-toggle="tooltip" data-placement="top" title="@item.Invoice_Doc"><i class="fa fa-download" aria-hidden="true"></i></a> </td>
+                                        <td>€@item.Cost</td>
                                     <td>@item.Date_Of_Cost.ToString("dd-MM-yyyy")</td>
                                 }
                                 else
@@ -185,42 +185,67 @@
                                     <td>@item.TypeCost_Name</td>
                                     <td>€@item.Cost</td>
                                     <td>@item.Date_Of_Cost.ToString("dd-MM-yyyy")</td>
+                                    <td><i class="fas fa-trash-alt float-right link" style="color: red;" data-toggle="modal" data-target="#deleteCostModal@(item.Cost_Id)"></i></td>
                                 }
                             </tr>
                         }
                         @if (i > 12)
                         {
-                            <tr class="collapse" id="collapseTable">
-                                @if (i == 13)
-                                {
-                                    <div id="accordionContent" />
-                                }
-                                @if (item.Typecost_Id == 2)
-                                {
-                                    <td>Reparatie: <i class="fa fa-download" aria-hidden="true"></i></td>
-                                    <td>€@item.Cost</td>
-                                    <td>@item.Date_Of_Cost.ToString("dd-MM-yyyy")</td>
-                                }
-                                else
-                                {
+                <tr class="collapse" id="collapseTable">
+                    @if (i == 13)
+                    {
+                        <div id="accordionContent" />
+                    }
+                    @if (item.Typecost_Id == 2)
+                    {
+                        <td>Reparatie: <i class="fa fa-download" aria-hidden="true"></i></td>
+                        <td>€@item.Cost</td>
+                        <td>@item.Date_Of_Cost.ToString("dd-MM-yyyy")</td>
+                        <td><i class="fas fa-trash-alt float-right link" style="color: red;" data-toggle="modal" data-target="#deleteCostModal@(item.Cost_Id)"></i></td>
+                    }
+                    else
+                    {
 
-                                    <td>@item.TypeCost_Name</td>
-                                    <td>€@item.Cost</td>
-                                    <td>@item.Date_Of_Cost.ToString("dd-MM-yyyy")</td>
-                                }
-                            </tr>
+                        <td>@item.TypeCost_Name</td>
+                        <td>€@item.Cost</td>
+                        <td>@item.Date_Of_Cost.ToString("dd-MM-yyyy")</td>
+                        <td><i class="fas fa-trash-alt float-right link" style="color: red;" data-toggle="modal" data-target="#deleteCostModal@(item.Cost_Id)"></i></td>
+                    }
+                </tr>
                         }
+                        <div class="modal fade" id="deleteCostModal@(item.Cost_Id)" tabindex="-1" role="dialog" aria-labelledby="deleteCostModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteCostModalLabel">Kost verwijderen</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" style="font-size: 16px">
+                                        <p>Weet u zeker dat u deze kost wilt verwijderen, dit is niet om te keren.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                                        <a class="btn btn-danger" asp-page-handler="DeleteCost" asp-route-id="@item.Cost_Id">Verwijderen</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         { i++; }
                     }
                 </tbody>
             </table>
-            <div class="accordion">
-                <div class="card-header p-0" id="collapseHeader" style="margin-bottom: 0px;">
-                    <button class="btn btn-light btn-block m-0 p-3 collapsed" type="button" data-toggle="collapse" data-target="#collapseTable" aria-expanded="false" aria-controls="collapseTable" onclick="switchCaret()">
-                        <b>Toon meer/minder kosten</b> <i id="accordionIcon" style="font-size: 30px; vertical-align: middle;" class="fas fa-caret-down"></i>
-                    </button>
+            @if (i > 12)
+            {
+                <div class="accordion">
+                    <div class="card-header p-0" id="collapseHeader" style="margin-bottom: 0px;">
+                        <button class="btn btn-light btn-block m-0 p-3 collapsed" type="button" data-toggle="collapse" data-target="#collapseTable" aria-expanded="false" aria-controls="collapseTable" onclick="switchCaret()">
+                            <b>Toon meer/minder kosten</b> <i id="accordionIcon" style="font-size: 30px; vertical-align: middle;" class="fas fa-caret-down"></i>
+                        </button>
+                    </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 </div>

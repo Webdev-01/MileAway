@@ -30,7 +30,29 @@ namespace MileAway.Repositories
                     License = costs.License,
                     Cost = costs.Cost,
                     DateOfCost = costs.Date_Of_Cost,
-                    InvoiceDoc = ""
+                    InvoiceDoc = costs.Invoice_Doc
+                });
+
+                return addCostRepair == 1;
+            }
+            catch (MySqlException e)
+            {
+                return false;
+            }
+        }
+
+        public static bool AddCostRepairFile(Costs costs, String File)
+        {
+            using var connect = DbUtils.GetDbConnection();
+            try
+            {
+                var addCostRepair = connect.Execute("INSERT INTO costs (Typecost_Id, License, Cost, Date_Of_Cost, Invoice_Doc) VALUES (@TypecostId, @License, @Cost, @DateOfCost, @InvoiceDoc)", new
+                {
+                    TypecostId = 2,
+                    License = costs.License,
+                    Cost = costs.Cost,
+                    DateOfCost = costs.Date_Of_Cost,
+                    InvoiceDoc = costs.Invoice_Doc + " - " + File
                 });
 
                 return addCostRepair == 1;
@@ -313,36 +335,6 @@ namespace MileAway.Repositories
                 }
             }
         }
-
-        /// <summary>
-        /// Gets fixed costs (tax, insurance)
-        /// </summary>
-        /// <param name="license">License of a vehicle</param>
-        /// <returns>Filled FixedCosts class</returns>
-        public static FixedCosts GetFixedCostsByLicense(string license)
-        {
-            using var connect = DbUtils.GetDbConnection();
-
-            var roadtax = connect.Query<Costs>(
-                "SELECT Cost,TypeCost_ID FROM costs WHERE License = @License AND TypeCost_ID = 3",
-                new
-                {
-                    License = license
-                }).ToList();
-
-            var insurance = connect.Query<Costs>(
-            "SELECT Cost,TypeCost_ID FROM costs WHERE License = @License AND TypeCost_ID = 4",
-            new
-            {
-                License = license
-            }).ToList();
-
-            var fixedCosts = new FixedCosts();
-            fixedCosts.Road_Tax = Convert.ToInt32(roadtax[0].Cost);
-            fixedCosts.Insurance = Convert.ToInt32(insurance[0].Cost);
-            return fixedCosts;
-        }
-
         /// <summary>
         /// Delete all costs of a vehicle
         /// </summary>
@@ -359,6 +351,24 @@ namespace MileAway.Repositories
                 });
 
                 return deleteCosts != 0;
+            }
+            catch (MySqlException e)
+            {
+                return false;
+            }
+        }
+
+        public static bool DeleteCost(int costId)
+        {
+            using var connect = DbUtils.GetDbConnection();
+            try
+            {
+                var deleteCost = connect.Execute("DELETE FROM costs WHERE Cost_ID = @CostId", new
+                {
+                    CostId = costId
+                });
+
+                return deleteCost != 0;
             }
             catch (MySqlException e)
             {
