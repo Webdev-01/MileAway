@@ -130,5 +130,36 @@ namespace MileAway.Repositories
                 return false;
             }
         }
+
+        /// <summary>
+        /// Updates vehicle information
+        /// </summary>
+        /// <param name="vehicle">All information about the vehicle</param>
+        /// <returns>True if success</returns>
+        public static bool UpdateVehicle(Vehicles vehicle)
+        {
+            using var connect = DbUtils.GetDbConnection();
+            try
+            {
+                var updateUser = connect.Execute("UPDATE vehicles SET Password = @Password, First_Name = @Firstname, Last_Name = @Lastname, User_Image = @User_Image", new
+                {
+                    Brand_Name = vehicle.Brand_Name,
+                    Model_Name = vehicle.Model_Name,
+                    Manufacturing_Year = vehicle.Manufacturing_Year,
+                    FuelType = vehicle.FuelType,
+                    Color = vehicle.Color,
+                    Mileage_KM = vehicle.Mileage_Km,
+                    Vehicle_Image = vehicle.Vehicle_Image,
+                    Insurance = vehicle.Insurance,
+                    Road_Tax = vehicle.Road_Tax
+                });
+
+                return updateUser != 0;
+            }
+            catch (MySqlException e)
+            {
+                return false;
+            }
+        }
     }
 }

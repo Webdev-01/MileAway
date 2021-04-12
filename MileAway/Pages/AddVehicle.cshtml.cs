@@ -48,9 +48,11 @@ namespace MileAway.Pages
             if (Photo != null)
             {
                 var path = Path.Combine(ihostingEnvironment.WebRootPath, "images", Vehicle.License + " - " + Photo.FileName);
-                var stream = new FileStream(path, FileMode.Create);
-                Photo.CopyToAsync(stream);
-                Vehicle.Vehicle_Image = Photo.FileName;
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    Photo.CopyToAsync(stream);
+                    Vehicle.Vehicle_Image = Photo.FileName;
+                }
             }
 
             if (VehiclesRepository.AddVehicle(Vehicle))
