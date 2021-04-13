@@ -50,6 +50,8 @@ namespace MileAway.Pages.Shared
         {
             if (ModelState.ErrorCount == 1)
             {
+                User.Email = HttpContext.Session.GetString("email");
+
                 if (Photo != null)
                 {
                     var path = Path.Combine(ihostingEnvironment.WebRootPath, "images", User.Email + " - Avatar.png");
@@ -63,7 +65,6 @@ namespace MileAway.Pages.Shared
                 {
                     User.User_Image = "Avatar.png";
                 }
-                User.Email = HttpContext.Session.GetString("email");
                 var user = UsersRepository.GetUserByEmail(User.Email);
                 if (user != null)
                 {
